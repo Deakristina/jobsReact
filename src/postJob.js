@@ -1,7 +1,8 @@
-import './App.css';
 import React, { Component } from 'react';
+import ModalPage from './components/modal';
 import Input from './components/input';
 import axios from 'axios';
+import './App.css';
 
 class PostJob extends Component {
 	state = {
@@ -11,7 +12,8 @@ class PostJob extends Component {
 			location: '',
 			salary: '',
 			description: '',
-			requirements: []
+			requirements: [],
+			showModal: false
 		},
 		errors: {}
 	};
@@ -46,11 +48,16 @@ class PostJob extends Component {
 				description: data.description
 			})
 			.then((result) => {
+				this.setState({ showModal: true });
 				console.log(result);
 			})
 			.catch((error) => {
 				console.log('errrorrrrr');
 			});
+	};
+
+	toggleModal = () => {
+		this.setState({ showModal: !this.state.showModal });
 	};
 	validateProperty = ({ name, value }) => {
 		if (name === 'title') {
@@ -78,7 +85,7 @@ class PostJob extends Component {
 	render() {
 		const { data, errors } = this.state;
 		return (
-			<div>
+			<div className="container">
 				<h1>Post your vacancy!</h1>
 				<form onSubmit={this.handleSubmit}>
 					<Input
@@ -139,6 +146,7 @@ class PostJob extends Component {
 					</div>
 					<button className="btn btn-primary">Submit</button>
 				</form>
+				<ModalPage modal={this.state.showModal} toggleModal={this.toggleModal} />
 			</div>
 		);
 	}
