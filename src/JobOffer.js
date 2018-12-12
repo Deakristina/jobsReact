@@ -3,22 +3,12 @@ import axios from 'axios';
 
 class JobOffer extends Component {
     
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state = {
             editProfile: false,
+            info: this.props.profileInfo
         }
-    }
-
-    componentDidMount = () =>{
-        var id = //cookie here with id 
-        axios('http://localhost:4000/profileInfo?id='+id, {
-            method: 'GET'
-        })
-        .then((result) => {
-            this.setState({profileInfo: result})
-        })
-        .catch((err) => console.log(err))
     }
     
     render() { //If true return form
