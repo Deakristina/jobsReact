@@ -3,7 +3,7 @@ import './App.css'; //NO
 import MainNavBar from './MainNavBar' //TESTING ZONE
 import Register from './Register' //UNDER CONSTRUCTION
 // import SearchJob from './SearchJob' //NOT CONSTRUCTED
-// import Login from './Login' //NOT CONSTRUCTED
+import Login from './Login' //NOT CONSTRUCTED
 import ProfilePage from './ProfilePage' //UNDER CONSTRUCTION
 
 class App extends Component {
@@ -24,8 +24,8 @@ class App extends Component {
     var router =  {
       // searchJob: <SearchJob/>, 
       register: <Register/>,
-      // login: <Login/>,
-      // profile: <ProfilePage/>,
+      login: <Login/>,
+      profile: <ProfilePage/>,
       //Here the component that renders post job
 
     }

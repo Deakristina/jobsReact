@@ -53,9 +53,9 @@ class JobSeeker extends Component {
                     <form action="changeProfile" method="POST">
                         <img src={this.state.profileInfo.image}></img>
                         <ul className="list" name="UserInfo">
-                            <li className="listItem"></li>
-                            <li className="listItem"></li>
-                            <li className="listItem"></li>
+                            <li className="listItem"><label></label></li>
+                            <li className="listItem"><label></label></li>
+                            <li className="listItem"><label></label></li>
                         </ul>    
                     </form>        
                 </div>
@@ -71,9 +71,9 @@ class JobSeeker extends Component {
                     </section>
                     <section>
                         <ul className="list" name="UserInfo">
-                            <li className="listItem"></li>
-                            <li className="listItem"></li>
-                            <li className="listItem"></li>
+                            <li className="listItem"><label></label></li>
+                            <li className="listItem"><label></label></li>
+                            <li className="listItem"><label></label></li>
                         </ul>    
                     </section>        
                 </div>
