@@ -3,6 +3,7 @@ import NavProfile from './NavProfile'
 import JobSeeker from './JobSeeker'
 import Login from './Login'
 import JobOffer from './JobOffer'
+const axios = require('axios')
 
 class ProfilePage extends Component{
     constructor(){
@@ -16,15 +17,14 @@ class ProfilePage extends Component{
         //State in ProfilePage holds all data
     }
     componentDidMount=()=>{ //Once page mounted fetch data from user profile object MongoDB
-        fetch('http://localhost:4000/jobsAPI') //Url to database
+        axios('localhost:5000/profileInfo', { //THIS IP IS INCORRECT
+            method: 'GET',
+            withCredentials:true
+        })
         .then((result) => {
-            result.json()
-        })
-        .then((resultFinal) => {
-            this.setState({profileInformation: resultFinal})
-            console.log(resultFinal) //We put it in state and pass it down as props
-        })
-        .catch((err) => console.log(err))
+            console.log(result)
+        })      
+        .catch(err => console.log(err))
     }
     changeProfileSection = (e) => {
         this.setState({profileMode: e})
