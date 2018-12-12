@@ -1,6 +1,8 @@
 import './App.css';
 import React, { Component } from 'react';
 import Input from './components/input';
+import axios from 'axios';
+
 class PostJob extends Component {
 	state = {
 		data: {
@@ -20,16 +22,35 @@ class PostJob extends Component {
 		if (data.duration.trim() === '') errors.duration = 'Duration is required';
 		if (data.requirements.length === 0) errors.requirements = 'Requirements is required';
 		if (data.location.trim() === '') errors.location = 'Location is required';
-		if (data.description.trim() === '') errors.description = 'Description is required';
+
 		return Object.keys(errors).length === 0 ? null : errors;
 	};
 	handleSubmit = (e) => {
+		const { data } = this.state;
 		e.preventDefault();
 		const errors = this.validate();
 		this.setState({ errors: errors || {} });
-		if (errors) return;
+		console.log(errors);
+		if (errors) {
+			console.log('HAS ERRORS');
+			return;
+		}
 		//call the server
-		console.log('check');
+		axios
+			.post('http://localhost:4000/post-job', {
+				title: data.title,
+				duration: data.duration,
+				requirements: data.requirements,
+				location: data.location,
+				salary: data.salary,
+				description: data.description
+			})
+			.then((result) => {
+				console.log(result);
+			})
+			.catch((error) => {
+				console.log('errrorrrrr');
+			});
 	};
 	validateProperty = ({ name, value }) => {
 		if (name === 'title') {
@@ -43,9 +64,6 @@ class PostJob extends Component {
 		}
 		if (name === 'location') {
 			if (value.trim() === '') return 'Location is required';
-		}
-		if (name === 'description') {
-			if (value.trim() === '') return 'Description is required';
 		}
 	};
 	handleChange = ({ currentTarget: input }) => {
