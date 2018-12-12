@@ -2,14 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 // import App from './App';
-import PostJob from './PostJob';
+// import PostJob from './PostJob';
+import SearchJob from './SearchJob';
 // import SearchProfile from './SearchProfile';
 import 'bootstrap/dist/css/bootstrap.css';
 import * as serviceWorker from './serviceWorker';
 
 // ReactDOM.render(<App />, document.getElementById('root'));
-ReactDOM.render(<PostJob />, document.getElementById('root'));
+// ReactDOM.render(<PostJob />, document.getElementById('root'));
 // ReactDOM.render(<SearchProfile />, document.getElementById('root'));
+ReactDOM.render(<SearchJob />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

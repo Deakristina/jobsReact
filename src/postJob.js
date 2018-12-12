@@ -30,16 +30,19 @@ class PostJob extends Component {
 	handleSubmit = (e) => {
 		const { data } = this.state;
 		e.preventDefault();
+
 		const errors = this.validate();
+		debugger;
 		this.setState({ errors: errors || {} });
-		console.log(errors);
+		console.log('checked');
 		if (errors) {
-			console.log('HAS ERRORS');
 			return;
 		}
 		//call the server
 		axios
-			.post('http://localhost:4000/post-job', {
+			.post('http://10.85.2.141:5001/post-job', {
+				withCredentials: true,
+				// method: 'POST',
 				title: data.title,
 				duration: data.duration,
 				requirements: data.requirements,

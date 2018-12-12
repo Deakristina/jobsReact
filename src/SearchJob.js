@@ -9,13 +9,22 @@ class SearchProfile extends Component {
 			data: {
 				title: '',
 				location: ''
-			}
+			},
+			search: ''
 		};
 	}
 
+	// componentDidMount() {
+	// 	const promise = axios.get('http://10.85.2.141:5001/post-job').then((res) => console.log(res));
+	// 	console.log(promise);
+	// }
+
 	//handlechange goes here -- update the state
-	handleChange = () => {
-		console.log('changed');
+	handleChange = (e) => {
+		// axios.get(`http://localhost:4000/post-job/${e.target.value}`).then((result) => {
+		// 	this.setState({ data: result });
+		// });
+		console.log('check');
 	};
 
 	//handlesubmit -- call to the backend
@@ -27,19 +36,19 @@ class SearchProfile extends Component {
 		const { data } = this.state;
 		return (
 			<div className="container">
+				<h3>Find jobs around you</h3>
 				<form onSubmit={this.handleSubmit}>
 					<Input
 						name="title"
 						value={data.title}
-						// label="Location"
 						onChange={this.handleChange}
 						type="text"
 						placeholder="Search by job title"
 					/>
+					<h5 className="text-center">Or</h5>
 					<Input
 						name="location"
 						value={data.location}
-						// label="Location"
 						onChange={this.handleChange}
 						type="text"
 						placeholder="Search by location"
