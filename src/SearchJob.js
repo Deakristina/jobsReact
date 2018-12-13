@@ -1,34 +1,36 @@
-import React, { Component } from 'react';
-import Input from './components/input';
-import axios from 'axios';
+import React, { Component } from 'react'
+import Input from './components/input'
+import axios from 'axios'
+
 
 class SearchJob extends Component {
+	
 	constructor(props) {
-		super(props);
+		super(props)
 		this.state = {
 			data: {
 				title: '',
 				location: ''
 			},
-			search: ''
-		};
+			search: '',	
+		}
 	}
 
 	//handlechange goes here -- update the state
 	handleChange = (e) => {
 		// axios.get(`http://localhost:4000/post-job/${e.target.value}`).then((result) => {
-		// 	this.setState({ data: result });
-		// });
-		console.log('check');
-	};
+		// 	this.setState({ data: result })
+		// })
+		console.log('check')
+	}
 
 	//handlesubmit -- call to the backend
 	handleSubmit = () => {
-		console.log('submitted');
-	};
+		
+	}
 
 	render() {
-		const { data } = this.state;
+		const { data } = this.state
 		return (
 			<div className="container">
 				<h3>Find jobs around you</h3>
@@ -55,8 +57,8 @@ class SearchJob extends Component {
 					</div>
 				</div>
 			</div>
-		);
+		)
 	}
 }
 
-export default SearchJob;
+export default SearchJob

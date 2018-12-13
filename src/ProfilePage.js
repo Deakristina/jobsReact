@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import NavProfile from './NavProfile'
 import JobSeeker from './JobSeeker'
-import Login from './Login'
 import JobOffer from './JobOffer'
 import local from './local'
 
@@ -11,7 +10,7 @@ class ProfilePage extends Component{
     constructor(props){
         super(props)
         this.state = {
-            profileMode: "JobSeeker",
+            profile: "jobSeeker",
             loggedIn: this.props.loggedIn, //cookie value
             userID: "", //from Database user object
         }
@@ -25,12 +24,16 @@ class ProfilePage extends Component{
         })
         .then((result) => {
             console.log(result)
-            this.setState({profileInfo: result})
+            this.setState({profileInfo: result}, () => {
+                this.props.handleID(this.state.profileInfo._id)
+                this.setState({userID: this.state.profileInfo._id})
+            })
+            
         })      
         .catch(err => console.log(err))
     }
-    changeProfileSection = (e) => {
-        this.setState({profileMode: e})
+    changeProfileType = (e) => {
+        this.setState({profile: e})
     }
     render(){
         var profileRouting = {
@@ -41,14 +44,14 @@ class ProfilePage extends Component{
             return(
                 /*NavProfile is different from original Nav or LoggedIn Nav*/ 
                 <div className="ProfilePage">
-                    <NavProfile changeSection = {this.changeProfileSection}/>
-                    {this.profileRouting[this.state.profileMode]}
+                    <NavProfile changeProfile = {this.changeProfileType}/>
+                    {this.profileRouting[this.state.profile]}
                 </div>
             )
         }
         else{
             return(
-                <Login/> /**Or login page or w/e */ 
+                this.props.changeCurrentPage('login')
             )
         }
        

@@ -44,7 +44,7 @@ class Login extends Component {
 	};
 
 	handleChange = (e) => {
-		if(e.target.name == 'username'){
+		if(e.target.name === 'username'){
 			this.setState({username: e.target.value})
 		}
 		else{
@@ -86,7 +86,6 @@ class Login extends Component {
 									name="password"
 								/>
 							</div>
-
 							<div className="row">
 								<div className="col-12 text-center pb-2 ">
 									<button type="submit" className="btn btn-info btn-block btn-lg">

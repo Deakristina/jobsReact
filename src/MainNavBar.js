@@ -1,5 +1,5 @@
-import React from 'react';
-import './App.css';
+import React from 'react'
+import './App.css'
 
 function MainNavBar(props) {
 	if (props.loggedIn) {
@@ -20,7 +20,7 @@ function MainNavBar(props) {
 					<a
 						className="navbar-brand"
 						onClick={function() {
-							props.changePage('home');
+							props.changePage('home')
 						}}
 					>
 						FindYourJob
@@ -30,7 +30,7 @@ function MainNavBar(props) {
 							<a
 								className="nav-link"
 								onClick={function() {
-									props.changePage('profile');
+									props.changePage('profile')
 								}}
 							>
 								Profile
@@ -40,7 +40,7 @@ function MainNavBar(props) {
 							<a
 								className="nav-link"
 								onClick={function() {
-									props.changePage('searchJob');
+									props.changePage('searchJob')
 								}}
 							>
 								Search Job
@@ -50,7 +50,7 @@ function MainNavBar(props) {
 							<a
 								className="nav-link"
 								onClick={function() {
-									props.changePage('postJob');
+									props.changePage('postJob')
 								}}
 							>
 								Post Job
@@ -59,7 +59,7 @@ function MainNavBar(props) {
 					</ul>
 				</div>
 			</nav>
-		);
+		)
 	} else {
 		return (
 			<nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -78,7 +78,7 @@ function MainNavBar(props) {
 					<a
 						className="navbar-brand"
 						onClick={function() {
-							props.changePage('home');
+							props.changePage('home')
 						}}
 					>
 						FindYourJob
@@ -88,7 +88,7 @@ function MainNavBar(props) {
 							<a
 								className="nav-link"
 								onClick={function() {
-									props.changePage('register');
+									props.changePage('register')
 								}}
 							>
 								Register
@@ -98,7 +98,7 @@ function MainNavBar(props) {
 							<a
 								className="nav-link"
 								onClick={function() {
-									props.changePage('login');
+									props.changePage('login')
 								}}
 							>
 								Log in
@@ -108,7 +108,7 @@ function MainNavBar(props) {
 							<a
 								className="nav-link"
 								onClick={function() {
-									props.changePage('searchJob');
+									props.changePage('searchJob')
 								}}
 							>
 								Search Job
@@ -117,8 +117,8 @@ function MainNavBar(props) {
 					</ul>
 				</div>
 			</nav>
-		);
+		)
 	}
 }
 
-export default MainNavBar;
+export default MainNavBar

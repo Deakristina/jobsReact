@@ -2,24 +2,36 @@ import React, { Component } from 'react';
 
 import LandingPage from './components/landingPage';
 import PostJob from './components/PostJob';
-import MainNavBar from './MainNavBar'; //TESTING ZONE
-import Register from './Register'; //UNDER CONSTRUCTION
-import SearchJob from './SearchJob'; //NOT CONSTRUCTED
-import Login from './Login'; //NOT CONSTRUCTED
+import MainNavBar from './MainNavBar'; //WORKS.
+import Register from './Register'; //WORKS.
+import SearchJob from './SearchJob'; //Under construction
+import Login from './Login'; //WORKS
 import ProfilePage from './ProfilePage'; //UNDER CONSTRUCTION
 import 'bootstrap/dist/css/bootstrap.css';
-import './App.css'; //NO`
+import './App.css'; 
+import {instanceOf} from 'prop-types'
+import {withCookies, Cookies} from 'react-cookies'
+
 
 class App extends Component {
-	constructor() {
-		super();
+	static propTypes = {
+		cookies: instanceOf(Cookies).isRequired,
+	}
+	constructor(props) {
+		super(props);
+		const {cookies} = props
+
 		this.state = {
 			currentPage: 'home',
 			loggedIn: false,
-			email: ''
+			email: '',
+			userID: "",
 		};
 	}
 
+	setID = (ID) => {
+		this.setState({userID: ID})
+	}
 	changeCurrentPage = (e) => {
 		this.setState({ currentPage: e });
 	};
@@ -34,20 +46,22 @@ class App extends Component {
 	render() {
 		var router = {
 			home: <LandingPage changePage={this.changeCurrentPage} loggedIn={this.loggedIn} />,
-			searchJob: <SearchJob changePage={this.changeCurrentPage} loggedIn={this.loggedIn} />,
+			searchJob: <SearchJob changePage={this.changeCurrentPage} loggedIn={this.loggedIn} userID = {this.state.userID}/>,
 			register: <Register changePage={this.changeCurrentPage} loggedIn={this.loggedIn} />,
-			login: <Login changePage={this.changeCurrentPage} loggedIn={this.loggedIn} email={this.getEmail} />,
+			login: <Login changePage={this.changeCurrentPage} loggedIn={this.loggedIn} email={this.getEmail}/>,
 			profile: (
 				<ProfilePage
 					changePage={this.changeCurrentPage}
 					loggedIn={this.state.loggedIn}
 					email={this.state.email}
+					handleID = {this.setID}
 				/>
 			),
 			postJob: <PostJob changePage={this.changeCurrentPage} loggedIn={this.loggedIn} />
 			//Here the component that renders post job
 		};
 		return (
+
 			<div>
 				<MainNavBar changePage={this.changeCurrentPage} loggedIn={this.state.loggedIn} />
 				{router[this.state.currentPage]}
