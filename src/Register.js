@@ -57,7 +57,7 @@ class RegisterForm extends Component {
 					console.log(result);
 					this.props.changePage('login');
 				} else {
-					this.setState({ error: 'There was an error, please try later' });
+					this.setState({ error: 'There was an error, please try later', userExists: true });
 				}
 			})
 			.catch((err) => console.log(err));
@@ -134,12 +134,85 @@ class RegisterForm extends Component {
 										required
 									/>
 								</div>
+								
+								<p>{this.state.error}</p>
+							</form>
+						</div>
+					</div>
+					<div className="col-4" />
+				</div>
+			);
+        } 
+        else {
+            return (
+				<div className="row">
+					<div className="col-4"> </div>
+					<div className="col-4">
+						<div className="container mt-5 register-container">
+							<h1 className="login-title text-center mt-3">Register</h1>
+							<form onSubmit={this.handleSubmit} className="formulario" method="POST">
+								<div className="form-group pt-3">
+									<label htmlFor="firstname">First Name: </label>
+									<input
+										onChange={this.handleChange}
+										type="text"
+										className="form-control"
+										id="firstname"
+										name="name"
+										required
+									/>
+								</div>
+								<div className="form-group">
+									<label htmlFor="lastname">Last Name: </label>
+									<input
+										onChange={this.handleChange}
+										type="text"
+										className="form-control"
+										id="lastname"
+										name="surname"
+										required
+									/>
+								</div>
+								<div className="form-group">
+									<label htmlFor="email">Email: </label>
+									<input
+										onChange={this.checkUsername}
+										type="email"
+										className="form-control"
+										id="email"
+										name="email"
+										required
+									/>
+								</div>
+
+								<div className="form-group">
+									<label htmlFor="phone">Phone: </label>
+									<input
+										onChange={this.handleChange}
+										type="number"
+										className="form-control"
+										id="phone"
+										name="phone"
+										required
+									/>
+								</div>
+								<div className="form-group ">
+									<label htmlFor="password">Password</label>
+									<input
+										onChange={this.handleChange}
+										id="password"
+										type="password"
+										className="form-control"
+										placeholder="Password"
+										name="password"
+										required
+									/>
+								</div>
 								<div className="row">
 									<div className="col-12 text-center pb-2 ">
 										<button
 											type="submit"
 											onChange={this.handleChange}
-											onClick={this.createUser}
 											className="btn btn-info btn-block btn-lg"
 										>
 											Register
@@ -154,7 +227,6 @@ class RegisterForm extends Component {
 					<div className="col-4" />
 				</div>
 			);
-		} else {
 		}
 	}
 }

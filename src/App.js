@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import LandingPage from './components/LandingPage';
+import LandingPage from './components/landingPage';
 import PostJob from './components/PostJob';
 import MainNavBar from './MainNavBar'; //TESTING ZONE
 import Register from './Register'; //UNDER CONSTRUCTION
@@ -14,7 +14,7 @@ class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			currentPage: '',
+			currentPage: 'home',
 			loggedIn: false,
 			email: ''
 		};
@@ -33,6 +33,7 @@ class App extends Component {
 
 	render() {
 		var router = {
+			home: <LandingPage changePage={this.changeCurrentPage} loggedIn={this.loggedIn} />,
 			searchJob: <SearchJob changePage={this.changeCurrentPage} loggedIn={this.loggedIn} />,
 			register: <Register changePage={this.changeCurrentPage} loggedIn={this.loggedIn} />,
 			login: <Login changePage={this.changeCurrentPage} loggedIn={this.loggedIn} email={this.getEmail} />,
