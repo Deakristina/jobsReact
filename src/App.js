@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import LandingPage from './components/landingPage';
+import LandingPage from './components/LandingPage';
 import PostJob from './components/PostJob';
 import MainNavBar from './MainNavBar'; //TESTING ZONE
 import Register from './Register'; //UNDER CONSTRUCTION

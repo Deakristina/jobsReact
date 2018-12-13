@@ -40,7 +40,7 @@ class SearchJob extends Component {
 						type="text"
 						placeholder="Search by job title"
 					/>
-					<h5 className="text-center">Or</h5>
+
 					<Input
 						name="location"
 						value={data.location}
