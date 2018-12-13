@@ -7,7 +7,7 @@ class JobOffer extends Component {
         super(props)
         this.state = {
             editProfile: false,
-            info: this.props.profileInfo
+            info: this.props.basicInfo
         }
     }
     

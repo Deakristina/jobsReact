@@ -3,7 +3,8 @@ import ModalPage from './modal';
 import Input from './input';
 import axios from 'axios';
 import '../App.css';
-import local from '../local';
+import local from '../local'
+
 
 class PostJob extends Component {
 	state = {

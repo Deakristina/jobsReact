@@ -37,12 +37,35 @@ class Login extends Component {
 			.catch((err) => console.log(err));
 	};
 
-	handleChange = (e) => {
-		if (e.target.name === 'username') {
-			this.setState({ name: e.target.value });
-		} else {
-			this.setState({ password: e.target.value });
-		}
+	handleSubmit = (e) => {
+		e.preventDefault();
+		console.log(this.state.username, this.state.password);
+		debugger;
+		axios({
+			method: 'post',
+			url: `http://${local.ipAddress}:${local.port}/login`,
+			data: {
+				username: this.state.name,
+				password: this.state.password
+			},
+			withCredentials: true
+		})
+			.then((result) => {
+				debugger;
+				if (result.status === 200) {
+					debugger;
+					this.props.email(this.state.username);
+					this.props.changePage('searchJob');
+					this.props.loggedIn(true);
+				}
+				if (result.status === 201) {
+					debugger;
+					this.setState({ error: 'Invalid Credentials' });
+				} else {
+					this.props.changePage('home');
+				}
+			})
+			.catch((err) => console.log(err));
 	};
 
 	render() {
