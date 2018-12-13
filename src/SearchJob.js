@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Input from './components/input';
 import axios from 'axios';
 
-class SearchProfile extends Component {
+class SearchJob extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -13,11 +13,6 @@ class SearchProfile extends Component {
 			search: ''
 		};
 	}
-
-	// componentDidMount() {
-	// 	const promise = axios.get('http://10.85.2.141:5001/post-job').then((res) => console.log(res));
-	// 	console.log(promise);
-	// }
 
 	//handlechange goes here -- update the state
 	handleChange = (e) => {
@@ -64,4 +59,4 @@ class SearchProfile extends Component {
 	}
 }
 
-export default SearchProfile;
+export default SearchJob;

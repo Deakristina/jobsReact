@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import ModalPage from './components/modal';
-import Input from './components/input';
+import ModalPage from './modal';
+import Input from './input';
 import axios from 'axios';
-import './App.css';
+import '../App.css';
+import local from '../local';
 
 class PostJob extends Component {
 	state = {
@@ -32,7 +33,6 @@ class PostJob extends Component {
 		e.preventDefault();
 
 		const errors = this.validate();
-		debugger;
 		this.setState({ errors: errors || {} });
 		console.log('checked');
 		if (errors) {
@@ -40,9 +40,8 @@ class PostJob extends Component {
 		}
 		//call the server
 		axios
-			.post('http://10.85.2.141:5001/post-job', {
+			.post(`${local.apiURL}/post-job`, {
 				withCredentials: true,
-				// method: 'POST',
 				title: data.title,
 				duration: data.duration,
 				requirements: data.requirements,
