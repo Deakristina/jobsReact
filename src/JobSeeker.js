@@ -63,17 +63,24 @@ class JobSeeker extends Component {
         }
         else{
             //Else view info, they both have the same structure one with inputs, the other with sections. 
+
+            var basicInformation = []
+            
+            for(const key in this.state.basicInfo.info.base){
+                basicInformation.push(key)
+            }
+
+            var basicInformationMapped = basicInformation.map((element) => element = <li>{element}</li>)
+
             return (
                 <div>
                     <a onClick={this.changeEditStatus}></a>
                     <section>
-                        <img src={this.state.profileInfo}></img>
+                        {/* <img src={this.state.profileInfo}></img> Leave it for later*/ }
                     </section>
                     <section>
                         <ul className="list" name="UserInfo">
-                            <li className="listItem"><label></label></li>
-                            <li className="listItem"><label></label></li>
-                            <li className="listItem"><label></label></li>
+                            {basicInformationMapped}
                         </ul>    
                     </section>        
                 </div>

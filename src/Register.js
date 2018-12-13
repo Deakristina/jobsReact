@@ -56,6 +56,7 @@ class RegisterForm extends Component {
 				if (result.status === 200) {
 					console.log(result);
 					this.props.changePage('login');
+					this.props.loggedIn(true);
 				} else {
 					this.setState({ error: 'There was an error, please try later', userExists: true });
 				}
