@@ -3,15 +3,18 @@ import ModalPage from './modal';
 import Input from './input';
 import axios from 'axios';
 import '../App.css';
-import local from '../local'
-
+import local from '../local';
 
 class PostJob extends Component {
 	state = {
 		data: {
 			title: '',
+			startDate: '',
 			duration: '',
-			location: '',
+			address: '',
+			postCode: '',
+			city: '',
+			country: '',
 			salary: '',
 			description: '',
 			requirements: [],
@@ -25,14 +28,12 @@ class PostJob extends Component {
 		if (data.title.trim() === '') errors.title = 'Title is required';
 		if (data.duration.trim() === '') errors.duration = 'Duration is required';
 		if (data.requirements.length === 0) errors.requirements = 'Requirements is required';
-		if (data.location.trim() === '') errors.location = 'Location is required';
-
+		if (data.address.trim() === '') errors.address = 'Address is required';
 		return Object.keys(errors).length === 0 ? null : errors;
 	};
 	handleSubmit = (e) => {
 		const { data } = this.state;
 		e.preventDefault();
-
 		const errors = this.validate();
 		this.setState({ errors: errors || {} });
 		console.log('checked');
@@ -44,9 +45,13 @@ class PostJob extends Component {
 			.post(`${local.apiURL}/post-job`, {
 				withCredentials: true,
 				title: data.title,
+				startDate: data.startDate,
 				duration: data.duration,
+				address: data.address,
+				postCode: data.postCode,
+				city: data.city,
+				country: data.country,
 				requirements: data.requirements,
-				location: data.location,
 				salary: data.salary,
 				description: data.description
 			})
@@ -72,8 +77,8 @@ class PostJob extends Component {
 		if (name === 'requirements') {
 			if (value.length === 0) return 'Requirements is required';
 		}
-		if (name === 'location') {
-			if (value.trim() === '') return 'Location is required';
+		if (name === 'address') {
+			if (value.trim() === '') return 'Address is required';
 		}
 	};
 	handleChange = ({ currentTarget: input }) => {
@@ -88,8 +93,8 @@ class PostJob extends Component {
 	render() {
 		const { data, errors } = this.state;
 		return (
-			<div className="container">
-				<h1>Post your vacancy!</h1>
+			<div className="container post-container">
+				<h1 className="text-center post-title">Post your Job Vacancy</h1>
 				<form onSubmit={this.handleSubmit}>
 					<Input
 						name="title"
@@ -100,24 +105,76 @@ class PostJob extends Component {
 						error={errors.title}
 						placeholder="e.g: Waitress"
 					/>
+					<div className="form-row">
+						<div className="col-md-6">
+							<Input
+								name="startDate"
+								value={data.startDate}
+								label="Start Date"
+								onChange={this.handleChange}
+								type="date"
+								error={errors.startDate}
+								placeholder="e.g: 2hours/day"
+							/>
+						</div>
+
+						<div className="col-md-6">
+							<Input
+								name="duration"
+								value={data.duration}
+								label="Duration"
+								onChange={this.handleChange}
+								type="text"
+								error={errors.duration}
+								placeholder="e.g: 2hours/day"
+							/>
+						</div>
+					</div>
+
 					<Input
-						name="duration"
-						value={data.duration}
-						label="Duration"
+						name="address"
+						value={data.address}
+						label="Address"
 						onChange={this.handleChange}
 						type="text"
-						error={errors.duration}
-						placeholder="e.g: 2hours/day"
-					/>
-					<Input
-						name="location"
-						value={data.location}
-						label="Location"
-						onChange={this.handleChange}
-						type="text"
-						error={errors.location}
+						error={errors.address}
 						placeholder="1234 Main St"
 					/>
+					<div className="form-row">
+						<div className="col-md-4">
+							<Input
+								name="postCode"
+								value={data.postCode}
+								label="Post Code"
+								onChange={this.handleChange}
+								type="text"
+								error={errors.postCode}
+								placeholder="Post Code"
+							/>
+						</div>
+						<div className="col-md-4">
+							<Input
+								name="city"
+								value={data.city}
+								label="City"
+								onChange={this.handleChange}
+								type="text"
+								error={errors.city}
+								placeholder="City"
+							/>
+						</div>
+						<div className="col-md-4">
+							<Input
+								name="country"
+								value={data.country}
+								label="Country"
+								onChange={this.handleChange}
+								type="text"
+								error={errors.country}
+								placeholder="Country"
+							/>
+						</div>
+					</div>
 					<Input
 						name="salary"
 						value={data.salary}

@@ -14,16 +14,15 @@ class SearchJob extends Component {
 		};
 	}
 
-	//handlechange goes here -- update the state
-	handleChange = (e) => {
-		// axios.get(`http://localhost:4000/post-job/${e.target.value}`).then((result) => {
-		// 	this.setState({ data: result });
-		// });
-		console.log('check');
+	handleChange = ({ currentTarget: input }) => {
+		const data = { ...this.state.data };
+		data[input.name] = input.value;
+		this.setState({ data });
 	};
 
 	//handlesubmit -- call to the backend
-	handleSubmit = () => {
+	handleSubmit = (e) => {
+		e.preventDefault();
 		console.log('submitted');
 	};
 
@@ -48,12 +47,12 @@ class SearchJob extends Component {
 						type="text"
 						placeholder="Search by location"
 					/>
-				</form>
-				<div className="row">
-					<div className="col-12 text-center">
-						<button className="btn btn-primary">Search</button>
+					<div className="row">
+						<div className="col-12 text-center">
+							<button className="btn btn-primary">Search</button>
+						</div>
 					</div>
-				</div>
+				</form>
 			</div>
 		);
 	}

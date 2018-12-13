@@ -1,10 +1,16 @@
 import React from 'react';
 import './App.css';
 
+let navStyle = {
+	position: 'fixed',
+	top: '0',
+	width: '100%'
+};
+
 function MainNavBar(props) {
 	if (props.loggedIn) {
 		return (
-			<nav className="navbar navbar-expand-lg navbar-light bg-light">
+			<nav className="navbar navbar-expand-lg navbar-light bg-light" style={navStyle}>
 				<button
 					className="navbar-toggler"
 					type="button"
@@ -62,7 +68,7 @@ function MainNavBar(props) {
 		);
 	} else {
 		return (
-			<nav className="navbar navbar-expand-lg navbar-light bg-light">
+			<nav className="navbar navbar-expand-lg navbar-light bg-light" style={navStyle}>
 				<button
 					className="navbar-toggler"
 					type="button"

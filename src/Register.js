@@ -79,7 +79,7 @@ class RegisterForm extends Component {
 							<h1 className="login-title text-center mt-3">Register</h1>
 							<form onSubmit={this.handleSubmit} className="formulario" method="POST">
 								<div className="form-group pt-3">
-									<label htmlFor="firstname">First Name: </label>
+									<label htmlFor="firstname">First Name </label>
 									<input
 										onChange={this.handleChange}
 										type="text"
@@ -90,7 +90,7 @@ class RegisterForm extends Component {
 									/>
 								</div>
 								<div className="form-group">
-									<label htmlFor="lastname">Last Name: </label>
+									<label htmlFor="lastname">Last Name </label>
 									<input
 										onChange={this.handleChange}
 										type="text"
@@ -101,7 +101,7 @@ class RegisterForm extends Component {
 									/>
 								</div>
 								<div className="form-group">
-									<label htmlFor="email">Email: </label>
+									<label htmlFor="email">Email </label>
 									<input
 										onChange={this.checkUsername}
 										type="email"
@@ -113,7 +113,7 @@ class RegisterForm extends Component {
 								</div>
 
 								<div className="form-group">
-									<label htmlFor="phone">Phone: </label>
+									<label htmlFor="phone">Phone </label>
 									<input
 										onChange={this.handleChange}
 										type="number"
@@ -151,7 +151,7 @@ class RegisterForm extends Component {
 							<h1 className="login-title text-center mt-3">Register</h1>
 							<form onSubmit={this.handleSubmit} className="formulario" method="POST">
 								<div className="form-group pt-3">
-									<label htmlFor="firstname">First Name: </label>
+									<label htmlFor="firstname">First Name </label>
 									<input
 										onChange={this.handleChange}
 										type="text"
@@ -162,7 +162,7 @@ class RegisterForm extends Component {
 									/>
 								</div>
 								<div className="form-group">
-									<label htmlFor="lastname">Last Name: </label>
+									<label htmlFor="lastname">Last Name </label>
 									<input
 										onChange={this.handleChange}
 										type="text"
@@ -173,7 +173,7 @@ class RegisterForm extends Component {
 									/>
 								</div>
 								<div className="form-group">
-									<label htmlFor="email">Email: </label>
+									<label htmlFor="email">Email </label>
 									<input
 										onChange={this.checkUsername}
 										type="email"
@@ -185,7 +185,7 @@ class RegisterForm extends Component {
 								</div>
 
 								<div className="form-group">
-									<label htmlFor="phone">Phone: </label>
+									<label htmlFor="phone">Phone </label>
 									<input
 										onChange={this.handleChange}
 										type="number"
