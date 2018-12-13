@@ -3,25 +3,28 @@ import NavProfile from './NavProfile'
 import JobSeeker from './JobSeeker'
 import Login from './Login'
 import JobOffer from './JobOffer'
+import local from './local'
+
 const axios = require('axios')
 
 class ProfilePage extends Component{
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state = {
             profileMode: "JobSeeker",
-            loggedIn: false, //cookie value
+            loggedIn: this.props.loggedIn, //cookie value
             userID: "", //from Database user object
         }
 
         //State in ProfilePage holds all data
     }
     componentDidMount=()=>{ //Once page mounted fetch data from user profile object MongoDB
-        axios('192.168.0.108:5001/profileInfo', { //THIS IP IS INCORRECT
-            method: 'GET',
-            withCredentials:true
+        axios(`http://${local.ipAddress}:${local.port}/profileInfo?u=${this.props.email}`, { //THIS IP IS INCORRECT
+            method: 'get',
+            withCredentials: true,
         })
         .then((result) => {
+            console.log(result)
             this.setState({profileInfo: result})
         })      
         .catch(err => console.log(err))
@@ -31,8 +34,8 @@ class ProfilePage extends Component{
     }
     render(){
         var profileRouting = {
-            jobSeeker: <JobSeeker profileInfo = {this.state.profileInformation}/>,//Same page but without editing
-            jobOffer: <JobOffer profileInfo = {this.state.profileInformation}/>,
+            jobSeeker: <JobSeeker basicInfo = {this.state.profileInfo}/>,//Same page but without editing
+            jobOffer: <JobOffer basicInfo = {this.state.profileInfo}/>,
         }
         if(this.state.loggedIn){
             return(

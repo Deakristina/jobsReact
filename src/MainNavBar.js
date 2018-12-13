@@ -23,7 +23,6 @@ function MainNavBar(props) {
 						<li className="nav-item active">
 							<a
 								className="nav-link"
-								href="#"
 								onClick={function() {
 									props.changePage('profile');
 								}}
@@ -34,7 +33,6 @@ function MainNavBar(props) {
 						<li className="nav-item active">
 							<a
 								className="nav-link"
-								href="#"
 								onClick={function() {
 									props.changePage('searchJob');
 								}}
@@ -45,7 +43,6 @@ function MainNavBar(props) {
 						<li className="nav-item active">
 							<a
 								className="nav-link"
-								href="#"
 								onClick={function() {
 									props.changePage('postJob');
 								}}
@@ -79,7 +76,6 @@ function MainNavBar(props) {
 						<li className="nav-item active">
 							<a
 								className="nav-link"
-								href="#"
 								onClick={function() {
 									props.changePage('register');
 								}}
@@ -90,7 +86,6 @@ function MainNavBar(props) {
 						<li className="nav-item active">
 							<a
 								className="nav-link"
-								href="#"
 								onClick={function() {
 									props.changePage('login');
 								}}
@@ -101,7 +96,6 @@ function MainNavBar(props) {
 						<li className="nav-item active">
 							<a
 								className="nav-link"
-								href="#"
 								onClick={function() {
 									props.changePage('searchJob');
 								}}

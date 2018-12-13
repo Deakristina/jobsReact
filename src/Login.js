@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-
+import local from './local'
 
 class Login extends Component {
   constructor(){
@@ -13,27 +13,37 @@ class Login extends Component {
 
   }
 
-  handleSubmit = () => {
+  handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(this.state.username, this.state.password)
+    debugger
     axios({
       method: 'post',
-      url: "192.168.0.108:5001/login",
+      url: `http://${local.ipAddress}:${local.port}/login`,
       data: {
-        username: this.state.username,
+        username: this.state.name,
         password: this.state.password,
       },
       withCredentials: true,
     })
     .then((result) => {
-      if(result.status === 200){
+      debugger
+      if(result.status === 200){  
+        debugger
+        this.props.email(this.state.username)
         this.props.changePage('searchJob')
+        this.props.loggedIn(true)
       }
-      else if (result.status === 201){
+      if (result.status === 201){
+        debugger
         this.setState({error: 'Invalid Credentials'})
       }
       else{
-        this.setState({error: "Invalid Credentials"})
+        this.props.changePage('home')
       }
+     
     })
+    .catch(err => console.log(err))
   }
 
   handleChange = (e) => {
@@ -52,7 +62,7 @@ class Login extends Component {
         <form onSubmit={this.handleSubmit} method="POST">
             <ul className="list">
               <li className="list-item"><input onChange={this.handleChange} type="text" className="input" placeholder="Email eg: example@email.com" name="username"/></li>
-              <li className="list-item"><input onChange={this.handleChange} type="text" className="input" placeholder="Password" name="password"/></li>
+              <li className="list-item"><input onChange={this.handleChange} type="password" className="input" placeholder="Password" name="password"/></li>
               <li className="list-item"><input type="submit" className="input" value="Logg In"/></li>
             </ul>
             <p>{this.state.error}</p>

@@ -29,7 +29,7 @@ class JobSeeker extends Component {
     constructor(props){
         super(props)
         this.state = {
-            seekerProfileInfo: this.props.profileInfo,
+            seekerProfileInfo: this.props.basicInfo,
             editProfile: false,
         }   
     }
