@@ -57,13 +57,14 @@ class RegisterForm extends Component {
 					console.log(result);
 					this.props.changePage('login');
 				} else {
-					this.setState({ error: 'There was an error, please try later' });
+					this.setState({ error: 'There was an error, please try later', userExists: true });
 				}
 			})
 			.catch((err) => console.log(err));
 	};
 	handleChange = (e) => {
-		var userObject = {};
+		debugger;
+		var userObject = {}; //Credits to documentation, and to mom thank for supporting me
 		userObject[e.target.name] = e.target.value;
 		this.setState(userObject);
 	};
@@ -134,20 +135,7 @@ class RegisterForm extends Component {
 										required
 									/>
 								</div>
-								<div className="row">
-									<div className="col-12 text-center pb-2 ">
-										<button
-											type="submit"
-											onChange={this.handleChange}
-											onClick={this.createUser}
-											className="btn btn-info btn-block btn-lg"
-										>
-											Register
-										</button>
-									</div>
-								</div>
-								<div error={this.state.error} />
-								{/* check error */}
+								<p>{this.state.error}</p>
 							</form>
 						</div>
 					</div>
@@ -224,7 +212,6 @@ class RegisterForm extends Component {
 										<button
 											type="submit"
 											onChange={this.handleChange}
-											onClick={this.createUser}
 											className="btn btn-info btn-block btn-lg"
 										>
 											Register
