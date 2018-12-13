@@ -63,7 +63,8 @@ class RegisterForm extends Component {
 			.catch((err) => console.log(err));
 	};
 	handleChange = (e) => {
-		var userObject = {};
+        debugger
+		var userObject = {}; //Credits to documentation, and to mom thank for supporting me
 		userObject[e.target.name] = e.target.value;
 		this.setState(userObject);
 	};
@@ -134,7 +135,6 @@ class RegisterForm extends Component {
 										required
 									/>
 								</div>
-								
 								<p>{this.state.error}</p>
 							</form>
 						</div>
