@@ -96,6 +96,43 @@
 	color: #e68a00;
 }
 
+/* -- Feature -- */
+.feature {
+	position: relative;
+}
+
+.feature + .feature {
+	margin-top: 40px;
+}
+
+.feature .feature-icon {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 80px;
+	height: 80px;
+	line-height: 80px;
+	text-align: center;
+	border-radius: 50%;
+	font-size: 30px;
+	border: 1px solid #ebebeb;
+	color: #ff6700;
+}
+
+.feature-content {
+	padding-left: 100px;
+}
+
+.feature-text {
+	color: #e68a00;
+}
+
+.footer-box {
+	background-color: #e68a00;
+	opacity: 0.9;
+	color: #fff;
+}
+
 /* 
 @media only screen and (max-width: 900px) {
 	.login-container{
