@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css';
 
 function MainNavBar(props) {
 	if (props.loggedIn) {
@@ -16,14 +17,18 @@ function MainNavBar(props) {
 					<span className="navbar-toggler-icon" />
 				</button>
 				<div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-					<a className="navbar-brand" href="#">
+					<a
+						className="navbar-brand"
+						onClick={function() {
+							props.changePage('home');
+						}}
+					>
 						FindYourJob
 					</a>
 					<ul className="navbar-nav mr-auto mt-2 mt-lg-0">
 						<li className="nav-item active">
 							<a
 								className="nav-link"
-								href="#"
 								onClick={function() {
 									props.changePage('profile');
 								}}
@@ -34,7 +39,6 @@ function MainNavBar(props) {
 						<li className="nav-item active">
 							<a
 								className="nav-link"
-								href="#"
 								onClick={function() {
 									props.changePage('searchJob');
 								}}
@@ -45,7 +49,6 @@ function MainNavBar(props) {
 						<li className="nav-item active">
 							<a
 								className="nav-link"
-								href="#"
 								onClick={function() {
 									props.changePage('postJob');
 								}}
@@ -72,14 +75,18 @@ function MainNavBar(props) {
 					<span className="navbar-toggler-icon" />
 				</button>
 				<div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-					<a className="navbar-brand" href="#">
+					<a
+						className="navbar-brand"
+						onClick={function() {
+							props.changePage('home');
+						}}
+					>
 						FindYourJob
 					</a>
 					<ul className="navbar-nav mr-auto mt-2 mt-lg-0">
 						<li className="nav-item active">
 							<a
 								className="nav-link"
-								href="#"
 								onClick={function() {
 									props.changePage('register');
 								}}
@@ -90,7 +97,6 @@ function MainNavBar(props) {
 						<li className="nav-item active">
 							<a
 								className="nav-link"
-								href="#"
 								onClick={function() {
 									props.changePage('login');
 								}}
@@ -101,7 +107,6 @@ function MainNavBar(props) {
 						<li className="nav-item active">
 							<a
 								className="nav-link"
-								href="#"
 								onClick={function() {
 									props.changePage('searchJob');
 								}}

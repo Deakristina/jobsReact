@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import './App.css'; //NO
+
+import LandingPage from './components/LandingPage';
 import PostJob from './components/PostJob';
 import MainNavBar from './MainNavBar'; //TESTING ZONE
 import Register from './Register'; //UNDER CONSTRUCTION
@@ -7,12 +8,13 @@ import Register from './Register'; //UNDER CONSTRUCTION
 import Login from './Login'; //NOT CONSTRUCTED
 import ProfilePage from './ProfilePage'; //UNDER CONSTRUCTION
 import 'bootstrap/dist/css/bootstrap.css';
+import './App.css'; //NO`
 
 class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			currentPage: '',
+			currentPage: 'home',
 			loggedIn: false
 		};
 	}
@@ -23,7 +25,7 @@ class App extends Component {
 
 	render() {
 		var router = {
-			//FindYourJob: <FindYourJob changePage={this.changeCurrentPage} />,
+			home: <LandingPage changePage={this.changeCurrentPage} />,
 			// searchJob: <SearchJob/>,
 			register: <Register changePage={this.changeCurrentPage} />,
 			login: <Login changePage={this.changeCurrentPage} />,
@@ -35,6 +37,7 @@ class App extends Component {
 			<div>
 				<MainNavBar changePage={this.changeCurrentPage} />
 				{router[this.state.currentPage]}
+				{/* <LandingPage /> */}
 			</div>
 		);
 	}

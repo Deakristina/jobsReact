@@ -1,4 +1,4 @@
-.App {
+/* .App {
 	text-align: center;
 }
 
@@ -29,4 +29,79 @@
 	to {
 		transform: rotate(360deg);
 	}
+} */
+
+/* -----Landing Page----- */
+
+.hero {
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
+
+.hero-area {
+	position: relative;
+	padding-top: 80px;
+	padding-bottom: 80px;
+}
+
+#home.hero-area {
+	height: calc(100vh - 80px);
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+.home-wrapper {
+	position: absolute;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+	left: 0;
+	right: 0;
+}
+
+.white-text {
+	color: #fff;
+}
+
+.icon-button {
+	color: #000;
+}
+
+.icon-button:hover {
+	color: #fff;
+}
+
+/* -----LoginPage----- */
+
+/* .login-container {
+	border: 2px solid #e68a00;
+	border-radius: 8px;
+	height: 60vh;
+	padding-top: 3vh;
+} */
+
+.login-title {
+	color: #595959;
+	text-decoration: underline;
+}
+
+.registration-link {
+	color: #17a2b8;
+}
+
+.registration-link:hover {
+	color: #e68a00;
+}
+
+/* 
+@media only screen and (max-width: 900px) {
+	.login-container{
+
+	}
+} */
+
+/* background credit */
+/* <a href='https://www.freepik.com/free-photo/business-people-handshake-greeting-deal-at-work_1024706.htm'>Designed by Jcomp</a> */
