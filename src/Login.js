@@ -16,7 +16,7 @@ class Login extends Component {
   handleSubmit = () => {
     axios({
       method: 'post',
-      url: "10.85.2.141:5001",
+      url: "192.168.0.108:5001/login",
       data: {
         username: this.state.username,
         password: this.state.password,
@@ -27,8 +27,8 @@ class Login extends Component {
       if(result.status === 200){
         this.props.changePage('searchJob')
       }
-      else if ( 300 < result.status < 505){
-        this.setState({error: 'Server error'})
+      else if (result.status === 201){
+        this.setState({error: 'Invalid Credentials'})
       }
       else{
         this.setState({error: "Invalid Credentials"})

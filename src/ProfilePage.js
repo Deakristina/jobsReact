@@ -17,12 +17,12 @@ class ProfilePage extends Component{
         //State in ProfilePage holds all data
     }
     componentDidMount=()=>{ //Once page mounted fetch data from user profile object MongoDB
-        axios('localhost:5000/profileInfo', { //THIS IP IS INCORRECT
+        axios('192.168.0.108:5001/profileInfo', { //THIS IP IS INCORRECT
             method: 'GET',
             withCredentials:true
         })
         .then((result) => {
-            console.log(result)
+            this.setState({profileInfo: result})
         })      
         .catch(err => console.log(err))
     }
