@@ -34,7 +34,6 @@
 /* -----Landing Page----- */
 
 .hero {
-	height: 100vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -42,7 +41,6 @@
 
 .hero-area {
 	position: relative;
-	padding-top: 80px;
 	padding-bottom: 80px;
 }
 
@@ -62,6 +60,16 @@
 	right: 0;
 }
 
+.home-search-wrapper {
+	position: absolute;
+	top: 30%;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+	left: 0;
+	right: 0;
+}
+
 .white-text {
 	color: #fff;
 }
@@ -73,6 +81,10 @@
 
 .icon-button:hover {
 	color: #fff;
+}
+
+.nav-link:hover {
+	cursor: pointer;
 }
 
 /* -----LoginPage----- */
@@ -149,12 +161,39 @@
 	color: #595959;
 }
 
-/* 
-@media only screen and (max-width: 900px) {
-	.login-container{
+/* -----SearchJobPage ----- */
 
+.search-title {
+	padding-top: 20vh;
+	color: #e68a00;
+}
+
+.no-result {
+	z-index: 100;
+}
+
+.btn-warning {
+	background-color: #e68a00 !important;
+	border-color: #e68a00 !important;
+}
+
+.job-result {
+	border: 3px solid black;
+	width: 50%;
+	margin: 2vh auto;
+	border-radius: 10px;
+}
+
+.job-list {
+	list-style-type: none;
+}
+
+@media only screen and (max-width: 900px) {
+	.job-result {
+		width: 100%;
 	}
-} */
+}
 
 /* background credit */
 /* <a href='https://www.freepik.com/free-photo/business-people-handshake-greeting-deal-at-work_1024706.htm'>Designed by Jcomp</a> */
+/* <a href='https://www.freepik.com/free-photo/office-workplace-with-keypad-and-glasses_2419876.htm'>Designed by Freepik</a> */
