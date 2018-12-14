@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import LandingPage from './components/LandingPage';
+import LandingPage from './components/landingPage';
 import PostJob from './components/PostJob';
 import MainNavBar from './MainNavBar'; //WORKS.
 import Register from './Register'; //WORKS.

@@ -13,32 +13,41 @@ class JobOffer extends Component {
     
     render() { //If true return form
 
-        var info = this.state.profileInfo 
+        
+        var basicInfo = []
+        var extendedInfo = []
 
-        var userPosts = info.jobsPosted.map((element) => { //Map all projects
-            element = <li>{element}</li>
-        })
+        for (var key in this.state.info.info.base){
+            basicInfo.push(key)
+        }
+        for(var element in this.state.info.info.extendedInfo){
+            extendedInfo.push(element)
+        }
+
+        var basicInfoMapped = basicInfo.map((element) => element = <li className="list-item">{element}</li>)
+        var extendedInfoMapped = extendedInfo.map((element) => element = <li className="list-item">{element}</li>)
+        var basicInfoInputs = basicInfo.map((element, pos) => element = <input onChange={this.handleChange} name={pos} value={element}/>)
+        var extendedInfoInputs = extendedInfo.map((element, pos) => element = <input onChange={this.handleChange} name={pos} value= {element}/> )
+
 
         if(this.state.editProfile){  //Posts cannot be edited from here
             return (
                 <div>
-                    
+                    <form onSubmit={this.handleSubmit}>
+                        {basicInfoInputs}
+                        {extendedInfoInputs}
+                        <input type="submit" value="Save"/>
+                    </form>
                 </div>
             )
         } 
         else{ //Here info of what people see in the offers and offers created
             return(
                 <div>
-                    <ul class="list offerer">
-                        <li className="list-item"><label>Name</label>{info.name}</li>
-                        <li className="list-item"><label></label>{info.email}</li>
-                        <li className="list-item"><label></label>{info.phone}</li>
+                    <ul>
+                        {basicInfoMapped}
+                        {extendedInfoMapped}
                     </ul>
-                    <div>
-                        <ul>
-                            {userPosts}
-                        </ul>
-                    </div>
                 </div>
             )
         }  

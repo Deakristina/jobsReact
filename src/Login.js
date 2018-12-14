@@ -91,6 +91,7 @@ class Login extends Component {
 									<button type="submit" className="btn btn-info btn-block btn-lg">
 										Log In
 									</button>
+									<p>{this.state.error}</p>
 								</div>
 							</div>
 							<div className="registration-footnote text-center pt-2 pb-2">

@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import axios from 'axios';
+import local from './local'
+
 
 class JobSeeker extends Component {
     /** 
@@ -29,11 +32,14 @@ class JobSeeker extends Component {
     constructor(props){
         super(props)
         this.state = {
-            seekerProfileInfo: this.props.basicInfo,
+            info: this.props.basicInfo,
             editProfile: false,
+            data: {
+
+            }
         }   
     }
-
+ 
     //POST REQUEST METHODS HERE TO PUT THE THINGS IN THE DATABASE. 
     changeEditStatus = () => {
         if(this.state.editProfile){
@@ -45,47 +51,61 @@ class JobSeeker extends Component {
         
     }
 
+    handleChange = (e) => {
+        var objectData = {}
+        objectData[e.target.name] = e.target.value
+
+        this.setState({data: objectData})
+    }
+
+    handleSubmit = () => {
+        axios(`http://${local.ipAddress}:${local.port}/update?e=${this.state.info._id}`)
+        .then((result) => {
+            this.setState({error: 'Profile was updated.'})
+        })
+        .catch((err) =>  console.log(err))
+    }
+
     render() {
-        if(this.state.editProfile){
-            return(
-                <div>
-                    <a onClick={this.changeEditStatus}></a>
-                    <form action="changeProfile" method="POST">
-                        <img src={this.state.profileInfo.image}></img>
-                        <ul className="list" name="UserInfo">
-                            <li className="listItem"><label></label></li>
-                            <li className="listItem"><label></label></li>
-                            <li className="listItem"><label></label></li>
-                        </ul>    
-                    </form>        
-                </div>
-            )
+
+        var basicInfo = []
+        var extendedInfo = []
+
+        for (var key in this.state.info.info.base){
+            basicInfo.push(key)
         }
-        else{
-            //Else view info, they both have the same structure one with inputs, the other with sections. 
+        for(var element in this.state.info.info.extendedInfo){
+            extendedInfo.push(element)
+        }
 
-            var basicInformation = []
-            
-            for(const key in this.state.basicInfo.info.base){
-                basicInformation.push(key)
-            }
+        var basicInfoMapped = basicInfo.map((element) => element = <li className="list-item">{element}</li>)
+        var extendedInfoMapped = extendedInfo.map((element) => element = <li className="list-item">{element}</li>)
+        var basicInfoInputs = basicInfo.map((element, pos) => element = <input onChange={this.handleChange} name={pos} value={element}/>)
+        var extendedInfoInputs = extendedInfo.map((element, pos) => element = <input onChange={this.handleChange} name={pos} value= {element}/> )
 
-            var basicInformationMapped = basicInformation.map((element) => element = <li>{element}</li>)
 
+        if(this.state.editProfile){  //Posts cannot be edited from here
             return (
                 <div>
-                    <a onClick={this.changeEditStatus}></a>
-                    <section>
-                        {/* <img src={this.state.profileInfo}></img> Leave it for later*/ }
-                    </section>
-                    <section>
-                        <ul className="list" name="UserInfo">
-                            {basicInformationMapped}
-                        </ul>    
-                    </section>        
+                    <form onSubmit={this.handleSubmit}>
+                        {basicInfoInputs}
+                        {extendedInfoInputs}
+                        <input type="submit" value="Save"/>
+                    </form>
                 </div>
             )
-        }
+        } 
+        else{ //Here info of what people see in the offers and offers created
+            return(
+                <div>
+                    <ul>
+                        {basicInfoMapped}
+                        {extendedInfoMapped}
+                    </ul>
+                </div>
+            )
+        }  
+
   }
 }
 

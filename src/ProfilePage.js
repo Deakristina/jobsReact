@@ -23,6 +23,7 @@ class ProfilePage extends Component{
             withCredentials: true,
         })
         .then((result) => {
+            debugger
             console.log(result)
             this.setState({profileInfo: result}, () => {
                 this.props.handleID(this.state.profileInfo._id)
@@ -37,15 +38,15 @@ class ProfilePage extends Component{
     }
     render(){
         var profileRouting = {
-            jobSeeker: <JobSeeker basicInfo = {this.state.profileInfo}/>,//Same page but without editing
-            jobOffer: <JobOffer basicInfo = {this.state.profileInfo}/>,
+            jobSeeker: <JobSeeker basicInfo = {this.state.info}/>,//Same page but without editing
+            jobOffer: <JobOffer basicInfo = {this.state.info}/>,
         }
         if(this.state.loggedIn){
             return(
                 /*NavProfile is different from original Nav or LoggedIn Nav*/ 
                 <div className="ProfilePage">
-                    <NavProfile changeProfile = {this.changeProfileType}/>
-                    {this.profileRouting[this.state.profile]}
+                    {/* <NavProfile changeProfile = {this.changeProfileType}/> */}
+                    {/* {this.profileRouting[this.state.profile]} */}
                 </div>
             )
         }
