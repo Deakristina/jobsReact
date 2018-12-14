@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import LandingPage from './components/landingPage';
+import LandingPage from './components/LandingPage';
 import PostJob from './components/PostJob';
 import MainNavBar from './MainNavBar'; //WORKS.
 import Register from './Register'; //WORKS.
@@ -38,8 +38,8 @@ class App extends Component {
 		this.setState({ loggedIn: trigger });
 	};
 
-	getEmail = (adress) => {
-		this.setState({ email: adress });
+	getEmail = (address) => {
+		this.setState({ email: address });
 	};
 
 	render() {

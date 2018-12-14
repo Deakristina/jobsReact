@@ -12,7 +12,8 @@ class SearchJob extends Component {
 				location: ''
 			},
 			jobs: [],
-			search: ''
+			search: '',
+			noResult: false
 		};
 	}
 
@@ -27,7 +28,7 @@ class SearchJob extends Component {
 		const { data } = this.state;
 		e.preventDefault();
 		axios
-			.post(`${local.apiURL}/search-job`, {
+			.post(`${local.ipAddress}:${local.port}/search-job`, {
 				withCredentials: true,
 				title: data.title,
 				location: data.location
@@ -35,43 +36,55 @@ class SearchJob extends Component {
 			.then((result) => {
 				this.setState({ jobs: result.data });
 			});
-		console.log('submitted');
 	};
 
 	render() {
 		const { data } = this.state;
-		console.log(this.state.jobs);
-		let jobs = this.state.jobs.map((job, i) => {
-			return (
-				<ul key={i}>
-					<li>{job.info.title}</li>
-					<li>{job.location.address}</li>
-					<li>{job.info.salary}</li>
-				</ul>
-			);
-		});
+		console.log(this.state.jobs, this.state.search);
+		let jobs;
+		if (this.state.jobs.length > 0) {
+			jobs = this.state.jobs.map((job, i) => {
+				return (
+					<ul key={i}>
+						<li>{job.info.title}</li>
+						<li>{job.location.address}</li>
+						<li>{job.info.salary}</li>
+					</ul>
+				);
+			});
+		} else if (this.state.jobs.length === 0 && data.title) {
+			jobs = <p>No result</p>;
+		} else {
+			jobs = <React.Fragment />;
+		}
 		return (
 			<div className="container">
 				<h3>Find jobs around you</h3>
 				<form onSubmit={this.handleSubmit}>
-					<Input
-						name="title"
-						value={data.title}
-						onChange={this.handleChange}
-						type="text"
-						placeholder="Search by job title"
-					/>
+					<div className="form-row mt-5">
+						<div className="col-md-6">
+							<Input
+								name="title"
+								value={data.title}
+								onChange={this.handleChange}
+								type="text"
+								placeholder="Search by job title"
+							/>
+						</div>
 
-					<Input
-						name="location"
-						value={data.location}
-						onChange={this.handleChange}
-						type="text"
-						placeholder="Search by city or country"
-					/>
-					<div className="row">
+						<div className="col-md-6">
+							<Input
+								name="location"
+								value={data.location}
+								onChange={this.handleChange}
+								type="text"
+								placeholder="Search by city or country"
+							/>
+						</div>
+					</div>
+					<div className="row mt-4">
 						<div className="col-12 text-center">
-							<button className="btn btn-primary">Search</button>
+							<button className="btn btn-primary btn-lg">Search</button>
 						</div>
 					</div>
 				</form>
