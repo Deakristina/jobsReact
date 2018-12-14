@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Input from './components/input';
+import Input from './input';
 import axios from 'axios';
+import local from '../local';
 
 class SearchJob extends Component {
 	constructor(props) {
@@ -10,6 +11,7 @@ class SearchJob extends Component {
 				title: '',
 				location: ''
 			},
+			jobs: [],
 			search: ''
 		};
 	}
@@ -22,12 +24,32 @@ class SearchJob extends Component {
 
 	//handlesubmit -- call to the backend
 	handleSubmit = (e) => {
+		const { data } = this.state;
 		e.preventDefault();
+		axios
+			.post(`${local.apiURL}/search-job`, {
+				withCredentials: true,
+				title: data.title,
+				location: data.location
+			})
+			.then((result) => {
+				this.setState({ jobs: result.data });
+			});
 		console.log('submitted');
 	};
 
 	render() {
 		const { data } = this.state;
+		console.log(this.state.jobs);
+		let jobs = this.state.jobs.map((job, i) => {
+			return (
+				<ul key={i}>
+					<li>{job.info.title}</li>
+					<li>{job.location.adress}</li>
+					<li>{job.info.salary}</li>
+				</ul>
+			);
+		});
 		return (
 			<div className="container">
 				<h3>Find jobs around you</h3>
@@ -45,7 +67,7 @@ class SearchJob extends Component {
 						value={data.location}
 						onChange={this.handleChange}
 						type="text"
-						placeholder="Search by location"
+						placeholder="Search by city or country"
 					/>
 					<div className="row">
 						<div className="col-12 text-center">
@@ -53,6 +75,7 @@ class SearchJob extends Component {
 						</div>
 					</div>
 				</form>
+				<div>{jobs}</div>
 			</div>
 		);
 	}
