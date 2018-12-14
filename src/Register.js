@@ -1,24 +1,24 @@
-import React, { Component } from 'react'
-import Input from './components/input'
-import local from './local'
+import React, { Component } from 'react';
+import Input from './components/input';
+import local from './local';
 
-const axios = require('axios')
-const port = 5001
-const ip = '10.85.2.141'
+const axios = require('axios');
+const port = 5001;
+const ip = '10.85.2.141';
 
 class RegisterForm extends Component {
 	constructor(props) {
-		super(props)
+		super(props);
 		this.state = {
 			error: '',
 			name: '',
 			surname: '',
 			email: ''
-		}
+		};
 	}
 
 	checkUsername = (event) => {
-		var toCheck = event.target.value
+		var toCheck = event.target.value;
 		this.setState({ email: toCheck }, () => {
 			axios({
 				method: 'post',
@@ -29,22 +29,22 @@ class RegisterForm extends Component {
 				withCredentials: true
 			})
 				.then((result) => {
-					console.log(result)
+					console.log(result);
 
 					if (result.status === 200) {
-						this.setState({ userExists: false, error: '' })
+						this.setState({ userExists: false, error: '' });
 					} else {
-						this.setState({ userExists: true, error: 'This email is already in use' })
+						this.setState({ userExists: true, error: 'This email is already in use' });
 					}
 				})
 				.catch((err) => {
-					console.log(err)
-				})
-		})
-	}
+					console.log(err);
+				});
+		});
+	};
 
 	handleSubmit = (e) => {
-		e.preventDefault()
+		e.preventDefault();
 		axios({
 			method: 'post',
 			url: `http://${local.ipAddress}:${local.port}/register`,
@@ -54,24 +54,23 @@ class RegisterForm extends Component {
 		})
 			.then((result) => {
 				if (result.status === 200) {
-                    console.log(result)
-                    this.props.changePage('login')
-                    this.props.loggedIn(true)
+					console.log(result);
+					this.props.changePage('login');
+					this.props.loggedIn(true);
 				} else {
-					this.setState({ error: 'There was an error, please try later', userExists: true })
+					this.setState({ error: 'There was an error, please try later', userExists: true });
 				}
 			})
-			.catch((err) => console.log(err))
-	}
+			.catch((err) => console.log(err));
+	};
 	handleChange = (e) => {
-        debugger
-		var userObject = {} //Credits to documentation, and to mom thank for supporting me
-		userObject[e.target.name] = e.target.value
-		this.setState(userObject)
-	}
+		var userObject = {}; //Credits to documentation, and to mom thank for supporting me
+		userObject[e.target.name] = e.target.value;
+		this.setState(userObject);
+	};
 
 	render() {
-		if (this.state.userExists){
+		if (this.state.userExists) {
 			return (
 				<div className="row">
 					<div className="col-4"> </div>
@@ -80,7 +79,7 @@ class RegisterForm extends Component {
 							<h1 className="login-title text-center mt-3">Register</h1>
 							<form onSubmit={this.handleSubmit} className="formulario" method="POST">
 								<div className="form-group pt-3">
-									<label htmlFor="firstname">First Name: </label>
+									<label htmlFor="firstname">First Name </label>
 									<input
 										onChange={this.handleChange}
 										type="text"
@@ -91,7 +90,7 @@ class RegisterForm extends Component {
 									/>
 								</div>
 								<div className="form-group">
-									<label htmlFor="lastname">Last Name: </label>
+									<label htmlFor="lastname">Last Name </label>
 									<input
 										onChange={this.handleChange}
 										type="text"
@@ -102,7 +101,7 @@ class RegisterForm extends Component {
 									/>
 								</div>
 								<div className="form-group">
-									<label htmlFor="email">Email: </label>
+									<label htmlFor="email">Email </label>
 									<input
 										onChange={this.checkUsername}
 										type="email"
@@ -114,7 +113,7 @@ class RegisterForm extends Component {
 								</div>
 
 								<div className="form-group">
-									<label htmlFor="phone">Phone: </label>
+									<label htmlFor="phone">Phone </label>
 									<input
 										onChange={this.handleChange}
 										type="number"
@@ -142,10 +141,16 @@ class RegisterForm extends Component {
 					</div>
 					<div className="col-4" />
 				</div>
+<<<<<<< HEAD
 			)
         } 
         else {
             return (
+=======
+			);
+		} else {
+			return (
+>>>>>>> c9b0d510e25b0e37972d16479dea0db434cff8a8
 				<div className="row">
 					<div className="col-4"> </div>
 					<div className="col-4">
@@ -153,7 +158,7 @@ class RegisterForm extends Component {
 							<h1 className="login-title text-center mt-3">Register</h1>
 							<form onSubmit={this.handleSubmit} className="formulario" method="POST">
 								<div className="form-group pt-3">
-									<label htmlFor="firstname">First Name: </label>
+									<label htmlFor="firstname">First Name </label>
 									<input
 										onChange={this.handleChange}
 										type="text"
@@ -164,7 +169,7 @@ class RegisterForm extends Component {
 									/>
 								</div>
 								<div className="form-group">
-									<label htmlFor="lastname">Last Name: </label>
+									<label htmlFor="lastname">Last Name </label>
 									<input
 										onChange={this.handleChange}
 										type="text"
@@ -175,7 +180,7 @@ class RegisterForm extends Component {
 									/>
 								</div>
 								<div className="form-group">
-									<label htmlFor="email">Email: </label>
+									<label htmlFor="email">Email </label>
 									<input
 										onChange={this.checkUsername}
 										type="email"
@@ -187,7 +192,7 @@ class RegisterForm extends Component {
 								</div>
 
 								<div className="form-group">
-									<label htmlFor="phone">Phone: </label>
+									<label htmlFor="phone">Phone </label>
 									<input
 										onChange={this.handleChange}
 										type="number"
@@ -227,9 +232,9 @@ class RegisterForm extends Component {
 					</div>
 					<div className="col-4" />
 				</div>
-			)
+			);
 		}
 	}
 }
 
-export default RegisterForm
+export default RegisterForm;

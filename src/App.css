@@ -67,7 +67,8 @@
 }
 
 .icon-button {
-	color: #000;
+	color: #595959;
+	font-weight: bolder;
 }
 
 .icon-button:hover {
@@ -76,12 +77,10 @@
 
 /* -----LoginPage----- */
 
-/* .login-container {
-	border: 2px solid #e68a00;
-	border-radius: 8px;
-	height: 60vh;
+.login-container,
+.register-container {
 	padding-top: 3vh;
-} */
+}
 
 .login-title {
 	color: #595959;
@@ -97,6 +96,14 @@
 }
 
 /* -- Feature -- */
+.section-why {
+	margin-top: 20vh;
+}
+
+.section-icons {
+	margin-bottom: 15vh;
+}
+
 .feature {
 	position: relative;
 }
@@ -131,6 +138,15 @@
 	background-color: #e68a00;
 	opacity: 0.9;
 	color: #fff;
+}
+
+/* -----PostPage ----- */
+.post-container {
+	padding-top: 10vh;
+}
+
+.post-title {
+	color: #595959;
 }
 
 /* 

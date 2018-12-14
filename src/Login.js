@@ -15,7 +15,6 @@ class Login extends Component {
 	handleSubmit = (e) => {
 		e.preventDefault();
 		console.log(this.state.username, this.state.password);
-		debugger;
 		axios({
 			method: 'post',
 			url: `http://${local.ipAddress}:${local.port}/login`,
@@ -26,15 +25,12 @@ class Login extends Component {
 			withCredentials: true
 		})
 			.then((result) => {
-				debugger;
 				if (result.status === 200) {
-					debugger;
 					this.props.email(this.state.username);
 					this.props.changePage('searchJob');
 					this.props.loggedIn(true);
 				}
 				if (result.status === 201) {
-					debugger;
 					this.setState({ error: 'Invalid Credentials' });
 				} else {
 					this.props.changePage('home');
@@ -44,13 +40,12 @@ class Login extends Component {
 	};
 
 	handleChange = (e) => {
-		if(e.target.name === 'username'){
-			this.setState({username: e.target.value})
+		if (e.target.name === 'username') {
+			this.setState({ username: e.target.value });
+		} else {
+			this.setState({ password: e.target.value });
 		}
-		else{
-			this.setState({password: e.target.value})
-		}
-	}
+	};
 
 	render() {
 		return (

@@ -6,8 +6,10 @@ import IconCommunity from './img/community.png';
 
 let sectionStyle = {
 	width: '100%',
-	height: '100%',
-	backgroundImage: `url(${Background})`
+	height: '100vh',
+	backgroundImage: `url(${Background})`,
+	backgroundRepeat: 'no-repeat',
+	backgroundSize: 'cover'
 };
 
 let iconQUick = {
@@ -40,23 +42,23 @@ class LandingPage extends Component {
 								<div className="col-md-8">
 									<h1 className="white-text">Find Jobs Around You</h1>
 									<p className="lead white-text">Make more money. Earn more freedom</p>
-									<a className="main-button icon-button" href="/searchJob">
-										Get Started!
-									</a>
+									<button className="main-button icon-button btn btn-light" href="/searchJob">
+										Find Job now
+									</button>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 
-				<div className="row mt-4 mb-4">
+				<div className="row mb-4 section-why">
 					<div className="section-header text-center col-12">
 						<h2 className="feature-text">Why Find A Job</h2>
 						<p className="lead">Libris vivendo eloquentiam ex ius, nec id splendide abhorreant.</p>
 					</div>
 				</div>
 
-				<div className="container mb-5">
+				<div className="container section-icons">
 					<div className="row">
 						<div className="col-md-4">
 							<div className="feature">
