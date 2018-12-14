@@ -42,7 +42,7 @@ class PostJob extends Component {
 		}
 		//call the server
 		axios
-			.post(`${local.apiURL}/post-job`, {
+			.post(`${local.ipAddress}:${local.port}/post-job`, {
 				withCredentials: true,
 				title: data.title,
 				startDate: data.startDate,
