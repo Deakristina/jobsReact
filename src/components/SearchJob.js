@@ -45,7 +45,7 @@ class SearchJob extends Component {
 			return (
 				<ul key={i}>
 					<li>{job.info.title}</li>
-					<li>{job.location.adress}</li>
+					<li>{job.location.address}</li>
 					<li>{job.info.salary}</li>
 				</ul>
 			);

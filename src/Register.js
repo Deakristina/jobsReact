@@ -64,7 +64,6 @@ class RegisterForm extends Component {
 			.catch((err) => console.log(err));
 	};
 	handleChange = (e) => {
-		debugger;
 		var userObject = {}; //Credits to documentation, and to mom thank for supporting me
 		userObject[e.target.name] = e.target.value;
 		this.setState(userObject);

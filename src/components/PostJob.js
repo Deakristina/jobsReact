@@ -12,7 +12,7 @@ class PostJob extends Component {
 			startDate: '',
 			duration: '',
 			address: '',
-			postCode: '',
+			zipCode: '',
 			city: '',
 			country: '',
 			salary: '',
@@ -48,7 +48,7 @@ class PostJob extends Component {
 				startDate: data.startDate,
 				duration: data.duration,
 				address: data.address,
-				postCode: data.postCode,
+				zipCode: data.zipCode,
 				city: data.city,
 				country: data.country,
 				requirements: data.requirements,
@@ -143,13 +143,13 @@ class PostJob extends Component {
 					<div className="form-row">
 						<div className="col-md-4">
 							<Input
-								name="postCode"
-								value={data.postCode}
+								name="zipCode"
+								value={data.zipCode}
 								label="Post Code"
 								onChange={this.handleChange}
 								type="text"
-								error={errors.postCode}
-								placeholder="Post Code"
+								error={errors.zipCode}
+								placeholder="Zip Code"
 							/>
 						</div>
 						<div className="col-md-4">
