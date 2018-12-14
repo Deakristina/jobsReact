@@ -141,16 +141,10 @@ class RegisterForm extends Component {
 					</div>
 					<div className="col-4" />
 				</div>
-<<<<<<< HEAD
 			)
         } 
         else {
             return (
-=======
-			);
-		} else {
-			return (
->>>>>>> c9b0d510e25b0e37972d16479dea0db434cff8a8
 				<div className="row">
 					<div className="col-4"> </div>
 					<div className="col-4">
