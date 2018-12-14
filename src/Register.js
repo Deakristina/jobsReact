@@ -3,8 +3,6 @@ import Input from './components/input';
 import local from './local';
 
 const axios = require('axios');
-const port = 5001;
-const ip = '10.85.2.141';
 
 class RegisterForm extends Component {
 	constructor(props) {
@@ -18,8 +16,10 @@ class RegisterForm extends Component {
 	}
 
 	checkUsername = (event) => {
+		debugger
 		var toCheck = event.target.value;
 		this.setState({ email: toCheck }, () => {
+			debugger
 			axios({
 				method: 'post',
 				url: `http://${local.ipAddress}:${local.port}/checkEmail`,
@@ -29,6 +29,7 @@ class RegisterForm extends Component {
 				withCredentials: true
 			})
 				.then((result) => {
+					debugger
 					console.log(result);
 
 					if (result.status === 200) {
@@ -38,6 +39,7 @@ class RegisterForm extends Component {
 					}
 				})
 				.catch((err) => {
+					debugger
 					console.log(err);
 				});
 		});

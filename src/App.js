@@ -22,7 +22,7 @@ class App extends Component {
 
 		this.state = {
 			currentPage: 'home',
-			loggedIn: true,
+			loggedIn: false,
 			email: '',
 			userID: ''
 		};

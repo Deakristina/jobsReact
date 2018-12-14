@@ -18,7 +18,7 @@ class ProfilePage extends Component{
         //State in ProfilePage holds all data
     }
     componentDidMount=()=>{ //Once page mounted fetch data from user profile object MongoDB
-        axios(`http://${local.ipAddress}:${local.port}/profileInfo?u=${this.props.email}`, { //THIS IP IS INCORRECT
+        axios(`http://${local.ipAddress}:${local.port}/profileInfo`, { //THIS IP IS INCORRECT
             method: 'get',
             withCredentials: true,
         })
