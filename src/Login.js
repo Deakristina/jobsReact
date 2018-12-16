@@ -27,13 +27,13 @@ class Login extends Component {
 			.then((result) => {
 				if (result.status === 200) {
 					this.props.email(this.state.username);
-					this.props.changePage('searchJob');
+					this.props.changePageByName('searchJob');
 					this.props.loggedIn(true);
 				}
 				if (result.status === 201) {
 					this.setState({ error: 'Invalid Credentials' });
 				} else {
-					this.props.changePage('home');
+					this.props.changePageByName('home');
 				}
 			})
 			.catch((err) => console.log(err));

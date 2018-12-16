@@ -16,10 +16,10 @@ class RegisterForm extends Component {
 	}
 
 	checkUsername = (event) => {
-		debugger
+		debugger;
 		var toCheck = event.target.value;
 		this.setState({ email: toCheck }, () => {
-			debugger
+			debugger;
 			axios({
 				method: 'post',
 				url: `http://${local.ipAddress}:${local.port}/checkEmail`,
@@ -29,7 +29,7 @@ class RegisterForm extends Component {
 				withCredentials: true
 			})
 				.then((result) => {
-					debugger
+					debugger;
 					console.log(result);
 
 					if (result.status === 200) {
@@ -39,7 +39,7 @@ class RegisterForm extends Component {
 					}
 				})
 				.catch((err) => {
-					debugger
+					debugger;
 					console.log(err);
 				});
 		});
@@ -57,7 +57,7 @@ class RegisterForm extends Component {
 			.then((result) => {
 				if (result.status === 200) {
 					console.log(result);
-					this.props.changePage('login');
+					this.props.changePageByName('login');
 					this.props.loggedIn(true);
 				} else {
 					this.setState({ error: 'There was an error, please try later', userExists: true });
@@ -143,10 +143,9 @@ class RegisterForm extends Component {
 					</div>
 					<div className="col-4" />
 				</div>
-			)
-        } 
-        else {
-            return (
+			);
+		} else {
+			return (
 				<div className="row">
 					<div className="col-4"> </div>
 					<div className="col-4">

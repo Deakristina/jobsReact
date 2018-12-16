@@ -10,8 +10,13 @@ let searchJobImage = {
 	height: '100vh',
 	backgroundImage: `url(${Background})`,
 	backgroundRepeat: 'no-repeat',
-	backgroundSize: 'cover',
-	opacity: 0.5
+	backgroundSize: 'cover'
+};
+
+let opacityDiv = {
+	background: 'rgba(255,255,255,0.5)',
+	height: '100vh',
+	overflow: 'auto'
 };
 
 class SearchJob extends Component {
@@ -36,7 +41,7 @@ class SearchJob extends Component {
 	handleChange = ({ currentTarget: input }) => {
 		const data = { ...this.state.data };
 		data[input.name] = input.value;
-		this.setState({ data });
+		this.setState({ data, noResult: false });
 	};
 
 	//handlesubmit -- call to the backend
@@ -50,7 +55,10 @@ class SearchJob extends Component {
 				location: data.location
 			})
 			.then((result) => {
-				this.setState({ jobs: result.data });
+				this.setState({
+					jobs: result.data,
+					noResult: result.data.length === 0
+				});
 			});
 	};
 
@@ -76,55 +84,56 @@ class SearchJob extends Component {
 						</div>
 						<div className="">
 							<ModalSearchResult modal={this.state.showModal} toggleModal={this.toggleModal} />
-							<button className="btn btn-info mt-2 mr-2" onClick={this.toggleModal}>
+							<button className="btn btn-warning mt-2 mr-2" onClick={this.toggleModal}>
 								Show Details
 							</button>
 						</div>
 					</div>
 				);
 			});
-		} else if (this.state.jobs.length === 0 && data.title) {
-			jobs = <p>No result</p>;
+		} else if (this.state.noResult) {
+			jobs = <p className="job-result no-result text-center mt-5">No result</p>;
 		} else {
 			jobs = <React.Fragment />;
 		}
 		return (
-			<div id="home" className="hero-area">
-				<div className="bg-image bg-parallax overlay" style={searchJobImage} />
-				<div className="home-search-wrapper">
-					<div className="container">
-						<h1 className="search-title text-center">Find jobs around you</h1>
-						<form onSubmit={this.handleSubmit}>
-							<div className="form-row ">
-								<div className="col-md-6">
-									<Input
-										name="title"
-										label="What position are you looking for?"
-										value={data.title}
-										onChange={this.handleChange}
-										type="text"
-										placeholder="Search by position"
-									/>
-								</div>
+			<div id="home" className="hero-area" style={searchJobImage}>
+				<div className="bg-image bg-parallax overlay" style={opacityDiv}>
+					<div className="home-search-wrapper">
+						<div className="container">
+							<h1 className="search-title text-center">Find jobs around you</h1>
+							<form onSubmit={this.handleSubmit}>
+								<div className="form-row ">
+									<div className="col-md-6">
+										<Input
+											name="title"
+											label="What position are you looking for?"
+											value={data.title}
+											onChange={this.handleChange}
+											type="text"
+											placeholder="Search by position"
+										/>
+									</div>
 
-								<div className="col-md-6">
-									<Input
-										name="location"
-										label="Where do you want to work?"
-										value={data.location}
-										onChange={this.handleChange}
-										type="text"
-										placeholder="Search by city or country"
-									/>
+									<div className="col-md-6">
+										<Input
+											name="location"
+											label="Where do you want to work?"
+											value={data.location}
+											onChange={this.handleChange}
+											type="text"
+											placeholder="Search by city or country"
+										/>
+									</div>
 								</div>
-							</div>
-							<div className="row mt-4">
-								<div className="col-12 text-center">
-									<button className="btn btn-warning btn-lg">Search</button>
+								<div className="row mt-4">
+									<div className="col-12 text-center">
+										<button className="btn btn-warning btn-lg">Search</button>
+									</div>
 								</div>
-							</div>
-						</form>
-						<div className="job-result-container">{jobs}</div>
+							</form>
+							<div className="job-result-container">{jobs}</div>
+						</div>
 					</div>
 				</div>
 			</div>

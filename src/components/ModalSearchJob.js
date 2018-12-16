@@ -23,7 +23,7 @@ class SearchResultModal extends Component {
 	};
 
 	render() {
-		// let data = this.state.data.map((item, i) => {
+		// let jobs = this.state.jobs.map((item, i) => {
 		// 	return <li>{item.info.title}</li>;
 		// });
 

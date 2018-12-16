@@ -1,5 +1,6 @@
-import React from 'react'
-import './App.css'
+// import React from 'react';
+import React, { Component } from 'react';
+import './App.css';
 
 let navStyle = {
 	position: 'fixed',
@@ -7,11 +8,69 @@ let navStyle = {
 	width: '100%'
 };
 
-function MainNavBar(props) {
-	if (props.loggedIn) {
+class MainNavBar extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			navbarClass: 'collapse navbar-collapse'
+		};
+	}
+
+	navbarToggle = () => {
+		let defaultClass = 'collapse navbar-collapse';
+		if (this.state.navbarClass === defaultClass) {
+			this.setState({ navbarClass: `${defaultClass} show` });
+		} else {
+			this.setState({ navbarClass: defaultClass });
+		}
+	};
+
+	render() {
+		let navButtons = (
+			<ul className="navbar-nav mr-auto mt-2 mt-lg-0">
+				<li className="nav-item active">
+					<a className="nav-link" data-page="register" onClick={this.props.changePageByEvent}>
+						Register
+					</a>
+				</li>
+				<li className="nav-item active">
+					<a className="nav-link" data-page="login" onClick={this.props.changePageByEvent}>
+						Log In
+					</a>
+				</li>
+				<li className="nav-item active">
+					<a className="nav-link" data-page="searchJob" onClick={this.props.changePageByEvent}>
+						Search Job
+					</a>
+				</li>
+			</ul>
+		);
+		if (this.props.loggedIn) {
+			navButtons = (
+				<ul className="navbar-nav mr-auto mt-2 mt-lg-0">
+					<li className="nav-item active">
+						<a className="nav-link" data-page="profile" onClick={this.props.changePageByEvent}>
+							Profile
+						</a>
+					</li>
+					<li className="nav-item active">
+						<a className="nav-link" data-page="searchJob" onClick={this.props.changePageByEvent}>
+							Search Job
+						</a>
+					</li>
+					<li className="nav-item active">
+						<a className="nav-link" data-page="postJob" onClick={this.props.changePageByEvent}>
+							Post Job
+						</a>
+					</li>
+				</ul>
+			);
+		}
+
 		return (
 			<nav className="navbar navbar-expand-lg navbar-light bg-light" style={navStyle}>
 				<button
+					onClick={this.navbarToggle}
 					className="navbar-toggler"
 					type="button"
 					data-toggle="collapse"
@@ -22,109 +81,15 @@ function MainNavBar(props) {
 				>
 					<span className="navbar-toggler-icon" />
 				</button>
-				<div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-					<a
-						className="navbar-brand"
-						onClick={function() {
-							props.changePage('home')
-						}}
-					>
-						FindYourJob
+				<div className={this.state.navbarClass} id="navbarTogglerDemo01">
+					<a href="#" className="navbar-brand" data-page="home" onClick={this.props.changePageByEvent}>
+						MicroJobs
 					</a>
-					<ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-						<li className="nav-item active">
-							<a
-								className="nav-link"
-								onClick={function() {
-									props.changePage('profile')
-								}}
-							>
-								Profile
-							</a>
-						</li>
-						<li className="nav-item active">
-							<a
-								className="nav-link"
-								onClick={function() {
-									props.changePage('searchJob')
-								}}
-							>
-								Search Job
-							</a>
-						</li>
-						<li className="nav-item active">
-							<a
-								className="nav-link"
-								onClick={function() {
-									props.changePage('postJob')
-								}}
-							>
-								Post Job
-							</a>
-						</li>
-					</ul>
+					{navButtons}
 				</div>
 			</nav>
-		)
-	} else {
-		return (
-			<nav className="navbar navbar-expand-lg navbar-light bg-light" style={navStyle}>
-				<button
-					className="navbar-toggler"
-					type="button"
-					data-toggle="collapse"
-					data-target="#navbarTogglerDemo01"
-					aria-controls="navbarTogglerDemo01"
-					aria-expanded="false"
-					aria-label="Toggle navigation"
-				>
-					<span className="navbar-toggler-icon" />
-				</button>
-				<div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-					<a
-						className="navbar-brand"
-						onClick={function() {
-							props.changePage('home')
-						}}
-					>
-						FindYourJob
-					</a>
-					<ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-						<li className="nav-item active">
-							<a
-								className="nav-link"
-								onClick={function() {
-									props.changePage('register')
-								}}
-							>
-								Register
-							</a>
-						</li>
-						<li className="nav-item active">
-							<a
-								className="nav-link"
-								onClick={function() {
-									props.changePage('login')
-								}}
-							>
-								Log in
-							</a>
-						</li>
-						<li className="nav-item active">
-							<a
-								className="nav-link"
-								onClick={function() {
-									props.changePage('searchJob')
-								}}
-							>
-								Search Job
-							</a>
-						</li>
-					</ul>
-				</div>
-			</nav>
-		)
+		);
 	}
 }
 
-export default MainNavBar
+export default MainNavBar;

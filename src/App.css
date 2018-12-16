@@ -33,6 +33,10 @@
 
 /* -----Landing Page----- */
 
+body {
+	margin-top: 100px;
+}
+
 .hero {
 	display: flex;
 	justify-content: center;
@@ -40,7 +44,6 @@
 }
 
 .hero-area {
-	position: relative;
 	padding-bottom: 80px;
 }
 
@@ -53,16 +56,6 @@
 .home-wrapper {
 	position: absolute;
 	top: 50%;
-	-webkit-transform: translateY(-50%);
-	-ms-transform: translateY(-50%);
-	transform: translateY(-50%);
-	left: 0;
-	right: 0;
-}
-
-.home-search-wrapper {
-	position: absolute;
-	top: 30%;
 	-webkit-transform: translateY(-50%);
 	-ms-transform: translateY(-50%);
 	transform: translateY(-50%);
@@ -164,8 +157,9 @@
 /* -----SearchJobPage ----- */
 
 .search-title {
-	padding-top: 20vh;
+	padding: 15vh 0 5vh 0;
 	color: #e68a00;
+	font-weight: bolder;
 }
 
 .no-result {
@@ -175,17 +169,32 @@
 .btn-warning {
 	background-color: #e68a00 !important;
 	border-color: #e68a00 !important;
+	color: #fff !important;
+}
+.btn-warning:hover {
+	background-color: #ffad33 !important;
+	border-color: #ffad33 !important;
 }
 
 .job-result {
-	border: 3px solid black;
+	/* border: 3px solid black; */
+	background-color: #17a2b8;
 	width: 50%;
 	margin: 2vh auto;
 	border-radius: 10px;
+	color: #fff;
+}
+
+.no-result {
+	font-size: 2vw;
 }
 
 .job-list {
 	list-style-type: none;
+}
+
+label {
+	font-weight: bolder;
 }
 
 @media only screen and (max-width: 900px) {
