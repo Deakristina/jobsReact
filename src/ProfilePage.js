@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import NavProfile from './NavProfile'
 import JobSeeker from './JobSeeker'
 import JobOffer from './JobOffer'
 import local from './local'
@@ -10,57 +9,65 @@ class profilePage extends Component{
     constructor(){
         super()
         this.state = {
-            status: 'jobSeeker',
+            status: '',
             basicInfo: {},
-        }
-        this.basicInfo = {
-
         }
     }
 
     componentDidMount = () => {
-        axios(`http://${local.ipAdress}:${local.port}/profileInfo`, { //Session of passport
+        debugger
+        axios(`http://localhost:5000/profileInfo`, { //Session of passport
             withCredentials: true,
             method: 'get',
         })
         .then((result) => {
-            if(result.status == 201){
+            debugger
+            if(result.status === 201){
+                debugger
                 this.props.changePage('login')
             }
             else{
                 debugger
-                this.basicInfo.data = result.data
+                console.log(result)
+                this.setState({basicInfo: result, status: 'JobSeeker'}, () => {
+                    console.log(this.state)
+                })
             }
         })
         .catch(err => console.log(err))
     }
 
-    handleProfile = (currentPage) => {
-        if(this.state.status === currentPage){
-            this.setState({status: 'jobOffer'})
+    handleProfile = () => {
+        if(this.state.status === 'JobSeeker'){
+            this.setState({status: 'JobOffer'})
            
         }
-        else{
-            this.setState({status: 'jobSeeker'})
+        else if(this.state.status === 'JobOffer'){
+            this.setState({status: 'JobSeeker'})
         }
-        return this.state.status
+        
     } 
     
     render(){
-        if(this.state.status == 'jobSeeker'){
+        if(this.state.status === 'JobSeeker'){
             return( 
                 <div>
-                    <a onClick={this.handleProfile(this.state.status)}>{this.state.status}</a>
-                    <jobSeeker basicInfo = {this.state.basicInfo} jobHistory = {this.state.basicInfo.jobs} />
+                    <a onClick={this.handleProfile}>See your profile as Job Poster</a>
+                    <JobSeeker basicInfo = {this.state.basicInfo}/>
                 </div>
             )       
         }
-        else{
+        else if(this.state.status === "JobOffer"){
             return(
                 <div>
-                    <a onClick={this.handleProfile(this.state.status)}>{this.state.status}</a>
-                    <jobOffer basicInfo = {this.state.basicInfo} jobHistory = {this.state.basicInfo.jobs}/>
+                    <a onClick={this.handleProfile}>See your profile as Job Seeker</a>
+                    <JobOffer basicInfo = {this.state.basicInfo}/>
                 </div>
+            )
+        }
+        else{
+            return(
+                <div>Your mom gay</div>
             )
         }
     }
