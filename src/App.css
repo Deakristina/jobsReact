@@ -193,6 +193,10 @@ body {
 	list-style-type: none;
 }
 
+.modal-list {
+	text-align: left;
+}
+
 label {
 	font-weight: bolder;
 }

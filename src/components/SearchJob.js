@@ -95,9 +95,9 @@ class SearchJob extends Component {
 		if (this.state.jobs.length > 0) {
 			jobs = this.state.jobs.map((job, i) => {
 				return (
-					<div className="job-result d-flex justify-content-between">
+					<div key={i} className="job-result d-flex justify-content-between mt-4">
 						<div>
-							<ul className=" p-2" key={i}>
+							<ul className=" p-2">
 								<li className="job-list">
 									<strong>Job Position: </strong> {job.info.title}
 								</li>
