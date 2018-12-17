@@ -25,10 +25,11 @@ class Login extends Component {
 			withCredentials: true
 		})
 			.then((result) => {
+				debugger
 				if (result.status === 200) {
 					this.props.email(this.state.username);
 					this.props.changePage('searchJob');
-					this.props.loggedIn(true);
+					this.props.loggedIn(true)
 				}
 				if (result.status === 201) {
 					this.setState({ error: 'Invalid Credentials' });

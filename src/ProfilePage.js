@@ -6,56 +6,64 @@ import local from './local'
 
 const axios = require('axios')
 
-class ProfilePage extends Component{
-    constructor(props){
-        super(props)
+class profilePage extends Component{
+    constructor(){
+        super()
         this.state = {
-            profile: "jobSeeker",
-            loggedIn: this.props.loggedIn, //cookie value
-            userID: "", //from Database user object
+            status: 'jobSeeker',
+            basicInfo: {},
         }
+        this.basicInfo = {
 
-        //State in ProfilePage holds all data
+        }
     }
-    componentDidMount=()=>{ //Once page mounted fetch data from user profile object MongoDB
-        axios(`http://${local.ipAddress}:${local.port}/profileInfo`, { //THIS IP IS INCORRECT
-            method: 'get',
+
+    componentDidMount = () => {
+        axios(`http://${local.ipAdress}:${local.port}/profileInfo`, { //Session of passport
             withCredentials: true,
+            method: 'get',
         })
         .then((result) => {
-            debugger
-            console.log(result)
-            this.setState({profileInfo: result}, () => {
-                this.props.handleID(this.state.profileInfo._id)
-                this.setState({userID: this.state.profileInfo._id})
-            })
-            
-        })      
+            if(result.status == 201){
+                this.props.changePage('login')
+            }
+            else{
+                debugger
+                this.basicInfo.data = result.data
+            }
+        })
         .catch(err => console.log(err))
     }
-    changeProfileType = (e) => {
-        this.setState({profile: e})
-    }
-    render(){
-        var profileRouting = {
-            jobSeeker: <JobSeeker basicInfo = {this.state.info}/>,//Same page but without editing
-            jobOffer: <JobOffer basicInfo = {this.state.info}/>,
+
+    handleProfile = (currentPage) => {
+        if(this.state.status === currentPage){
+            this.setState({status: 'jobOffer'})
+           
         }
-        if(this.state.loggedIn){
-            return(
-                /*NavProfile is different from original Nav or LoggedIn Nav*/ 
-                <div className="ProfilePage">
-                    {/* <NavProfile changeProfile = {this.changeProfileType}/> */}
-                    {/* {this.profileRouting[this.state.profile]} */}
+        else{
+            this.setState({status: 'jobSeeker'})
+        }
+        return this.state.status
+    } 
+    
+    render(){
+        if(this.state.status == 'jobSeeker'){
+            return( 
+                <div>
+                    <a onClick={this.handleProfile(this.state.status)}>{this.state.status}</a>
+                    <jobSeeker basicInfo = {this.state.basicInfo} jobHistory = {this.state.basicInfo.jobs} />
                 </div>
-            )
+            )       
         }
         else{
             return(
-                this.props.changeCurrentPage('login')
+                <div>
+                    <a onClick={this.handleProfile(this.state.status)}>{this.state.status}</a>
+                    <jobOffer basicInfo = {this.state.basicInfo} jobHistory = {this.state.basicInfo.jobs}/>
+                </div>
             )
         }
-       
     }
 }
-export default ProfilePage
+
+export default profilePage

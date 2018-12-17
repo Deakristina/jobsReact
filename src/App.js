@@ -11,6 +11,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import { instanceOf } from 'prop-types';
 import { withCookies, Cookies } from 'react-cookies';
+import axios from 'axios';
+import local from './local'
 
 class App extends Component {
 	static propTypes = {
@@ -22,11 +24,12 @@ class App extends Component {
 
 		this.state = {
 			currentPage: 'home',
-			loggedIn: false,
 			email: '',
 			userID: ''
+
 		};
 	}
+
 
 	setID = (ID) => {
 		this.setState({ userID: ID });
@@ -53,9 +56,6 @@ class App extends Component {
 			profile: (
 				<ProfilePage
 					changePage={this.changeCurrentPage}
-					loggedIn={this.state.loggedIn}
-					email={this.state.email}
-					handleID={this.setID}
 				/>
 			),
 			postJob: <PostJob changePage={this.changeCurrentPage} loggedIn={this.loggedIn} />
@@ -65,7 +65,7 @@ class App extends Component {
 			<div>
 				{router[this.state.currentPage]}
 				{/* <LandingPage /> */}
-				<MainNavBar changePage={this.changeCurrentPage} loggedIn={this.state.loggedIn} />
+				<MainNavBar changePage={this.changeCurrentPage} status={this.state.loggedIn} />
 			</div>
 		);
 	}

@@ -1,5 +1,7 @@
 import React from 'react'
 import './App.css'
+import local from './local'
+import axios from 'axios';
 
 let navStyle = {
 	position: 'fixed',
@@ -8,7 +10,7 @@ let navStyle = {
 };
 
 function MainNavBar(props) {
-	if (props.loggedIn) {
+	if (props.status) {
 		return (
 			<nav className="navbar navbar-expand-lg navbar-light bg-light" style={navStyle}>
 				<button

@@ -1,58 +1,54 @@
-import React, { Component } from 'react'
-import axios from 'axios'
+import React from 'react'
 
-class JobOffer extends Component {
-    
-    constructor(props){
-        super(props)
-        this.state = {
-            editProfile: false,
-            info: this.props.basicInfo
-        }
+var jobOffer = (props) => {
+    var info = props.basicInfo.info
+    var arrayInfoBase
+    var arrayInfoExtended
+    var keysBase = Object.keys(info.base)
+    var keysExtended = Object.keys(info.extendedInfo)
+    var showMore = false
+    var jobs = props.jobs.jobsPosted
+    var jobsMapped = jobs.map((element) => element = <p>{element}</p>)
+
+
+    for(let key in info.base){
+        arrayInfoBase.push(key)
     }
+    for(let element in info.extendedInfo){
+        arrayInfoExtended.push(element)
+    }
+
+    var arrayInfoBaseMap = arrayInfoBase.map((element, pos) => element = <li name = {keysBase[pos]}>{element}</li>)
+    var arrayInfoExtendedMap = arrayInfoExtended.map((element, pos) => element = <li name = {keysExtended[pos]}>{element}</li>)
+
+   if(showMore){
+       return(
+           <div>
+               <ul>
+                   {arrayInfoBaseMap}
+               </ul>
+               <ul>
+                   {arrayInfoExtendedMap}
+               </ul>
+           </div>
+       )
+   }
+   else{
     
-    render() { //If true return form
-
-        
-        var basicInfo = []
-        var extendedInfo = []
-
-        for (var key in this.state.info.info.base){
-            basicInfo.push(key)
-        }
-        for(var element in this.state.info.info.extendedInfo){
-            extendedInfo.push(element)
-        }
-
-        var basicInfoMapped = basicInfo.map((element) => element = <li className="list-item">{element}</li>)
-        var extendedInfoMapped = extendedInfo.map((element) => element = <li className="list-item">{element}</li>)
-        var basicInfoInputs = basicInfo.map((element, pos) => element = <input onChange={this.handleChange} name={pos} value={element}/>)
-        var extendedInfoInputs = extendedInfo.map((element, pos) => element = <input onChange={this.handleChange} name={pos} value= {element}/> )
-
-
-        if(this.state.editProfile){  //Posts cannot be edited from here
-            return (
-                <div>
-                    <form onSubmit={this.handleSubmit}>
-                        {basicInfoInputs}
-                        {extendedInfoInputs}
-                        <input type="submit" value="Save"/>
-                    </form>
-                </div>
-            )
-        } 
-        else{ //Here info of what people see in the offers and offers created
-            return(
-                <div>
-                    <ul>
-                        {basicInfoMapped}
-                        {extendedInfoMapped}
-                    </ul>
-                </div>
-            )
-        }  
-    
-  }
+    return(
+        <div>
+            <ul name='basicInfo'>
+                {arrayInfoBaseMap}
+            </ul>
+            <ul name='extendedInfo'>
+                {arrayInfoExtendedMap}
+            </ul>
+            <div name='jobHistory'>
+                {jobsMapped}
+            </div>
+        </div>
+    )
+   }    
 }
 
-export default JobOffer
+export default jobOffer
