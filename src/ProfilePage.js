@@ -23,14 +23,16 @@ class profilePage extends Component{
         .then((result) => {
             debugger
             if(result.status === 201){
+                this.props.loggedIn(false)
                 debugger
                 this.props.changePage('login')
             }
             else{
                 debugger
                 console.log(result)
-                this.setState({basicInfo: result, status: 'JobSeeker'}, () => {
-                    console.log(this.state)
+                this.setState({basicInfo: result, status: 'JobOffer'}, () => {
+                    console.log(this.state.basicInfo.data)
+                    this.setState({status: 'JobOffer'})
                 })
             }
         })
@@ -49,19 +51,19 @@ class profilePage extends Component{
     } 
     
     render(){
-        if(this.state.status === 'JobSeeker'){
-            return( 
-                <div>
-                    <a onClick={this.handleProfile}>See your profile as Job Poster</a>
-                    <JobSeeker basicInfo = {this.state.basicInfo}/>
-                </div>
-            )       
-        }
-        else if(this.state.status === "JobOffer"){
+        // if(this.state.status === 'JobSeeker'){
+        //     return( 
+        //         <div>
+        //             <a onClick={this.handleProfile}>See your profile as Job Poster</a>
+        //             <JobSeeker basicInfo = {this.state.basicInfo}/>
+        //         </div>
+        //     )       
+        // }
+        if(this.state.status === "JobOffer"){
             return(
                 <div>
                     <a onClick={this.handleProfile}>See your profile as Job Seeker</a>
-                    <JobOffer basicInfo = {this.state.basicInfo}/>
+                    <JobOffer basicInfo = {this.state.basicInfo.data}/>
                 </div>
             )
         }

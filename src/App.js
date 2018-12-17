@@ -27,8 +27,7 @@ class App extends Component {
 			loggedIn: true,
 			email: '',
 			userID: ''
-
-		};
+		}
 	}
 
 
