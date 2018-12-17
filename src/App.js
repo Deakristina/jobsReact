@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 
-import LandingPage from './components/LandingPage';
-import PostJob from './components/PostJob';
+import LandingPage from './components/LandingPage'; //WORKS
+import PostJob from './components/PostJob'; //WORKS
 import MainNavBar from './MainNavBar'; //WORKS.
 import Register from './Register'; //WORKS.
-import SearchJob from './components/SearchJob'; //Under construction
+import SearchJob from './components/SearchJob'; //WORKS
 import Login from './Login'; //WORKS
-import ProfilePage from './ProfilePage'; //UNDER CONSTRUCTION
+import ProfilePage from './ProfilePage'; //Testing
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import { instanceOf } from 'prop-types';
 import { withCookies, Cookies } from 'react-cookies';
 import axios from 'axios';
-import local from './local'
+import local from './local';
 
 class App extends Component {
 	static propTypes = {
@@ -24,12 +24,11 @@ class App extends Component {
 
 		this.state = {
 			currentPage: 'home',
-			loggedIn: true,
+			loggedIn: false,
 			email: '',
 			userID: ''
 		}
 	}
-
 
 	setID = (ID) => {
 		this.setState({ userID: ID });
@@ -60,7 +59,14 @@ class App extends Component {
 			),
 			register: <Register changePageByName={this.changePageByName} loggedIn={this.loggedIn} />,
 			login: <Login changePageByName={this.changePageByName} loggedIn={this.loggedIn} email={this.getEmail} />,
-			profile: <ProfilePage loggedIn={this.state.loggedIn} email={this.state.email} handleID={this.setID} />,
+			profile: (
+				<ProfilePage
+					changePageByName={this.changePageByName}
+					loggedIn={this.state.loggedIn}
+					email={this.state.email}
+					handleID={this.setID}
+				/>
+			),
 			postJob: <PostJob loggedIn={this.loggedIn} />
 		};
 		return (

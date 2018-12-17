@@ -43,7 +43,7 @@ class LandingPage extends Component {
 									<h1 className="white-text">Find MicroJobs Around You</h1>
 									<p className="lead white-text">Make more money. Earn more freedom</p>
 									<button
-										className="main-button icon-button btn btn-light"
+										className="main-button icon-button text-icon btn btn-light"
 										data-page="searchJob"
 										onClick={this.props.changePageByEvent}
 									>
@@ -58,7 +58,7 @@ class LandingPage extends Component {
 				<div className="row mb-4 section-why">
 					<div className="section-header text-center col-12">
 						<h2 className="feature-text">Why Find A Job</h2>
-						<p className="lead">Libris vivendo eloquentiam ex ius, nec id splendide abhorreant.</p>
+						<p className="lead">Find and work everywhere around you on your preferred moments. </p>
 					</div>
 				</div>
 
@@ -66,12 +66,9 @@ class LandingPage extends Component {
 					<div className="row">
 						<div className="col-md-4">
 							<div className="feature">
-								<div className="feature-content " style={iconQUick}>
+								<div className="feature-content" style={iconQUick}>
 									<h4 className="feature-text">Quick & Easy</h4>
-									<p>
-										Ceteros fuisset mei no, soleat epicurei adipiscing ne vis. Et his suas veniam
-										nominati.
-									</p>
+									<p>Find or post job easily, wherever & whenever.</p>
 								</div>
 							</div>
 						</div>
@@ -81,8 +78,8 @@ class LandingPage extends Component {
 								<div className="feature-content" style={iconSignal}>
 									<h4 className="feature-text">Jobs closest to you</h4>
 									<p>
-										Ceteros fuisset mei no, soleat epicurei adipiscing ne vis. Et his suas veniam
-										nominati.
+										You can find or post job to everyone around you! Minimizing travel time and
+										cost.
 									</p>
 								</div>
 							</div>
@@ -93,8 +90,8 @@ class LandingPage extends Component {
 								<div className="feature-content" style={iconCommunity}>
 									<h4 className="feature-text">Community</h4>
 									<p>
-										Ceteros fuisset mei no, soleat epicurei adipiscing ne vis. Et his suas veniam
-										nominati.
+										Creating sense of community service around you. Networking has never been this
+										easy.
 									</p>
 								</div>
 							</div>

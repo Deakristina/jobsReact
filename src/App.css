@@ -1,40 +1,31 @@
-/* .App {
-	text-align: center;
-}
-
-.App-logo {
-	animation: App-logo-spin infinite 20s linear;
-	height: 40vmin;
-}
-
-.App-header {
-	background-color: #282c34;
-	min-height: 100vh;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	font-size: calc(10px + 2vmin);
-	color: white;
-}
-
-.App-link {
-	color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
-	}
-} */
-
 /* -----Landing Page----- */
 
 body {
 	margin-top: 100px;
+}
+
+.light {
+	background: linear-gradient(
+		90deg,
+		rgba(230, 138, 0, 1) 18%,
+		rgba(204, 122, 0, 1) 57%,
+		rgba(230, 138, 0, 1) 100%
+	) !important;
+}
+
+.brand {
+	font-size: 2.5vw !important;
+	font-weight: bolder;
+}
+
+.text-nav {
+	color: #fff !important;
+	-webkit-transition: color 1s; /* Safari */
+	transition: color 1s;
+}
+
+.text-nav:hover {
+	color: #595959 !important;
 }
 
 .hero {
@@ -67,9 +58,9 @@ body {
 	color: #fff;
 }
 
-.icon-button {
-	color: #595959;
-	font-weight: bolder;
+.btn-light {
+	color: #e68a00 !important;
+	font-weight: bolder !important;
 }
 
 .icon-button:hover {
@@ -102,11 +93,11 @@ body {
 
 /* -- Feature -- */
 .section-why {
-	margin-top: 20vh;
+	margin-top: 18vh;
 }
 
 .section-icons {
-	margin-bottom: 15vh;
+	margin-bottom: 10vh;
 }
 
 .feature {
@@ -151,7 +142,8 @@ body {
 }
 
 .post-title {
-	color: #595959;
+	color: #e68a00;
+	font-weight: bolder;
 }
 
 /* -----SearchJobPage ----- */
@@ -210,3 +202,4 @@ label {
 /* background credit */
 /* <a href='https://www.freepik.com/free-photo/business-people-handshake-greeting-deal-at-work_1024706.htm'>Designed by Jcomp</a> */
 /* <a href='https://www.freepik.com/free-photo/office-workplace-with-keypad-and-glasses_2419876.htm'>Designed by Freepik</a> */
+/* <a href='https://www.freepik.com/free-photo/closeup-of-business-person-completing-form_1027059.htm'>Designed by Katemangostar</a> */

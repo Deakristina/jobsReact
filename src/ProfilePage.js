@@ -1,18 +1,18 @@
-import React, {Component} from 'react'
-import JobSeeker from './JobSeeker'
-import JobOffer from './JobOffer'
-import local from './local'
+import React, { Component } from 'react';
+import JobSeeker from './JobSeeker';
+import JobOffer from './JobOffer';
+import local from './local';
 
-const axios = require('axios')
+const axios = require('axios');
 
-class profilePage extends Component{
-    constructor(){
-        super()
-        this.state = {
-            status: '',
-            basicInfo: {},
-        }
-    }
+class profilePage extends Component {
+	constructor() {
+		super();
+		this.state = {
+			status: 'JobSeeker',
+			basicInfo: {}
+		};
+	}
 
     componentDidMount = () => {
         debugger
@@ -75,4 +75,4 @@ class profilePage extends Component{
     }
 }
 
-export default profilePage
+export default profilePage;

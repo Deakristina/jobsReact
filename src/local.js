@@ -1,7 +1,7 @@
 const local = {
 	// apiURL: 'http://localhost:5000'
-	// ipAddress: 'http://localhost',
-	ipAddress: '10.85.4.232',
+	ipAddress: 'http://localhost',
+	// ipAddress: '10.85.4.232',
 	port: 5000
 };
 

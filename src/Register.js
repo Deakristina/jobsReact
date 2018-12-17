@@ -22,7 +22,7 @@ class RegisterForm extends Component {
 			debugger
 			axios({
 				method: 'post',
-				url: `http://${local.ipAddress}:${local.port}/checkEmail`,
+				url: `${local.ipAddress}:${local.port}/checkEmail`,
 				data: {
 					email: this.state.email
 				},
@@ -49,7 +49,7 @@ class RegisterForm extends Component {
 		e.preventDefault()
 		axios({
 			method: 'post',
-			url: `http://${local.ipAddress}:${local.port}/register`,
+			url: `${local.ipAddress}:${local.port}/register`,
 			data: {
 				thedata: this.state
 			}
