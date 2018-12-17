@@ -30,7 +30,8 @@ class SearchJob extends Component {
 			jobs: [],
 			search: '',
 			noResult: false,
-			showModal: false
+			showModal: false,
+			jobId: ''
 		};
 	}
 
@@ -62,8 +63,34 @@ class SearchJob extends Component {
 			});
 	};
 
+	handleShowModal = (e) => {
+		this.setState({
+			showModal: true,
+			jobId: e.target.dataset.jobid
+		});
+	};
+
+	handleHideModal = () => {
+		this.setState({
+			showModal: false
+		});
+	};
+
 	render() {
 		const { data } = this.state;
+
+		let modal = '';
+		if (this.state.showModal) {
+			modal = (
+				<ModalSearchResult
+					modal={true}
+					hideModal={this.handleHideModal}
+					jobId={this.state.jobId}
+					changePageByName={this.props.changePageByName}
+				/>
+			);
+		}
+
 		let jobs;
 		if (this.state.jobs.length > 0) {
 			jobs = this.state.jobs.map((job, i) => {
@@ -83,8 +110,11 @@ class SearchJob extends Component {
 							</ul>
 						</div>
 						<div className="">
-							<ModalSearchResult modal={this.state.showModal} toggleModal={this.toggleModal} />
-							<button className="btn btn-warning mt-2 mr-2" onClick={this.toggleModal}>
+							<button
+								className="btn btn-warning mt-2 mr-2"
+								data-jobid={job._id}
+								onClick={this.handleShowModal}
+							>
 								Show Details
 							</button>
 						</div>
@@ -136,6 +166,7 @@ class SearchJob extends Component {
 						</div>
 					</div>
 				</div>
+				{modal}
 			</div>
 		);
 	}

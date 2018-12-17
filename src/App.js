@@ -48,7 +48,13 @@ class App extends Component {
 	render() {
 		var router = {
 			home: <LandingPage changePageByEvent={this.changePageByEvent} loggedIn={this.loggedIn} />,
-			searchJob: <SearchJob loggedIn={this.loggedIn} userID={this.state.userID} />,
+			searchJob: (
+				<SearchJob
+					loggedIn={this.loggedIn}
+					userID={this.state.userID}
+					changePageByName={this.changePageByName}
+				/>
+			),
 			register: <Register changePageByName={this.changePageByName} loggedIn={this.loggedIn} />,
 			login: <Login changePageByName={this.changePageByName} loggedIn={this.loggedIn} email={this.getEmail} />,
 			profile: <ProfilePage loggedIn={this.state.loggedIn} email={this.state.email} handleID={this.setID} />,

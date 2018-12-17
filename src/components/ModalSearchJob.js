@@ -1,20 +1,12 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalBody, ModalFooter } from 'reactstrap';
+import axios from 'axios';
+import '../App.css';
+import local from '../local';
 
 class SearchResultModal extends Component {
 	state = {
-		data: {
-			title: '',
-			startDate: '',
-			duration: '',
-			address: '',
-			zipCode: '',
-			city: '',
-			country: '',
-			salary: '',
-			description: '',
-			requirements: []
-		}
+		jobData: null
 	};
 	toggle = () => {
 		this.setState({
@@ -22,20 +14,34 @@ class SearchResultModal extends Component {
 		});
 	};
 
+	componentDidMount() {
+		axios.get(`${local.ipAddress}:${local.port}/get-job/${this.props.jobId}`).then((result) => {
+			this.setState({ jobData: result.data });
+		});
+	}
+
+	save = () => {
+		console.log('I SAVED!');
+
+		this.props.changePageByName('home');
+	};
+
 	render() {
-		// let jobs = this.state.jobs.map((item, i) => {
-		// 	return <li>{item.info.title}</li>;
-		// });
+		let jobDetails = <div>Loading..</div>;
+		if (this.state.jobData) {
+			let job = this.state.jobData;
+			jobDetails = <div>{job.location.city}</div>;
+		}
 
 		return (
 			<div>
-				<Modal isOpen={this.props.modal} toggle={this.props.toggleModal} className={this.props.className}>
-					<ModalBody className="text-center">check!</ModalBody>
+				<Modal isOpen={this.props.modal} className={this.props.className}>
+					<ModalBody className="text-center">{jobDetails}</ModalBody>
 					<ModalFooter>
-						<Button color="primary" onClick={this.props.toggleModal}>
+						<Button color="primary" onClick={this.save}>
 							Save
 						</Button>{' '}
-						<Button color="secondary" onClick={this.props.toggleModal}>
+						<Button color="secondary" onClick={this.props.hideModal}>
 							Back to Search
 						</Button>
 					</ModalFooter>
