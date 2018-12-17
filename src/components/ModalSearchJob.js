@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalBody, ModalFooter, Alert } from 'reactstrap';
+import { Button, Modal, ModalBody, ModalFooter } from 'reactstrap';
 import axios from 'axios';
 import '../App.css';
 import local from '../local';
@@ -105,6 +105,7 @@ class SearchResultModal extends Component {
 						<Button color="primary" onClick={this.save}>
 							Save
 						</Button>
+
 						<Button color="secondary" onClick={this.props.hideModal}>
 							Back to Search
 						</Button>

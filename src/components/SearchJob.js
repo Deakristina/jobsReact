@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Input from './input';
 import axios from 'axios';
 import local from '../local';
+import { Alert } from 'reactstrap';
 import Background from './img/course06.jpg';
 import ModalSearchResult from './ModalSearchJob';
 

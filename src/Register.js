@@ -16,20 +16,17 @@ class RegisterForm extends Component {
 	}
 
 	checkUsername = (event) => {
-		debugger;
 		var toCheck = event.target.value;
 		this.setState({ email: toCheck }, () => {
-			debugger;
 			axios({
 				method: 'post',
-				url: `http://${local.ipAddress}:${local.port}/checkEmail`,
+				url: `${local.ipAddress}:${local.port}/checkEmail`,
 				data: {
 					email: this.state.email
 				},
 				withCredentials: true
 			})
 				.then((result) => {
-					debugger;
 					console.log(result);
 
 					if (result.status === 200) {
@@ -39,7 +36,6 @@ class RegisterForm extends Component {
 					}
 				})
 				.catch((err) => {
-					debugger;
 					console.log(err);
 				});
 		});
@@ -49,7 +45,7 @@ class RegisterForm extends Component {
 		e.preventDefault();
 		axios({
 			method: 'post',
-			url: `http://${local.ipAddress}:${local.port}/register`,
+			url: `${local.ipAddress}:${local.port}/register`,
 			data: {
 				thedata: this.state
 			}

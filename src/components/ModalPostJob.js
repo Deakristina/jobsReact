@@ -19,9 +19,6 @@ class ModalPage extends Component {
 				<Modal isOpen={this.props.modal} toggle={this.props.toggleModal} className={this.props.className}>
 					<ModalBody className="text-center">You have sucessfully post the job!</ModalBody>
 					<ModalFooter>
-						<Button color="primary" onClick={this.props.toggleModal}>
-							Do Something
-						</Button>
 						<Button color="secondary" onClick={this.props.toggleModal}>
 							Close
 						</Button>

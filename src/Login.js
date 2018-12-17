@@ -17,7 +17,7 @@ class Login extends Component {
 		console.log(this.state.username, this.state.password);
 		axios({
 			method: 'post',
-			url: `http://${local.ipAddress}:${local.port}/login`,
+			url: `${local.ipAddress}:${local.port}/login`,
 			data: {
 				username: this.state.username,
 				password: this.state.password
@@ -25,7 +25,6 @@ class Login extends Component {
 			withCredentials: true
 		})
 			.then((result) => {
-				debugger
 				if (result.status === 200) {
 					this.props.email(this.state.username);
 					this.props.changePageByName('searchJob');

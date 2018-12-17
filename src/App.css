@@ -1,40 +1,31 @@
-/* .App {
-	text-align: center;
-}
-
-.App-logo {
-	animation: App-logo-spin infinite 20s linear;
-	height: 40vmin;
-}
-
-.App-header {
-	background-color: #282c34;
-	min-height: 100vh;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	font-size: calc(10px + 2vmin);
-	color: white;
-}
-
-.App-link {
-	color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
-	}
-} */
-
 /* -----Landing Page----- */
 
 body {
 	margin-top: 100px;
+}
+
+.light {
+	background: linear-gradient(
+		90deg,
+		rgba(230, 138, 0, 1) 18%,
+		rgba(204, 122, 0, 1) 57%,
+		rgba(230, 138, 0, 1) 100%
+	) !important;
+}
+
+.brand {
+	font-size: 2.5vw !important;
+	font-weight: bolder;
+}
+
+.text-nav {
+	color: #fff !important;
+	-webkit-transition: color 1s; /* Safari */
+	transition: color 1s;
+}
+
+.text-nav:hover {
+	color: #595959 !important;
 }
 
 .hero {
@@ -102,11 +93,11 @@ body {
 
 /* -- Feature -- */
 .section-why {
-	margin-top: 20vh;
+	margin-top: 18vh;
 }
 
 .section-icons {
-	margin-bottom: 15vh;
+	margin-bottom: 10vh;
 }
 
 .feature {
