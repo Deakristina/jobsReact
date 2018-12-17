@@ -67,9 +67,9 @@ body {
 	color: #fff;
 }
 
-.icon-button {
-	color: #595959;
-	font-weight: bolder;
+.btn-light {
+	color: #e68a00 !important;
+	font-weight: bolder !important;
 }
 
 .icon-button:hover {
@@ -151,7 +151,8 @@ body {
 }
 
 .post-title {
-	color: #595959;
+	color: #e68a00;
+	font-weight: bolder;
 }
 
 /* -----SearchJobPage ----- */
@@ -210,3 +211,4 @@ label {
 /* background credit */
 /* <a href='https://www.freepik.com/free-photo/business-people-handshake-greeting-deal-at-work_1024706.htm'>Designed by Jcomp</a> */
 /* <a href='https://www.freepik.com/free-photo/office-workplace-with-keypad-and-glasses_2419876.htm'>Designed by Freepik</a> */
+/* <a href='https://www.freepik.com/free-photo/closeup-of-business-person-completing-form_1027059.htm'>Designed by Katemangostar</a> */

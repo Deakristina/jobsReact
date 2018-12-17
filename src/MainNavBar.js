@@ -1,6 +1,7 @@
 // import React from 'react';
 import React, { Component } from 'react';
 import './App.css';
+import { Collapse } from 'reactstrap';
 
 let navStyle = {
 	position: 'fixed',
@@ -15,6 +16,10 @@ class MainNavBar extends Component {
 			navbarClass: 'collapse navbar-collapse'
 		};
 	}
+
+	toggle = () => {
+		this.setState({ isOpen: !this.state.isOpen });
+	};
 
 	navbarToggle = () => {
 		let defaultClass = 'collapse navbar-collapse';

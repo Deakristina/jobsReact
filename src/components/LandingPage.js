@@ -43,7 +43,7 @@ class LandingPage extends Component {
 									<h1 className="white-text">Find MicroJobs Around You</h1>
 									<p className="lead white-text">Make more money. Earn more freedom</p>
 									<button
-										className="main-button icon-button btn btn-light"
+										className="main-button icon-button text-icon btn btn-light"
 										data-page="searchJob"
 										onClick={this.props.changePageByEvent}
 									>
