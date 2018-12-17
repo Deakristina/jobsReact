@@ -33,16 +33,17 @@
 
 /* -----Landing Page----- */
 
+body {
+	margin-top: 100px;
+}
+
 .hero {
-	height: 100vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
 .hero-area {
-	position: relative;
-	padding-top: 80px;
 	padding-bottom: 80px;
 }
 
@@ -73,6 +74,10 @@
 
 .icon-button:hover {
 	color: #fff;
+}
+
+.nav-link:hover {
+	cursor: pointer;
 }
 
 /* -----LoginPage----- */
@@ -149,12 +154,55 @@
 	color: #595959;
 }
 
-/* 
-@media only screen and (max-width: 900px) {
-	.login-container{
+/* -----SearchJobPage ----- */
 
+.search-title {
+	padding: 15vh 0 5vh 0;
+	color: #e68a00;
+	font-weight: bolder;
+}
+
+.no-result {
+	z-index: 100;
+}
+
+.btn-warning {
+	background-color: #e68a00 !important;
+	border-color: #e68a00 !important;
+	color: #fff !important;
+}
+.btn-warning:hover {
+	background-color: #ffad33 !important;
+	border-color: #ffad33 !important;
+}
+
+.job-result {
+	/* border: 3px solid black; */
+	background-color: #17a2b8;
+	width: 50%;
+	margin: 2vh auto;
+	border-radius: 10px;
+	color: #fff;
+}
+
+.no-result {
+	font-size: 2vw;
+}
+
+.job-list {
+	list-style-type: none;
+}
+
+label {
+	font-weight: bolder;
+}
+
+@media only screen and (max-width: 900px) {
+	.job-result {
+		width: 100%;
 	}
-} */
+}
 
 /* background credit */
 /* <a href='https://www.freepik.com/free-photo/business-people-handshake-greeting-deal-at-work_1024706.htm'>Designed by Jcomp</a> */
+/* <a href='https://www.freepik.com/free-photo/office-workplace-with-keypad-and-glasses_2419876.htm'>Designed by Freepik</a> */

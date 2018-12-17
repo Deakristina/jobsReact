@@ -24,6 +24,7 @@ class App extends Component {
 
 		this.state = {
 			currentPage: 'home',
+			loggedIn: true,
 			email: '',
 			userID: ''
 
@@ -34,8 +35,11 @@ class App extends Component {
 	setID = (ID) => {
 		this.setState({ userID: ID });
 	};
-	changeCurrentPage = (e) => {
-		this.setState({ currentPage: e });
+	changePageByName = (name) => {
+		this.setState({ currentPage: name });
+	};
+	changePageByEvent = (e) => {
+		this.setState({ currentPage: e.target.dataset.page });
 	};
 	loggedIn = (trigger) => {
 		this.setState({ loggedIn: trigger });
@@ -47,25 +51,24 @@ class App extends Component {
 
 	render() {
 		var router = {
-			home: <LandingPage changePage={this.changeCurrentPage} loggedIn={this.loggedIn} />,
+			home: <LandingPage changePageByEvent={this.changePageByEvent} loggedIn={this.loggedIn} />,
 			searchJob: (
-				<SearchJob changePage={this.changeCurrentPage} loggedIn={this.loggedIn} userID={this.state.userID} />
-			),
-			register: <Register changePage={this.changeCurrentPage} loggedIn={this.loggedIn} />,
-			login: <Login changePage={this.changeCurrentPage} loggedIn={this.loggedIn} email={this.getEmail} />,
-			profile: (
-				<ProfilePage
-					changePage={this.changeCurrentPage}
+				<SearchJob
+					loggedIn={this.loggedIn}
+					userID={this.state.userID}
+					changePageByName={this.changePageByName}
 				/>
 			),
-			postJob: <PostJob changePage={this.changeCurrentPage} loggedIn={this.loggedIn} />
-			//Here the component that renders post job
+			register: <Register changePageByName={this.changePageByName} loggedIn={this.loggedIn} />,
+			login: <Login changePageByName={this.changePageByName} loggedIn={this.loggedIn} email={this.getEmail} />,
+			profile: <ProfilePage loggedIn={this.state.loggedIn} email={this.state.email} handleID={this.setID} />,
+			postJob: <PostJob loggedIn={this.loggedIn} />
 		};
 		return (
 			<div>
 				{router[this.state.currentPage]}
-				{/* <LandingPage /> */}
-				<MainNavBar changePage={this.changeCurrentPage} status={this.state.loggedIn} />
+
+				<MainNavBar changePageByEvent={this.changePageByEvent} loggedIn={this.state.loggedIn} />
 			</div>
 		);
 	}
