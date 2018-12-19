@@ -7,7 +7,7 @@ import Register from './Register'; //WORKS.
 import SearchJob from './components/SearchJob'; //WORKS
 import Login from './Login'; //WORKS
 import ProfilePage from './ProfilePage'; //Only styling left
-import LogOut from './logout'; //WORKS
+import LogOut from './logout'; //doesnt WORK
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import { instanceOf } from 'prop-types';
@@ -52,18 +52,6 @@ class App extends Component {
 					this.setState({ loggedIn: true });
 				} else {
 					this.changePageByName('login');
-				}
-			})
-			.catch((err) => console.log(err));
-	};
-	logOut = () => {
-		debugger;
-		axios(`http://${local.ipAddress}:${local.port}/logout`)
-			.then((result) => {
-				if (result.status === 200) {
-					this.setState({ loggedIn: false });
-				} else {
-					this.setState({ error: 'There was an error when loggin Out' });
 				}
 			})
 			.catch((err) => console.log(err));

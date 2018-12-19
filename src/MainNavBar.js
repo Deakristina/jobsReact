@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import axios from 'axios';
+import local from './local';
 
 let navStyle = {
 	position: 'fixed',
@@ -21,6 +23,7 @@ class MainNavBar extends Component {
 			isOpen: !this.state.isOpen
 		});
 	}
+
 	render() {
 		let navButtons = (
 			<Nav className="ml-auto h5 text-nav" navbar>
@@ -60,7 +63,7 @@ class MainNavBar extends Component {
 						</NavLink>
 					</NavItem>
 					<NavItem>
-						<NavLink className=" text-nav" data-page="logOut" onClick={this.props.changePageByEvent}>
+						<NavLink className=" text-nav" data-page="home" onClick={this.props.changePageByEvent}>
 							Log Out
 						</NavLink>
 					</NavItem>
