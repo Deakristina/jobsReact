@@ -50,8 +50,8 @@ class Login extends Component {
 	render() {
 		return (
 			<div className="row">
-				<div className="col-4" />
-				<div className="col-4">
+				<div className="col-md-4" />
+				<div className="col-md-4">
 					<div className="container mt-5 login-container">
 						<h1 className="login-title text-center mt-3">Log In</h1>
 						<form onSubmit={this.handleSubmit} method="POST">
@@ -100,7 +100,7 @@ class Login extends Component {
 						</form>
 					</div>
 				</div>
-				<div className="col-4" />
+				<div className="col-md-4" />
 			</div>
 		);
 	}

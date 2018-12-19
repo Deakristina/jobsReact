@@ -6,12 +6,30 @@ import local from '../local';
 
 class SearchResultModal extends Component {
 	state = {
-		jobData: null
+		jobData: null,
+		nestedModal: false,
+		closeAll: false
 	};
+
 	toggle = () => {
 		this.setState({
 			modal: !this.state.modal
 		});
+	};
+
+	toggleNested = () => {
+		this.setState({
+			nestedModal: !this.state.nestedModal,
+			closeAll: false
+		});
+	};
+
+	hideAll = () => {
+		this.setState({
+			nestedModal: false,
+			closeAll: true
+		});
+		this.props.hideModal();
 	};
 
 	componentDidMount() {
@@ -21,15 +39,19 @@ class SearchResultModal extends Component {
 	}
 
 	save = () => {
-		this.props.changePageByName('home');
+		axios.post(`${local.ipAddress}:${local.port}/save-job`, {
+			withCredentials: true,
+			jobId: this.state.jobData._id
+			// userId: '5c17ad5153dc7bc50f3361df'
+		});
+		this.toggleNested();
 	};
 
 	render() {
 		let jobDetails = <div>Loading..</div>;
 		if (this.state.jobData) {
 			let job = this.state.jobData;
-			let date = job.info.startDate;
-			console.log(date);
+
 			if (job.info.description === '') {
 				jobDetails = (
 					<div>
@@ -105,6 +127,19 @@ class SearchResultModal extends Component {
 						<Button color="primary" onClick={this.save}>
 							Save
 						</Button>
+
+						<Modal
+							isOpen={this.state.nestedModal}
+							toggle={this.toggleNested}
+							onClosed={this.state.closeAll ? this.toggle : undefined}
+						>
+							<ModalBody>You have successfully saved this job!</ModalBody>
+							<ModalFooter>
+								<Button color="secondary" onClick={this.hideAll}>
+									Close
+								</Button>
+							</ModalFooter>
+						</Modal>
 
 						<Button color="secondary" onClick={this.props.hideModal}>
 							Back to Search

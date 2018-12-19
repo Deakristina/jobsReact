@@ -32,6 +32,7 @@ class SearchJob extends Component {
 			search: '',
 			noResult: false,
 			showModal: false,
+
 			jobId: ''
 		};
 	}
@@ -79,7 +80,7 @@ class SearchJob extends Component {
 
 	render() {
 		const { data } = this.state;
-
+		console.log(this.props.loggedIn);
 		let modal = '';
 		if (this.state.showModal) {
 			modal = (
@@ -95,6 +96,22 @@ class SearchJob extends Component {
 		let jobs;
 		if (this.state.jobs.length > 0) {
 			jobs = this.state.jobs.map((job, i) => {
+				let detailButton = (
+					<button className="btn btn-warning mt-2 mr-2" data-jobid={job._id} onClick={this.handleShowModal}>
+						Show Details
+					</button>
+				);
+				if (!this.props.loggedIn) {
+					detailButton = (
+						<button
+							className="btn btn-warning mt-2 mr-2"
+							data-page="login"
+							onClick={this.props.changePageByEvent}
+						>
+							Log In
+						</button>
+					);
+				}
 				return (
 					<div key={i} className="job-result d-flex justify-content-between mt-4">
 						<div>
@@ -110,15 +127,7 @@ class SearchJob extends Component {
 								</li>
 							</ul>
 						</div>
-						<div className="">
-							<button
-								className="btn btn-warning mt-2 mr-2"
-								data-jobid={job._id}
-								onClick={this.handleShowModal}
-							>
-								Show Details
-							</button>
-						</div>
+						<div className="">{detailButton}</div>
 					</div>
 				);
 			});
