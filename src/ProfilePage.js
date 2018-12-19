@@ -9,7 +9,7 @@ class profilePage extends Component {
 	constructor() {
 		super();
 		this.state = {
-			status: 'JobSeeker',
+			status: '',
             basicInfo: {},
             isOffer: false,
             loggedIn: false
@@ -35,6 +35,7 @@ class profilePage extends Component {
                 this.setState({basicInfo: result, status: 'JobOffer'}, () => {
                     console.log(this.state.basicInfo.data)
                     this.setState({status: 'JobOffer'})
+                    console.log(this.state.basicInfo)
                 })
             }
         })

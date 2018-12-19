@@ -7,7 +7,7 @@ import Register from './Register'; //WORKS.
 import SearchJob from './components/SearchJob'; //WORKS
 import Login from './Login'; //WORKS
 import ProfilePage from './ProfilePage'; //Only styling left
-import LogOut from './logout'; //WORKS
+import logOut from './logout'; //WORKS
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import { instanceOf } from 'prop-types';
@@ -42,6 +42,22 @@ class App extends Component {
 
 	getEmail = (address) => {
 		this.setState({ email: address });
+	};
+	componentDidMount = () => {
+		debugger;
+		axios(`http://${local.ipAddress}:${local.port}/login`, {
+			withCredentials: true
+		})
+			.then((result) => {
+				if (result.status === 200) {
+					debugger;
+					this.setState({ loggedIn: true });
+				} else {
+					debugger;
+					this.changePageByName('login');
+				}
+			})
+			.catch((err) => console.log(err));
 	};
 	logOut = () => {
 		axios(`http://${local.ipAddress}:${local.port}/logout`)
