@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 
-import LandingPage from './components/LandingPage';
-import PostJob from './components/PostJob';
+import LandingPage from './components/LandingPage'; //WORKS
+import PostJob from './components/PostJob'; //WORKS
 import MainNavBar from './MainNavBar'; //WORKS.
 import Register from './Register'; //WORKS.
-import SearchJob from './components/SearchJob'; //Under construction
+import SearchJob from './components/SearchJob'; //WORKS
 import Login from './Login'; //WORKS
-import ProfilePage from './ProfilePage'; //UNDER CONSTRUCTION
+import ProfilePage from './ProfilePage'; //Only styling left
+import logOut from './logout' //WORKS
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import { instanceOf } from 'prop-types';
@@ -26,13 +27,9 @@ class App extends Component {
 			currentPage: 'home',
 			loggedIn: false,
 			email: '',
-			userID: ''
-		};
+		}
 	}
 
-	setID = (ID) => {
-		this.setState({ userID: ID });
-	};
 	changePageByName = (name) => {
 		this.setState({ currentPage: name });
 	};
@@ -46,6 +43,20 @@ class App extends Component {
 	getEmail = (address) => {
 		this.setState({ email: address });
 	};
+	logOut = () => {
+		axios(`http://${local.ipAddress}:${local.port}/logout`)
+		.then((result) => {
+			if(result.status === 200)
+			{
+				this.setState({loggedIn: false})
+			}
+			else{
+				this.setState({error: 'There was an error when loggin Out'})
+			}
+		})
+		.catch((err) => console.log(err))
+		
+	}
 
 	render() {
 		var router = {
@@ -65,7 +76,6 @@ class App extends Component {
 					changePageByName={this.changePageByName}
 					loggedIn={this.state.loggedIn}
 					email={this.state.email}
-					handleID={this.setID}
 				/>
 			),
 			postJob: <PostJob loggedIn={this.loggedIn} />
@@ -75,6 +85,8 @@ class App extends Component {
 				{router[this.state.currentPage]}
 
 				<MainNavBar changePageByEvent={this.changePageByEvent} loggedIn={this.state.loggedIn} />
+				<logOut onClick={this.logOut}/> 
+				{this.state.error}
 			</div>
 		);
 	}

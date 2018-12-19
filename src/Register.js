@@ -1,71 +1,75 @@
-import React, { Component } from 'react';
-import Input from './components/input';
-import local from './local';
+import React, { Component } from 'react'
+import Input from './components/input'
+import local from './local'
 
-const axios = require('axios');
+const axios = require('axios')
 
 class RegisterForm extends Component {
 	constructor(props) {
-		super(props);
+		super(props)
 		this.state = {
 			error: '',
 			name: '',
 			surname: '',
 			email: ''
-		};
+		}
 	}
 
 	checkUsername = (event) => {
-		var toCheck = event.target.value;
+		debugger
+		var toCheck = event.target.value
 		this.setState({ email: toCheck }, () => {
+			debugger
 			axios({
 				method: 'post',
-				url: `${local.ipAddress}:${local.port}/checkEmail`,
+				url: `http://${local.ipAddress}:${local.port}/checkEmail`,
 				data: {
 					email: this.state.email
 				},
 				withCredentials: true
 			})
 				.then((result) => {
-					console.log(result);
+					debugger
+					console.log(result)
 
 					if (result.status === 200) {
-						this.setState({ userExists: false, error: '' });
+						this.setState({ userExists: false, error: '' })
 					} else {
-						this.setState({ userExists: true, error: 'This email is already in use' });
+						this.setState({ userExists: true, error: 'This email is already in use' })
 					}
 				})
 				.catch((err) => {
-					console.log(err);
-				});
-		});
-	};
+					debugger
+					console.log(err)
+				})
+		})
+	}
 
 	handleSubmit = (e) => {
-		e.preventDefault();
+		e.preventDefault()
 		axios({
 			method: 'post',
-			url: `${local.ipAddress}:${local.port}/register`,
+			url: `http://${local.ipAddress}:${local.port}/register`,
 			data: {
 				thedata: this.state
 			}
 		})
 			.then((result) => {
 				if (result.status === 200) {
-					console.log(result);
-					this.props.changePageByName('login');
-					this.props.loggedIn(true);
+					console.log(result)
+					this.props.changePageByName('login')
+					this.props.loggedIn(true)
 				} else {
-					this.setState({ error: 'There was an error, please try later', userExists: true });
+					this.setState({ error: 'There was an error, please try later', userExists: true })
 				}
 			})
-			.catch((err) => console.log(err));
-	};
+			.catch((err) => console.log(err))
+	}
 	handleChange = (e) => {
-		var userObject = {}; //Credits to documentation, and to mom thank for supporting me
-		userObject[e.target.name] = e.target.value;
-		this.setState(userObject);
-	};
+		var userObject = {} //Credits to documentation, and to mom thank for supporting me
+		userObject[e.target.name] = e.target.value
+		this.setState(userObject)
+	}
 
 	render() {
 		if (this.state.userExists) {
@@ -139,7 +143,7 @@ class RegisterForm extends Component {
 					</div>
 					<div className="col-4" />
 				</div>
-			);
+			)
 		} else {
 			return (
 				<div className="row">
@@ -223,9 +227,9 @@ class RegisterForm extends Component {
 					</div>
 					<div className="col-4" />
 				</div>
-			);
+			)
 		}
 	}
 }
 
-export default RegisterForm;
+export default RegisterForm
