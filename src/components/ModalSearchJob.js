@@ -41,11 +41,16 @@ class SearchResultModal extends Component {
 	}
 
 	save = () => {
-		axios.post(`http://${local.ipAddress}:${local.port}/save-job`, {
+		axios(`http://${local.ipAddress}:${local.port}/save-job`, {
+			method: 'post',
 			withCredentials: true,
-			jobId: this.state.jobData._id
+			data: {
+				jobId: this.state.jobData._id
+			}
 			// 	// userId: '5c17ad5153dc7bc50f3361df'
-		});
+		})
+			.then((result) => console.log(result))
+			.catch((err) => console.log(err));
 		this.toggleNested();
 	};
 
