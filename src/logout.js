@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 
-class logout extends Component {
+class logOut extends Component {
   render() {
     return (
       <div>
-          <input type="button" value="Log Out"/>
+          <input type="button" value="Log Out">Log out</input>
       </div>
     )
   }
 }
 
-export default logout
+export default logOut

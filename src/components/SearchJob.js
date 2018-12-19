@@ -51,7 +51,7 @@ class SearchJob extends Component {
 		const { data } = this.state;
 		e.preventDefault();
 		axios
-			.post(`${local.ipAddress}:${local.port}/search-job`, {
+			.post(`http://${local.ipAddress}:${local.port}/search-job`, {
 				withCredentials: true,
 				title: data.title,
 				location: data.location

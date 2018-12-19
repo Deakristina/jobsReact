@@ -22,7 +22,7 @@ class jobOffer extends Component{
 
     handleSubmit = () => {
         
-        axios(`http://localhost:5000/profileInfo`, {
+        axios(`http://${local.ipAddress}:${local.port}/profileInfo`, {
             method: 'post',
             data: {
                 data: this.state.newData,

@@ -17,7 +17,7 @@ class profilePage extends Component {
 	}
 
     componentDidMount = () => {
-        axios(`http://localhost:5000/profileInfo?isOf=${this.state.isOffer}`, { //Session of passport
+        axios(`http://${local.ipAddress}:${local.port}/profileInfo?isOf=${this.state.isOffer}`, { //Session of passport
             withCredentials: true,
             method: 'get',
         

@@ -17,7 +17,7 @@ class Login extends Component {
 		console.log(this.state.username, this.state.password);
 		axios({
 			method: 'post',
-			url: `http://localhost:5000/login`,
+			url: `http://${local.ipAddress}:${local.port}/login`,
 			data: {
 				username: this.state.username,
 				password: this.state.password

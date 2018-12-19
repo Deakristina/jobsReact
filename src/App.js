@@ -7,7 +7,7 @@ import Register from './Register'; //WORKS.
 import SearchJob from './components/SearchJob'; //WORKS
 import Login from './Login'; //WORKS
 import ProfilePage from './ProfilePage'; //Only styling left
-import logout from './logout' //WORKS
+import logOut from './logout' //WORKS
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import { instanceOf } from 'prop-types';
@@ -44,7 +44,7 @@ class App extends Component {
 		this.setState({ email: address });
 	};
 	logOut = () => {
-		axios('http://localhost:5000/logout')
+		axios(`http://${local.ipAddress}:${local.port}/logout`)
 		.then((result) => {
 			if(result.status === 200)
 			{
