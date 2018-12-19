@@ -10,15 +10,17 @@ class profilePage extends Component {
 		super();
 		this.state = {
 			status: 'JobSeeker',
-			basicInfo: {}
+            basicInfo: {},
+            isOffer: false,
+            loggedIn: false
 		};
 	}
 
     componentDidMount = () => {
-        debugger
-        axios(`http://localhost:5000/profileInfo`, { //Session of passport
+        axios(`http://localhost:5000/profileInfo?isOf=${this.state.isOffer}`, { //Session of passport
             withCredentials: true,
             method: 'get',
+        
         })
         .then((result) => {
             debugger
@@ -41,25 +43,27 @@ class profilePage extends Component {
 
     handleProfile = () => {
         if(this.state.status === 'JobSeeker'){
-            this.setState({status: 'JobOffer'})
+            this.setState({status: 'JobOffer', isOffer: true})
+          
            
         }
         else if(this.state.status === 'JobOffer'){
-            this.setState({status: 'JobSeeker'})
+            this.setState({status: 'JobSeeker', isOffer: false})
+            
         }
         
     } 
     
     render(){
-        // if(this.state.status === 'JobSeeker'){
-        //     return( 
-        //         <div>
-        //             <a onClick={this.handleProfile}>See your profile as Job Poster</a>
-        //             <JobSeeker basicInfo = {this.state.basicInfo}/>
-        //         </div>
-        //     )       
-        // }
-        if(this.state.status === "JobOffer"){
+        if(this.state.status === 'JobSeeker'){
+            return( 
+                <div>
+                    <a onClick={this.handleProfile}>See your profile as Job Poster</a>
+                    <JobSeeker basicInfo = {this.state.basicInfo}/>
+                </div>
+            )       
+        }
+        else if(this.state.status === "JobOffer"){
             return(
                 <div>
                     <a onClick={this.handleProfile}>See your profile as Job Seeker</a>
@@ -69,7 +73,7 @@ class profilePage extends Component {
         }
         else{
             return(
-                <div>Your mom gay</div>
+                <div>There was an error. We are working to fix it</div>
             )
         }
     }

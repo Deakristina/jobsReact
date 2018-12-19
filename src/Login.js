@@ -17,7 +17,7 @@ class Login extends Component {
 		console.log(this.state.username, this.state.password);
 		axios({
 			method: 'post',
-			url: `${local.ipAddress}:${local.port}/login`,
+			url: `http://localhost:5000/login`,
 			data: {
 				username: this.state.username,
 				password: this.state.password
@@ -26,11 +26,10 @@ class Login extends Component {
 		})
 			.then((result) => {
 				if (result.status === 200) {
-					this.props.email(this.state.username);
 					this.props.changePageByName('searchJob');
 					this.props.loggedIn(true);
 				}
-				if (result.status === 201) {
+				if (result.status === 204) {
 					this.setState({ error: 'Invalid Credentials' });
 				} else {
 					this.props.changePageByName('home');
@@ -98,6 +97,7 @@ class Login extends Component {
 								</span>
 							</div>
 						</form>
+						<p>{this.state.error}</p>
 					</div>
 				</div>
 				<div className="col-4" />

@@ -91,12 +91,9 @@ class jobOffer extends Component{
         var keysExtended = Object.keys(this.state.info.info.extendedInfo)
         var jobs = this.state.info.jobs.saved
         
-
         var inputsBase = keysBase.map((element, pos) => element = <input onChange={this.handleChange} name={keysBase[pos]} placeholder={element}/>)
         var inputsExtended = keysExtended.map((element, pos) => element = <input onChange = {this.handleChange} name = {keysExtended[pos]} placeholder = {element}  />)
 
-        
-    
         var arrayInfoBaseMap = arrayInfoBase.map((element, pos) => element = <li >{element}</li>)
         var arrayInfoExtendedMap = arrayInfoExtended.map((element, pos) => element = <li >{element}</li>)
         var jobsMapped = jobs.map((element) => element = <li>{element}</li>)

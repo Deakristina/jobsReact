@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import axios from 'axios'
 import local from './local'
 
-class jobOffer extends Component{
+class jobSeeker extends Component{
     constructor(props){
         super(props)
         this.state = {
@@ -159,4 +159,4 @@ class jobOffer extends Component{
 }
 
 
-export default jobOffer
+export default jobSeeker
