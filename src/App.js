@@ -1,27 +1,27 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import LandingPage from './components/LandingPage'; //WORKS
-import PostJob from './components/PostJob'; //WORKS
-import MainNavBar from './MainNavBar'; //WORKS.
-import Register from './Register'; //WORKS.
-import SearchJob from './components/SearchJob'; //WORKS
-import Login from './Login'; //WORKS
-import ProfilePage from './ProfilePage'; //Only styling left
+import LandingPage from './components/LandingPage' //WORKS
+import PostJob from './components/PostJob' //WORKS
+import MainNavBar from './MainNavBar' //WORKS.
+import Register from './Register' //WORKS.
+import SearchJob from './components/SearchJob' //WORKS
+import Login from './Login' //WORKS
+import ProfilePage from './ProfilePage' //Only styling left
 import logOut from './logout' //WORKS
-import 'bootstrap/dist/css/bootstrap.css';
-import './App.css';
-import { instanceOf } from 'prop-types';
-import { withCookies, Cookies } from 'react-cookies';
-import axios from 'axios';
-import local from './local';
+import 'bootstrap/dist/css/bootstrap.css'
+import './App.css'
+import { instanceOf } from 'prop-types'
+import { withCookies, Cookies } from 'react-cookies'
+import axios from 'axios'
+import local from './local'
 
 class App extends Component {
 	static propTypes = {
 		cookies: instanceOf(Cookies).isRequired
-	};
+	}
 	constructor(props) {
-		super(props);
-		const { cookies } = props;
+		super(props)
+		const { cookies } = props
 
 		this.state = {
 			currentPage: 'home',
@@ -31,18 +31,35 @@ class App extends Component {
 	}
 
 	changePageByName = (name) => {
-		this.setState({ currentPage: name });
-	};
+		this.setState({ currentPage: name })
+	}
 	changePageByEvent = (e) => {
-		this.setState({ currentPage: e.target.dataset.page });
-	};
+		this.setState({ currentPage: e.target.dataset.page })
+	}
 	loggedIn = (trigger) => {
-		this.setState({ loggedIn: trigger });
-	};
+		this.setState({ loggedIn: trigger })
+	}
 
 	getEmail = (address) => {
-		this.setState({ email: address });
-	};
+		this.setState({ email: address })
+	}
+	componentDidMount = () => {
+		debugger
+		axios(`http://${local.ipAddress}:${local.port}/login`, {
+			withCredentials: true,
+		})
+		.then((result) => {
+			if(result.status === 200){
+				debugger
+				this.setState({loggedIn: true})
+			}
+			else{
+				debugger
+				this.changePageByName('login')
+			}
+		})
+		.catch((err) => console.log(err))
+	}
 	logOut = () => {
 		axios(`http://${local.ipAddress}:${local.port}/logout`)
 		.then((result) => {
@@ -78,7 +95,7 @@ class App extends Component {
 				/>
 			),
 			postJob: <PostJob loggedIn={this.loggedIn} />
-		};
+		}
 		return (
 			<div>
 				{router[this.state.currentPage]}
@@ -87,8 +104,8 @@ class App extends Component {
 				<logOut onClick={this.logOut}/> 
 				{this.state.error}
 			</div>
-		);
+		)
 	}
 }
 
-export default App;
+export default App

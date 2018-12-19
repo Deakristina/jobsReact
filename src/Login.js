@@ -29,9 +29,13 @@ class Login extends Component {
 					this.props.changePageByName('searchJob');
 					this.props.loggedIn(true);
 				}
-				if (result.status === 204) {
+				else if (result.status === 201) {
 					this.setState({ error: 'Invalid Credentials' });
-				} else {
+				} 
+				else if(result.status == 204){
+					this.props.changePageByName('profilePage')
+				}
+				else {
 					this.props.changePageByName('home');
 				}
 			})
