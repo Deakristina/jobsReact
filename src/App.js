@@ -7,7 +7,7 @@ import Register from './Register'; //WORKS.
 import SearchJob from './components/SearchJob'; //WORKS
 import Login from './Login'; //WORKS
 import ProfilePage from './ProfilePage'; //Only styling left
-import logOut from './logout' //WORKS
+import LogOut from './logout'; //WORKS
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import { instanceOf } from 'prop-types';
@@ -26,8 +26,8 @@ class App extends Component {
 		this.state = {
 			currentPage: 'home',
 			loggedIn: false,
-			email: '',
-		}
+			email: ''
+		};
 	}
 
 	changePageByName = (name) => {
@@ -45,18 +45,15 @@ class App extends Component {
 	};
 	logOut = () => {
 		axios(`http://${local.ipAddress}:${local.port}/logout`)
-		.then((result) => {
-			if(result.status === 200)
-			{
-				this.setState({loggedIn: false})
-			}
-			else{
-				this.setState({error: 'There was an error when loggin Out'})
-			}
-		})
-		.catch((err) => console.log(err))
-		
-	}
+			.then((result) => {
+				if (result.status === 200) {
+					this.setState({ loggedIn: false });
+				} else {
+					this.setState({ error: 'There was an error when loggin Out' });
+				}
+			})
+			.catch((err) => console.log(err));
+	};
 
 	render() {
 		var router = {
@@ -85,7 +82,7 @@ class App extends Component {
 				{router[this.state.currentPage]}
 
 				<MainNavBar changePageByEvent={this.changePageByEvent} loggedIn={this.state.loggedIn} />
-				<logOut onClick={this.logOut}/> 
+				<LogOut onClick={this.logOut} />
 				{this.state.error}
 			</div>
 		);

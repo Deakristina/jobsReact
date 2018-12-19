@@ -33,16 +33,18 @@ class SearchResultModal extends Component {
 	};
 
 	componentDidMount() {
-		axios.get(`${local.ipAddress}:${local.port}/get-job/${this.props.jobId}`).then((result) => {
-			this.setState({ jobData: result.data });
-		});
+		axios
+			.get(`http://${local.ipAddress}:${local.port}/get-job/${this.props.jobId}`, { withCredentials: true })
+			.then((result) => {
+				this.setState({ jobData: result.data });
+			});
 	}
 
 	save = () => {
-		axios.post(`${local.ipAddress}:${local.port}/save-job`, {
+		axios.post(`http://${local.ipAddress}:${local.port}/save-job`, {
 			withCredentials: true,
 			jobId: this.state.jobData._id
-			// userId: '5c17ad5153dc7bc50f3361df'
+			// 	// userId: '5c17ad5153dc7bc50f3361df'
 		});
 		this.toggleNested();
 	};
