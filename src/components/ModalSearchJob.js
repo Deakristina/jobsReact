@@ -33,17 +33,24 @@ class SearchResultModal extends Component {
 	};
 
 	componentDidMount() {
-		axios.get(`${local.ipAddress}:${local.port}/get-job/${this.props.jobId}`).then((result) => {
-			this.setState({ jobData: result.data });
-		});
+		axios
+			.get(`http://${local.ipAddress}:${local.port}/get-job/${this.props.jobId}`, { withCredentials: true })
+			.then((result) => {
+				this.setState({ jobData: result.data });
+			});
 	}
 
 	save = () => {
-		axios.post(`${local.ipAddress}:${local.port}/save-job`, {
+		axios(`http://${local.ipAddress}:${local.port}/save-job`, {
+			method: 'post',
 			withCredentials: true,
-			jobId: this.state.jobData._id
-			// userId: '5c17ad5153dc7bc50f3361df'
-		});
+			data: {
+				jobId: this.state.jobData._id
+			}
+			// 	// userId: '5c17ad5153dc7bc50f3361df'
+		})
+			.then((result) => console.log(result))
+			.catch((err) => console.log(err));
 		this.toggleNested();
 	};
 

@@ -14,7 +14,7 @@ class Login extends Component {
 
 	handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(this.state.username, this.state.password);
+
 		axios({
 			method: 'post',
 			url: `http://${local.ipAddress}:${local.port}/login`,

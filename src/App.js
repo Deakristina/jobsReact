@@ -1,79 +1,62 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import LandingPage from './components/LandingPage' //WORKS
-import PostJob from './components/PostJob' //WORKS
-import MainNavBar from './MainNavBar' //WORKS.
-import Register from './Register' //WORKS.
-import SearchJob from './components/SearchJob' //WORKS
-import Login from './Login' //WORKS
-import ProfilePage from './ProfilePage' //Only styling left
-import logOut from './logout' //WORKS
-import 'bootstrap/dist/css/bootstrap.css'
-import './App.css'
-import { instanceOf } from 'prop-types'
-import { withCookies, Cookies } from 'react-cookies'
-import axios from 'axios'
-import local from './local'
+import LandingPage from './components/LandingPage'; //WORKS
+import PostJob from './components/PostJob'; //WORKS
+import MainNavBar from './MainNavBar'; //WORKS.
+import Register from './Register'; //WORKS.
+import SearchJob from './components/SearchJob'; //WORKS
+import Login from './Login'; //WORKS
+import ProfilePage from './ProfilePage'; //Only styling left
+import LogOut from './logout'; //WORKS
+import 'bootstrap/dist/css/bootstrap.css';
+import './App.css';
+import { instanceOf } from 'prop-types';
+import { withCookies, Cookies } from 'react-cookies';
+import axios from 'axios';
+import local from './local';
 
 class App extends Component {
 	static propTypes = {
 		cookies: instanceOf(Cookies).isRequired
-	}
+	};
 	constructor(props) {
-		super(props)
-		const { cookies } = props
+		super(props);
+		const { cookies } = props;
 
 		this.state = {
 			currentPage: 'home',
 			loggedIn: false,
-			email: '',
-		}
+			email: ''
+		};
 	}
 
 	changePageByName = (name) => {
-		this.setState({ currentPage: name })
-	}
+		this.setState({ currentPage: name });
+	};
 	changePageByEvent = (e) => {
-		this.setState({ currentPage: e.target.dataset.page })
-	}
+		this.setState({ currentPage: e.target.dataset.page });
+	};
 	loggedIn = (trigger) => {
-		this.setState({ loggedIn: trigger })
-	}
+		this.setState({ loggedIn: trigger });
+	};
 
 	getEmail = (address) => {
-		this.setState({ email: address })
-	}
+		this.setState({ email: address });
+	};
 	componentDidMount = () => {
-		debugger
 		axios(`http://${local.ipAddress}:${local.port}/login`, {
-			withCredentials: true,
+			withCredentials: true
 		})
-		.then((result) => {
-			if(result.status === 200){
-				debugger
-				this.setState({loggedIn: true})
-			}
-			else{
-				debugger
-				this.changePageByName('login')
-			}
-		})
-		.catch((err) => console.log(err))
-	}
-	logOut = () => {
-		axios(`http://${local.ipAddress}:${local.port}/logout`)
-		.then((result) => {
-			if(result.status === 200)
-			{
-				this.setState({loggedIn: false})
-			}
-			else{
-				this.setState({error: 'There was an error when loggin Out'})
-			}
-		})
-		.catch((err) => console.log(err))
-		
-	}
+			.then((result) => {
+				if (result.status === 200) {
+					this.setState({ loggedIn: true });
+				} else {
+					this.changePageByName('login');
+				}
+			})
+			.catch((err) => console.log(err));
+	};
+	
 
 	render() {
 		var router = {
@@ -95,18 +78,20 @@ class App extends Component {
 					email={this.state.email}
 				/>
 			),
-			postJob: <PostJob loggedIn={this.loggedIn} />
-		}
+			postJob: <PostJob loggedIn={this.loggedIn} />,
+			logOut: <LogOut onClick={this.logOut} />
+		};
+
 		return (
 			<div>
 				{router[this.state.currentPage]}
 
 				<MainNavBar changePageByEvent={this.changePageByEvent} loggedIn={this.state.loggedIn} />
-				<logOut logoutAction = {this.logOut}/> 
+				<LogOut/> 
 				{this.state.error}
 			</div>
-		)
+		);
 	}
 }
 
-export default App
+export default App;

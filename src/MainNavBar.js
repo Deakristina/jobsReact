@@ -59,6 +59,11 @@ class MainNavBar extends Component {
 							Search Job
 						</NavLink>
 					</NavItem>
+					<NavItem>
+						<NavLink className=" text-nav" data-page="logOut" onClick={this.props.changePageByEvent}>
+							Log Out
+						</NavLink>
+					</NavItem>
 				</Nav>
 			);
 		}
