@@ -8,7 +8,6 @@ class logOut extends Component {
 	}
 
 	logOutAction = () => {
-		debugger;
 		axios(`http://${local.ipAddress}:${local.port}/logout`)
 			.then((result) => {
 				if (result.status === 200) {

@@ -143,8 +143,8 @@ class RegisterForm extends Component {
 		} else {
 			return (
 				<div className="row">
-					<div className="col-4"> </div>
-					<div className="col-4">
+					<div className="col-md-4"> </div>
+					<div className="col-md-4">
 						<div className="container mt-5 register-container">
 							<h1 className="login-title text-center mt-3">Register</h1>
 							<form onSubmit={this.handleSubmit} className="formulario" method="POST">
@@ -221,7 +221,7 @@ class RegisterForm extends Component {
 							</form>
 						</div>
 					</div>
-					<div className="col-4" />
+					<div className="col-md-4" />
 				</div>
 			);
 		}
