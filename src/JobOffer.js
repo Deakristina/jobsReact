@@ -93,7 +93,7 @@ class jobOffer extends Component{
         var arrayInfoExtended = Object.values(this.state.info.info.extendedInfo)
         var keysBase = Object.keys(this.state.info.info.base)
         var keysExtended = Object.keys(this.state.info.info.extendedInfo)
-        var jobs = this.state.info.jobs.saved
+        var jobs = this.state.info.jobs.postedJobs
         
         var inputsBase = keysBase.map((element, pos) => {
             if(element === "password"){
@@ -132,8 +132,8 @@ class jobOffer extends Component{
         
         }) 
        
-        var arrayInfoBaseMap = arrayInfoBase.map((element, pos) => element = <li >{element}</li>)
-        var arrayInfoExtendedMap = arrayInfoExtended.map((element, pos) => element = <li >{element}</li>)
+        var arrayInfoBaseMap = arrayInfoBase.map((element, pos) => element = <li name={keysBase[pos]} >{element}</li>)
+        var arrayInfoExtendedMap = arrayInfoExtended.map((element, pos) => element = <li name={keysExtended[pos]} >{element}</li>)
         var jobsMapped = jobs.map((element) => element = <li>{element}</li>)
 
         console.log(this.state)
