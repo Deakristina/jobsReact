@@ -80,9 +80,10 @@ class App extends Component {
 			home: <LandingPage changePageByEvent={this.changePageByEvent} loggedIn={this.loggedIn} />,
 			searchJob: (
 				<SearchJob
-					loggedIn={this.loggedIn}
+					loggedIn={this.state.loggedIn}
 					userID={this.state.userID}
 					changePageByName={this.changePageByName}
+					changePageByEvent={this.changePageByEvent}
 				/>
 			),
 			register: <Register changePageByName={this.changePageByName} loggedIn={this.loggedIn} />,
