@@ -16,7 +16,7 @@ class profilePage extends Component {
 		};
 	}
 
-	componentDidMount = () => {
+	componentWillMount = () => {
 		axios(`http://${local.ipAddress}:${local.port}/profileInfo?isOf=${this.state.isOffer}`, {
 			//Session of passport
 			withCredentials: true,
@@ -24,16 +24,11 @@ class profilePage extends Component {
 		})
 			.then((result) => {
 				if (result.status === 201) {
-					this.props.loggedIn(false);
-
+					this.props.loggedIn(false)
 					this.props.changePage('login');
 				} else {
 					console.log(result);
-					this.setState({ basicInfo: result, status: 'JobOffer' }, () => {
-						console.log(this.state.basicInfo.data);
-						this.setState({ status: 'JobOffer' });
-						console.log(this.state.basicInfo);
-					});
+					this.setState({ basicInfo: result, status: 'JobSeeker' })
 				}
 			})
 			.catch((err) => console.log(err));
@@ -52,7 +47,7 @@ class profilePage extends Component {
 			return (
 				<div>
 					<a onClick={this.handleProfile}>See your profile as Job Poster</a>
-					<JobSeeker basicInfo={this.state.basicInfo} />
+					<JobSeeker basicInfo={this.state.basicInfo.data} />
 				</div>
 			);
 		} else if (this.state.status === 'JobOffer') {

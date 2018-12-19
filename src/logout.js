@@ -3,7 +3,12 @@ import axios from 'axios';
 import local from './local';
 
 class logOut extends Component {
-	logOut = () => {
+	constructor(props) {
+		super(props);
+	}
+
+	logOutAction = () => {
+		debugger;
 		axios(`http://${local.ipAddress}:${local.port}/logout`)
 			.then((result) => {
 				if (result.status === 200) {
@@ -18,7 +23,7 @@ class logOut extends Component {
 	render() {
 		return (
 			<div>
-				<input type="button" value="Log Out" onClick={this.logOut} />
+				<button type="button" value="Log Out" onClick={this.logOutAction} />
 			</div>
 		);
 	}

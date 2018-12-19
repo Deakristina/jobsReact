@@ -9,6 +9,7 @@ class jobOffer extends Component{
             edit: false,
             info: this.props.basicInfo,
             showMore: false,
+            showMoreInputs: false,
         }
     }
     
@@ -77,7 +78,10 @@ class jobOffer extends Component{
 					console.log(err)
 				})
 		})
-	}
+    }
+    handleShowMoreInputs = () => {
+        this.setState({showMoreInputs: !this.state.showMoreInputs})
+    }
     
     componentDidMount = () => {
         console.log(this.state.info)
@@ -89,13 +93,47 @@ class jobOffer extends Component{
         var arrayInfoExtended = Object.values(this.state.info.info.extendedInfo)
         var keysBase = Object.keys(this.state.info.info.base)
         var keysExtended = Object.keys(this.state.info.info.extendedInfo)
-        var jobs = this.state.info.jobs.saved
+        var jobs = this.state.info.jobs.postedJobs
         
-        var inputsBase = keysBase.map((element, pos) => element = <input onChange={this.handleChange} name={keysBase[pos]} placeholder={element}/>)
-        var inputsExtended = keysExtended.map((element, pos) => element = <input onChange = {this.handleChange} name = {keysExtended[pos]} placeholder = {element}  />)
+        var inputsBase = keysBase.map((element, pos) => {
+            if(element === "password"){
+                
+                element = <li><input type="password" placeholder="new Password" onChange={this.handleChange} name={keysBase[pos]}/></li>
+                return element
+            }
+            else if(element === "email"){
+                
+                element = <li><input type="email" onChange={this.handleChange} name={keysBase[pos]} placeholder={element}/></li>
+                return element
+            }
+            else{
+                
+                element = <li><input onChange={this.handleChange} name={keysBase[pos]} placeholder={element}/></li>
+                return element
+            }
+        })
 
-        var arrayInfoBaseMap = arrayInfoBase.map((element, pos) => element = <li >{element}</li>)
-        var arrayInfoExtendedMap = arrayInfoExtended.map((element, pos) => element = <li >{element}</li>)
+        var inputsExtended = keysExtended.map((element, pos) => {
+            if(element === 'description'){
+                
+                element = <li><textarea onChange={this.handleChange} placeholder='Tell us something about you!'  name={keysBase[pos]}/></li>
+                return element
+            }
+            else if(element === 'birthday'){
+                
+                element = <li><input onChange = {this.handleChange} name = {keysExtended[pos]} placeholder = {element} type="date"/></li>
+                return element
+            }
+            else{
+                
+                element = <li><input onChange = {this.handleChange} name = {keysExtended[pos]} placeholder = {element}  /></li>
+                return element
+            }
+        
+        }) 
+       
+        var arrayInfoBaseMap = arrayInfoBase.map((element, pos) => element = <li name={keysBase[pos]} >{element}</li>)
+        var arrayInfoExtendedMap = arrayInfoExtended.map((element, pos) => element = <li name={keysExtended[pos]} >{element}</li>)
         var jobsMapped = jobs.map((element) => element = <li>{element}</li>)
 
         console.log(this.state)
@@ -116,23 +154,46 @@ class jobOffer extends Component{
         )
     }
     else if(this.state.edit){
-        return( 
-            <div>
-                <ul>
-                    <li>
-                        <form onSubmit={this.handleSubmit} method='POST'>
-                            {inputsBase}
-                            {inputsExtended}
-                            <input type="submit" name="submit" value="Apply Changes"/>
-                        </form>
-                    </li>
-                    <li>
-                        {this.state.error}
-                        {this.state.success}
-                    </li>
-                </ul>
-            </div>
-        )
+        if(this.state.showMoreInputs){
+            return( 
+                <div>
+                    <form onSubmit={this.handleSubmit} method='POST'>
+                    <ul>
+                        {inputsBase}
+                    </ul>
+                    <ul>
+                        {inputsExtended}  
+                    </ul>
+                        <input type="submit" name="submit" value="Apply Changes"/>
+                    </form>
+                    <div>
+                        <p>{this.state.error}</p>
+                        <p>{this.state.success}</p>
+                    </div>
+                    <a onClick={this.handleShowMoreInputs}>Hide extended Information</a>
+                </div>
+            )
+        }
+        else{
+           
+            return( 
+                <div>
+                    <form onSubmit={this.handleSubmit} method='POST'>
+                    <ul>
+                        {inputsBase}
+                    </ul>
+                    <input type="submit" name="submit" value="Apply Changes"/>
+                    </form>
+                    <div>
+                        <p>{this.state.error}</p>
+                        <p>{this.state.success}</p>
+                    </div>
+                    <a onClick={this.handleShowMoreInputs}>Show extended Information</a>
+                </div>
+            )
+        
+        }
+        
     }
     else{
         return(
