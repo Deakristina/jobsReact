@@ -103,7 +103,7 @@ class LandingPage extends Component {
 				<div className="row">
 					<div className="col-md-12 footer-box footer-copyright pt-5 pb-5 text-center">
 						<span className="footer-text">
-							| &copy; Copyright 2018. All Rights Reserved by Find Your Job. |
+							| &copy; Copyright 2018. All Rights Reserved by MicroJob. |
 							<i className="fa fa-heart-o" aria-hidden="true" />
 						</span>
 					</div>
