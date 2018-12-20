@@ -11,8 +11,10 @@ class logOut extends Component {
     debugger;
     axios(`http://${local.ipAddress}:${local.port}/logout`)
       .then((result) => {
+        debugger
         if (result.status === 200) {
-          this.setState({ loggedIn: false });
+          debugger
+          this.props.loggedIn(false);
         } else {
           this.setState({ error: 'There was an error when loggin Out' });
         }

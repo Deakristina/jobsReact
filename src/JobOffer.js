@@ -10,8 +10,11 @@ class jobOffer extends Component{
             info: this.props.basicInfo,
             showMore: false,
             showMoreInputs: false,
+            email: '',
         }
     }
+
+    componen
     
     handleChange = (e) => {
         var objectData = {}
@@ -55,9 +58,8 @@ class jobOffer extends Component{
         var toCheck = event.target.value
 		this.setState({ email: toCheck }, () => {
 			
-			axios({
+			axios(`http://${local.ipAddress}:${local.port}/checkEmail`,{
 				method: 'post',
-				url: `http://${local.ipAddress}:${local.port}/checkEmail`,
 				data: {
 					email: this.state.email
 				},
@@ -83,9 +85,6 @@ class jobOffer extends Component{
         this.setState({showMoreInputs: !this.state.showMoreInputs})
     }
     
-    componentDidMount = () => {
-        console.log(this.state.info)
-    }
 
     render(){
 
@@ -103,7 +102,7 @@ class jobOffer extends Component{
             }
             else if(element === "email"){
                 
-                element = <li><input type="email" onChange={this.handleChange} name={keysBase[pos]} placeholder={element}/></li>
+                element = <li><input type="email" onChange={this.   checkUsername} name={keysBase[pos]} placeholder={element}/></li>
                 return element
             }
             else{

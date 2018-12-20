@@ -32,7 +32,7 @@ class Login extends Component {
 				else if (result.status === 201) {
 					this.setState({ error: 'Invalid Credentials' });
 				} 
-				else if(result.status == 204){
+				else if(result.status === 204){
 					this.props.changePageByName('profilePage')
 				}
 				else {

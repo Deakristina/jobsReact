@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import axios from 'axios'
+import local from './local'
 
 let navStyle = {
 	position: 'fixed',
@@ -9,18 +11,35 @@ let navStyle = {
 
 class MainNavBar extends Component {
 	constructor(props) {
-		super(props);
-
-		this.toggle = this.toggle.bind(this);
+		super(props)
+	
 		this.state = {
 			isOpen: false
 		};
 	}
-	toggle() {
+	toggle = () => {
 		this.setState({
 			isOpen: !this.state.isOpen
 		});
+
 	}
+	logOutAction = () => {
+		debugger;
+		axios(`http://${local.ipAddress}:${local.port}/logout`, {
+			withCredentials: true,
+		})
+		  .then((result) => {
+			debugger
+			if (result.status === 200) {
+			  debugger
+			  this.props.loggedIn(false)
+			} else {
+			  this.setState({ error: 'There was an error when loggin Out' });
+			}
+		  })
+		  .catch((err) => console.log(err));
+	  };
+
 	render() {
 		let navButtons = (
 			<Nav className="ml-auto h5 text-nav" navbar>
@@ -60,7 +79,10 @@ class MainNavBar extends Component {
 						</NavLink>
 					</NavItem>
 					<NavItem>
-						<NavLink className=" text-nav" data-page="logOut" onClick={this.props.changePageByEvent}>
+						<NavLink className=" text-nav" data-page="login" onClick={() => {
+							this.logOutAction()
+							this.props.changePageByEvent()
+						}}>
 							Log Out
 						</NavLink>
 					</NavItem>
