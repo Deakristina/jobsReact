@@ -16,12 +16,9 @@ class profilePage extends Component {
 		};
 	}
 
-
-
 	componentWillMount = () => {
 		debugger
 		axios(`http://${local.ipAddress}:${local.port}/profileInfo?isOf=${this.state.isOffer}`, {
-			//Session of passport
 			withCredentials: true,
 			method: 'get'
 		})
@@ -31,7 +28,7 @@ class profilePage extends Component {
 					this.props.changePageByName('login');
 				} else {
 					console.log(result);
-					this.setState({ basicInfo: result, status: 'JobSeeker' })
+					this.setState({ basicInfo: result, status: 'JobSeeker' });
 				}
 			})
 			.catch((err) => console.log(err));
@@ -48,16 +45,35 @@ class profilePage extends Component {
 	render() {
 		if (this.state.status === 'JobSeeker') {
 			return (
-				<div>
-					<a onClick={this.handleProfile}>See your profile as Job Poster</a>
-					<JobSeeker basicInfo={this.state.basicInfo.data} />
+				<div className="container seeker-container">
+					<div className="title-profile text-center mb-5">Your Profile</div>
+					<div className="profile-info">
+						<JobSeeker basicInfo={this.state.basicInfo.data} />
+					</div>
+					<div className="change-profile row mt-3">
+						<div className="col-12 text-center pb-2 ">
+							<button className="btn btn-primary btn-lg" onClick={this.handleProfile}>
+								See your profile as Job Poster
+							</button>
+						</div>
+					</div>
 				</div>
 			);
 		} else if (this.state.status === 'JobOffer') {
 			return (
-				<div>
-					<a onClick={this.handleProfile}>See your profile as Job Seeker</a>
-					<JobOffer basicInfo={this.state.basicInfo.data} />
+				<div className="container seeker-container">
+					<div className="title-profile text-center mb-5">Your Profile</div>
+					<div className="profile-info">
+						{/* <div className="col-12 text-center pb-2 "> */}
+						<JobOffer basicInfo={this.state.basicInfo.data} />
+						<div className="col-12 text-center pb-2  mt-3">
+							<button className="btn btn-secondary btn-lg" onClick={this.handleProfile}>
+								See your profile as Job Seeker
+							</button>
+						</div>
+
+						{/* </div> */}
+					</div>
 				</div>
 			);
 		} else {

@@ -97,14 +97,14 @@ class SearchJob extends Component {
 		if (this.state.jobs.length > 0) {
 			jobs = this.state.jobs.map((job, i) => {
 				let detailButton = (
-					<button className="btn btn-warning mt-2 mr-2" data-jobid={job._id} onClick={this.handleShowModal}>
+					<button className="btn btn-primary mt-2 mr-2" data-jobid={job._id} onClick={this.handleShowModal}>
 						Show Details
 					</button>
 				);
 				if (!this.props.loggedIn) {
 					detailButton = (
 						<button
-							className="btn btn-warning mt-2 mr-2"
+							className="btn btn-primary mt-2 mr-2"
 							data-page="login"
 							onClick={this.props.changePageByEvent}
 						>
@@ -168,7 +168,7 @@ class SearchJob extends Component {
 								</div>
 								<div className="row mt-4">
 									<div className="col-12 text-center">
-										<button className="btn btn-warning btn-lg">Search</button>
+										<button className="btn btn-primary btn-lg">Search</button>
 									</div>
 								</div>
 							</form>

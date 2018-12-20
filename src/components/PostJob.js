@@ -243,7 +243,7 @@ class PostJob extends Component {
 							</div>
 							<div className="row mt-2 mb-4">
 								<div className="col-12 text-center">
-									<button className="btn btn-warning btn-lg">Submit</button>
+									<button className="btn btn-primary btn-lg">Submit</button>
 								</div>
 							</div>
 						</form>

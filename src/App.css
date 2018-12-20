@@ -158,12 +158,12 @@ body {
 	z-index: 100;
 }
 
-.btn-warning {
+.btn-primary {
 	background-color: #e68a00 !important;
 	border-color: #e68a00 !important;
 	color: #fff !important;
 }
-.btn-warning:hover {
+.btn-primary:hover {
 	background-color: #ffad33 !important;
 	border-color: #ffad33 !important;
 }
@@ -190,6 +190,17 @@ body {
 }
 
 label {
+	font-weight: bolder;
+}
+
+/* -----Profilepage----- */
+.seeker-container {
+	margin-top: 15vh;
+}
+
+.title-profile {
+	font-size: 3vw;
+	color: #e68a00;
 	font-weight: bolder;
 }
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
-import axios from 'axios'
-import local from './local'
+import axios from 'axios';
+import local from './local';
 
 let navStyle = {
 	position: 'fixed',
