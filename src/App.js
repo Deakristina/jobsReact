@@ -85,8 +85,7 @@ class App extends Component {
 			<div>
 				{router[this.state.currentPage]}
 
-				<MainNavBar changePageByEvent={this.changePageByEvent} loggedIn={this.state.loggedIn} />
-				<LogOut />
+				<MainNavBar changePageByEvent={this.changePageByEvent} changePageByName = {this.changePageByName} loggedIn={this.state.loggedIn} />	
 				{this.state.error}
 			</div>
 		);

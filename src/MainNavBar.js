@@ -13,7 +13,6 @@ class MainNavBar extends Component {
 	constructor(props) {
 		super(props);
 
-		// this.toggle = this.toggle.bind(this);
 		this.state = {
 			isOpen: false
 		};
@@ -22,6 +21,22 @@ class MainNavBar extends Component {
 		this.setState({
 			isOpen: !this.state.isOpen
 		});
+	};
+	logOutAction = () => {
+		debugger;
+		axios(`http://${local.ipAddress}:${local.port}/logout`, {
+			withCredentials: true
+		})
+			.then((result) => {
+				debugger;
+				if (result.status === 200) {
+					debugger;
+					this.props.loggedIn(false);
+				} else {
+					this.setState({ error: 'There was an error when loggin Out' });
+				}
+			})
+			.catch((err) => console.log(err));
 	};
 
 	render() {
@@ -63,7 +78,14 @@ class MainNavBar extends Component {
 						</NavLink>
 					</NavItem>
 					<NavItem>
-						<NavLink className=" text-nav" data-page="home" onClick={this.props.changePageByEvent}>
+						<NavLink
+							className=" text-nav"
+							data-page="login"
+							onClick={() => {
+								this.logOutAction();
+								this.props.changePageByEvent();
+							}}
+						>
 							Log Out
 						</NavLink>
 					</NavItem>

@@ -17,14 +17,15 @@ class profilePage extends Component {
 	}
 
 	componentWillMount = () => {
+		debugger
 		axios(`http://${local.ipAddress}:${local.port}/profileInfo?isOf=${this.state.isOffer}`, {
 			withCredentials: true,
 			method: 'get'
 		})
 			.then((result) => {
 				if (result.status === 201) {
-					this.props.loggedIn(false);
-					this.props.changePage('login');
+					this.props.loggedIn(false)
+					this.props.changePageByName('login');
 				} else {
 					console.log(result);
 					this.setState({ basicInfo: result, status: 'JobSeeker' });
