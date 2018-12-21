@@ -6,6 +6,7 @@ class jobSeeker extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			email: '',
 			edit: false,
 			info: this.props.basicInfo,
 			showMore: false,
@@ -55,9 +56,9 @@ class jobSeeker extends Component {
 				method: 'post',
 				url: `http://10.85.5.220:5000/checkEmail`,
 				data: {
-					email: this.state.email
+					email: this.state.email,
 				},
-				withCredentials: true
+				withCredentials: true,
 			})
 				.then((result) => {
 					console.log(result);
