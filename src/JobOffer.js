@@ -9,8 +9,10 @@ class jobOffer extends Component {
 			edit: false,
 			info: this.props.basicInfo,
 			showMore: false,
-			showMoreInputs: false
+			showMoreInputs: false,
+			jobNames: [],
 		};
+		
 	}
 
 	handleChange = (e) => {
@@ -77,6 +79,29 @@ class jobOffer extends Component {
         this.setState({showMoreInputs: !this.state.showMoreInputs})
     }
     
+	componentWillMount = () => {
+		console.log(this.state.info)
+		var jobs = this.state.info.jobs.postedJobs;
+		debugger
+		jobs.forEach((element) => {
+			debugger
+			axios(`http://10.85.5.220:5000/post-job?id=${element}`)
+				.then((result) => {
+					debugger
+					if(result.data === ""){
+						var allJobs = [...this.state.jobNames]
+						this.setState({jobNames: allJobs})
+					}
+					else{
+						var allJobs = [...this.state.jobNames]
+						allJobs.push(result.data.info.title)
+						this.setState({jobNames: allJobs})
+						
+					}
+				})
+				.catch((err) => console.log(err));
+		});
+	};
 
     render(){
 
@@ -84,7 +109,7 @@ class jobOffer extends Component {
         var arrayInfoExtended = Object.values(this.state.info.info.extendedInfo)
         var keysBase = Object.keys(this.state.info.info.base)
         var keysExtended = Object.keys(this.state.info.info.extendedInfo)
-        var jobs = this.state.info.jobs.postedJobs
+        var jobs = this.state.jobNames
         
         var inputsBase = keysBase.map((element, pos) => {
             if(element === "password"){
@@ -94,7 +119,7 @@ class jobOffer extends Component {
             }
             else if(element === "email"){
                 
-                element = <li><input type="email" onChange={this.   checkUsername} name={keysBase[pos]} placeholder={element}/></li>
+                element = <li><input type="email" onChange={this.checkUsername} name={keysBase[pos]} placeholder={element}/></li>
                 return element
             }
             else{
@@ -124,8 +149,19 @@ class jobOffer extends Component {
         }) 
        
         var arrayInfoBaseMap = arrayInfoBase.map((element, pos) => element = <li name={keysBase[pos]} >{element}</li>)
-        var arrayInfoExtendedMap = arrayInfoExtended.map((element, pos) => element = <li name={keysExtended[pos]} >{element}</li>)
-        var jobsMapped = jobs.map((element) => element = <li>{element}</li>)
+		var arrayInfoExtendedMap = arrayInfoExtended.map((element, pos) => element = <li name={keysExtended[pos]} >{element}</li>)
+		
+        var jobsMapped = jobs.map((element) => {
+			if(element === "Error"){
+				debugger
+				element =  <li>You have not saved any jobs.</li>
+				return element 
+			}
+			else{
+				element = <li>{element}</li>
+				return element
+			}
+		})
 
         console.log(this.state)
         console.log(this.props)
@@ -202,227 +238,6 @@ class jobOffer extends Component {
     }    
 
   }
-    
-
-	componentDidMount = () => {
-		console.log(this.state.info);
-	};
-
-	render() {
-		var arrayInfoBase = Object.values(this.state.info.info.base);
-		var arrayInfoExtended = Object.values(this.state.info.info.extendedInfo);
-		var keysBase = Object.keys(this.state.info.info.base);
-		var keysExtended = Object.keys(this.state.info.info.extendedInfo);
-		var jobs = this.state.info.jobs.postedJobs;
-
-		var inputsBase = keysBase.map((element, pos) => {
-			if (element === 'password') {
-				element = (
-					<div>
-						<input
-							className="col-md-12 form-control"
-							type="password"
-							placeholder="new Password"
-							onChange={this.handleChange}
-							name={keysBase[pos]}
-						/>
-					</div>
-				);
-				return element;
-			} else if (element === 'email') {
-				element = (
-					<div>
-						<input
-							className="col-md-12 form-control"
-							type="email"
-							onChange={this.handleChange}
-							name={keysBase[pos]}
-							placeholder={element}
-						/>
-					</div>
-				);
-				return element;
-			} else {
-				element = (
-					<div>
-						<input
-							className="col-md-12 form-control"
-							onChange={this.handleChange}
-							name={keysBase[pos]}
-							placeholder={element}
-						/>
-					</div>
-				);
-				return element;
-			}
-		});
-
-		var inputsExtended = keysExtended.map((element, pos) => {
-			if (element === 'description') {
-				element = (
-					<div>
-						<textarea
-							className="col-md-12 form-control"
-							onChange={this.handleChange}
-							placeholder="Tell us something about you!"
-							name={keysBase[pos]}
-						/>
-					</div>
-				);
-				return element;
-			} else if (element === 'birthday') {
-				element = (
-					<div>
-						<input
-							className="col-md-12 form-control"
-							onChange={this.handleChange}
-							name={keysExtended[pos]}
-							placeholder={element}
-							type="date"
-						/>
-					</div>
-				);
-				return element;
-			} else {
-				element = (
-					<div>
-						<input
-							className="col-md-12 form-control"
-							onChange={this.handleChange}
-							name={keysExtended[pos]}
-							placeholder={element}
-						/>
-					</div>
-				);
-				return element;
-			}
-		});
-
-		var arrayInfoBaseMap = arrayInfoBase.map((element, pos) => {
-			element = (
-				<div className="col-md-12 form-control" name={keysBase[pos]}>
-					<strong>{keysBase[pos]}: </strong> {element}
-				</div>
-			);
-			return element;
-		});
-		var arrayInfoExtendedMap = arrayInfoExtended.map((element, pos) => {
-			element = (
-				<div className="col-md-12 form-control" name={keysExtended[pos]}>
-					<strong>{keysExtended[pos]}: </strong>
-					{element}
-				</div>
-			);
-
-			return element;
-		});
-		var jobsMapped = jobs.map((element) => (element = <li>{element}</li>));
-
-		if (this.state.showMore) {
-			return (
-				<div>
-					<div className="form-row input-group-text">{arrayInfoBaseMap}</div>
-					<div name="extendedInfo" className="form-row input-group-text">
-						{arrayInfoExtendedMap}
-					</div>
-
-					<div className="row mt-3">
-						<div className="col-6 text-center pb-2 ">
-							<button className="btn btn-info" onClick={this.handleShowMore}>
-								Show Less
-							</button>
-						</div>
-						<div className="col-6 text-center pb-2 ">
-							<button className="btn btn-danger" onClick={this.editProfile}>
-								Edit profile
-							</button>
-						</div>
-					</div>
-				</div>
-			);
-		} else if (this.state.edit) {
-			if (this.state.showMoreInputs) {
-				return (
-					<div>
-						<form onSubmit={this.handleSubmit} method="POST">
-							<div>{inputsBase}</div>
-							<div>{inputsExtended}</div>
-							<div className="row mt-3">
-								<div className="col-6 text-center pb-2 ">
-									<button className="btn btn-success" name="submit">
-										Apply Changes
-									</button>
-								</div>
-								<div className="col-6 text-center pb-2 ">
-									<button
-										type="button"
-										className="btn btn-danger"
-										onClick={this.handleShowMoreInputs}
-									>
-										Hide extended Information
-									</button>
-								</div>
-							</div>
-						</form>
-						<div>
-							<p>{this.state.error}</p>
-							<p>{this.state.success}</p>
-						</div>
-					</div>
-				);
-			} else {
-				return (
-					<div>
-						<form onSubmit={this.handleSubmit} method="POST">
-							<div>{inputsBase}</div>
-
-							<div className="row mt-3">
-								<div className="col-6 text-center pb-2 ">
-									<button className="btn btn-success" name="submit">
-										Apply Changes
-									</button>
-								</div>
-								<div className="col-6 text-center pb-2 ">
-									<button
-										type="button"
-										className="btn btn-danger"
-										onClick={this.handleShowMoreInputs}
-									>
-										Show extended Information
-									</button>
-								</div>
-							</div>
-						</form>
-						<div>
-							<p>{this.state.error}</p>
-							<p>{this.state.success}</p>
-						</div>
-					</div>
-				);
-			}
-		} else {
-			return (
-				<div>
-					<div className="form-row input-group-text" name="NormalInfo">
-						{arrayInfoBaseMap}
-					</div>
-					<div name="jobHistory">{jobsMapped}</div>
-					<div className="row mt-3">
-						<div className="col-6 text-center pb-2 ">
-							<button className="btn btn-success" onClick={this.handleShowMore}>
-								Show more
-							</button>
-						</div>
-						<div className="col-6 text-center pb-2 ">
-							<button className="btn btn-danger" onClick={this.editProfile}>
-								Edit your profile
-							</button>
-						</div>
-					</div>
-				</div>
-			);
-		}
-	}
 }
 
 export default jobOffer;

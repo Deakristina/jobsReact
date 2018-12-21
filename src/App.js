@@ -7,7 +7,6 @@ import Register from './Register'; //WORKS.
 import SearchJob from './components/SearchJob'; //WORKS
 import Login from './Login'; //WORKS
 import ProfilePage from './ProfilePage'; //Only styling left
-import LogOut from './logout'; //doesnt WORK
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import { instanceOf } from 'prop-types';
@@ -78,14 +77,13 @@ class App extends Component {
 				/>
 			),
 			postJob: <PostJob loggedIn={this.loggedIn} />,
-			logOut: <LogOut onClick={this.logOut} />
 		};
 
 		return (
 			<div>
 				{router[this.state.currentPage]}
 
-				<MainNavBar changePageByEvent={this.changePageByEvent} changePageByName = {this.changePageByName} loggedIn={this.state.loggedIn} />	
+				<MainNavBar changePageByEvent={this.changePageByEvent} changePageByName = {this.changePageByName} loggedIn={this.state.loggedIn} setLoggedIn = {this.loggedIn}/>	
 				{this.state.error}
 			</div>
 		);

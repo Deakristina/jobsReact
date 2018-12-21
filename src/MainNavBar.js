@@ -23,7 +23,7 @@ class MainNavBar extends Component {
 		});
 
 	}
-	logOutAction = () => {
+	logOutAction = (changeAPP) => {
 		debugger;
 		axios(`http://${local.ipAddress}:${local.port}/logout`, {
 			withCredentials: true,
@@ -31,10 +31,10 @@ class MainNavBar extends Component {
 		  .then((result) => {
 			debugger
 			if (result.status === 200) {
-			  debugger
-			  this.props.loggedIn(false)
+				debugger
+				this.props.setLoggedIn(false)
 			} else {
-			  this.setState({ error: 'There was an error when loggin Out' });
+				this.setState({ error: 'There was an error when loggin Out' });
 			}
 		  })
 		  .catch((err) => console.log(err));
@@ -81,7 +81,7 @@ class MainNavBar extends Component {
 					<NavItem>
 						<NavLink className=" text-nav" data-page="login" onClick={() => {
 							this.logOutAction()
-							this.props.changePageByEvent()
+							this.props.changePageByName('login')
 						}}>
 							Log Out
 						</NavLink>

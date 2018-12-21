@@ -9,8 +9,10 @@ class jobSeeker extends Component {
 			edit: false,
 			info: this.props.basicInfo,
 			showMore: false,
-			showMoreInputs: false
+			showMoreInputs: false,
+			jobNames: [],
 		};
+	
 	}
 
 	handleChange = (e) => {
@@ -51,7 +53,7 @@ class jobSeeker extends Component {
 		this.setState({ email: toCheck }, () => {
 			axios({
 				method: 'post',
-				url: `http://${local.ipAddress}:${local.port}/checkEmail`,
+				url: `http://10.85.5.220:5000/checkEmail`,
 				data: {
 					email: this.state.email
 				},
@@ -67,7 +69,7 @@ class jobSeeker extends Component {
 					}
 				})
 				.catch((err) => {
-					console.log(err);
+					console.log(err);	
 				});
 		});
 	};
@@ -75,8 +77,28 @@ class jobSeeker extends Component {
 		this.setState({ showMoreInputs: !this.state.showMoreInputs });
 	};
 
-	componentDidMount = () => {
-		console.log(this.state.info);
+	componentWillMount = () => {
+		console.log(this.state.info)
+		var jobs = this.state.info.jobs.saved;
+		debugger
+		jobs.forEach((element) => {
+			debugger
+			axios(`http://10.85.5.220:5000/post-job?id=${element}`)
+				.then((result) => {
+					debugger
+					if(result.data === ""){
+						var allJobs = [...this.state.jobNames]
+						this.setState({jobNames: allJobs})
+					}
+					else{
+						var allJobs = [...this.state.jobNames]
+						allJobs.push(result.data.info.title)
+						this.setState({jobNames: allJobs})
+						
+					}
+				})
+				.catch((err) => console.log(err));
+		});
 	};
 
 	render() {
@@ -84,7 +106,7 @@ class jobSeeker extends Component {
 		var arrayInfoExtended = Object.values(this.state.info.info.extendedInfo);
 		var keysBase = Object.keys(this.state.info.info.base);
 		var keysExtended = Object.keys(this.state.info.info.extendedInfo);
-		var jobs = this.state.info.jobs.saved;
+		var jobs = this.state.jobNames
 
 		var inputsBase = keysBase.map((element, pos) => {
 			if (element === 'password') {
@@ -185,7 +207,16 @@ class jobSeeker extends Component {
 			);
 			return element;
 		});
-		var jobsMapped = jobs.map((element) => (element = <li>{element}</li>));
+		var jobsMapped = jobs.map((element) => {
+			if(element === "Error"){
+				element =  <li>You have not saved any jobs.</li>
+				return element
+			}
+			else{
+				element = <li>{element}</li>
+				return element
+			}
+		})
 
 		if (this.state.showMore) {
 			return (
