@@ -163,9 +163,6 @@ class jobOffer extends Component {
 			}
 		})
 
-        console.log(this.state)
-        console.log(this.props)
-
    if(this.state.showMore){
         return(
             <div>

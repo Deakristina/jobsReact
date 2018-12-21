@@ -22,31 +22,11 @@ class MainNavBar extends Component {
 		this.setState({
 			isOpen: !this.state.isOpen
 		});
-<<<<<<< HEAD
-
-	}
-	logOutAction = (changeAPP) => {
-		debugger;
-=======
 	};
 	logOutAction = () => {
->>>>>>> 516748f1e8565048cf996cdd501b7109fe9aa3fd
 		axios(`http://${local.ipAddress}:${local.port}/logout`, {
 			withCredentials: true
 		})
-<<<<<<< HEAD
-		  .then((result) => {
-			debugger
-			if (result.status === 200) {
-				debugger
-				this.props.setLoggedIn(false)
-			} else {
-				this.setState({ error: 'There was an error when loggin Out' });
-			}
-		  })
-		  .catch((err) => console.log(err));
-	  };
-=======
 			.then((result) => {
 				if (result.status === 200) {
 					this.props.setLoggedIn(false);
@@ -58,7 +38,6 @@ class MainNavBar extends Component {
 			})
 			.catch((err) => console.log(err));
 	};
->>>>>>> 516748f1e8565048cf996cdd501b7109fe9aa3fd
 
 	render() {
 		let navButtons = (
@@ -111,12 +90,6 @@ class MainNavBar extends Component {
 						</NavLink>
 					</NavItem>
 					<NavItem>
-<<<<<<< HEAD
-						<NavLink className=" text-nav" data-page="login" onClick={() => {
-							this.logOutAction()
-							this.props.changePageByName('login')
-						}}>
-=======
 						<NavLink
 							className=" text-nav"
 							data-page="login"
@@ -128,7 +101,6 @@ class MainNavBar extends Component {
 							}}
 						>
 							{/* <SuccessAlert /> */}
->>>>>>> 516748f1e8565048cf996cdd501b7109fe9aa3fd
 							Log Out
 						</NavLink>
 					</NavItem>

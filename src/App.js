@@ -92,11 +92,7 @@ class App extends Component {
 					email={this.state.email}
 				/>
 			),
-<<<<<<< HEAD
 			postJob: <PostJob loggedIn={this.loggedIn} />,
-=======
-			postJob: <PostJob loggedIn={this.loggedIn} />
->>>>>>> 516748f1e8565048cf996cdd501b7109fe9aa3fd
 		};
 		if (this.state.success) {
 			this.successTimeOut();
@@ -113,9 +109,6 @@ class App extends Component {
 				</Alert>
 				{router[this.state.currentPage]}
 
-<<<<<<< HEAD
-				<MainNavBar changePageByEvent={this.changePageByEvent} changePageByName = {this.changePageByName} loggedIn={this.state.loggedIn} setLoggedIn = {this.loggedIn}/>	
-=======
 				<MainNavBar
 					changePageByEvent={this.changePageByEvent}
 					changePageByName={this.changePageByName}
@@ -124,7 +117,6 @@ class App extends Component {
 					successAlert={this.success}
 				/>
 
->>>>>>> 516748f1e8565048cf996cdd501b7109fe9aa3fd
 				{this.state.error}
 			</div>
 		);
