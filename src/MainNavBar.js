@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import axios from 'axios';
 import local from './local';
+import ScrollableAnchor from 'react-scrollable-anchor';
 
 let navStyle = {
 	position: 'fixed',
@@ -23,15 +24,14 @@ class MainNavBar extends Component {
 		});
 	};
 	logOutAction = () => {
-		debugger;
 		axios(`http://${local.ipAddress}:${local.port}/logout`, {
 			withCredentials: true
 		})
 			.then((result) => {
-				debugger;
 				if (result.status === 200) {
-					debugger;
-					this.props.loggedIn(false);
+					this.props.setLoggedIn(false);
+					this.props.isOpen(true);
+					this.props.toggle();
 				} else {
 					this.setState({ error: 'There was an error when loggin Out' });
 				}
@@ -41,23 +41,35 @@ class MainNavBar extends Component {
 
 	render() {
 		let navButtons = (
-			<Nav className="ml-auto h5 text-nav" navbar>
-				<NavItem>
-					<NavLink className=" text-nav" data-page="register" onClick={this.props.changePageByEvent}>
-						Register
-					</NavLink>
-				</NavItem>
-				<NavItem>
-					<NavLink className=" text-nav" data-page="login" onClick={this.props.changePageByEvent}>
-						Login
-					</NavLink>
-				</NavItem>
-				<NavItem>
-					<NavLink className=" text-nav" data-page="searchJob" onClick={this.props.changePageByEvent}>
-						Search Job
-					</NavLink>
-				</NavItem>
-			</Nav>
+			<ScrollableAnchor id="homepage">
+				<Nav className="ml-auto h5 text-nav" navbar>
+					<NavItem>
+						<NavLink
+							className=" text-nav"
+							href="/#section1"
+							data-page="home"
+							onClick={this.props.changePageByEvent}
+						>
+							Why MicroJobs
+						</NavLink>
+					</NavItem>
+					<NavItem>
+						<NavLink className=" text-nav" data-page="register" onClick={this.props.changePageByEvent}>
+							Register
+						</NavLink>
+					</NavItem>
+					<NavItem>
+						<NavLink className=" text-nav" data-page="login" onClick={this.props.changePageByEvent}>
+							Login
+						</NavLink>
+					</NavItem>
+					<NavItem>
+						<NavLink className=" text-nav" data-page="searchJob" onClick={this.props.changePageByEvent}>
+							Search Job
+						</NavLink>
+					</NavItem>
+				</Nav>
+			</ScrollableAnchor>
 		);
 		if (this.props.loggedIn) {
 			navButtons = (
@@ -83,9 +95,12 @@ class MainNavBar extends Component {
 							data-page="login"
 							onClick={() => {
 								this.logOutAction();
-								this.props.changePageByEvent();
+								this.props.changePageByName('home');
+
+								this.props.successAlert();
 							}}
 						>
+							{/* <SuccessAlert /> */}
 							Log Out
 						</NavLink>
 					</NavItem>
