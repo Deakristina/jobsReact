@@ -9,7 +9,8 @@ class jobOffer extends Component {
 			edit: false,
 			info: this.props.basicInfo,
 			showMore: false,
-			showMoreInputs: false
+			showMoreInputs: false,
+			jobNames: []
 		};
 	}
 
@@ -76,140 +77,26 @@ class jobOffer extends Component {
 		this.setState({ showMoreInputs: !this.state.showMoreInputs });
 	};
 
-	render() {
-		var arrayInfoBase = Object.values(this.state.info.info.base);
-		var arrayInfoExtended = Object.values(this.state.info.info.extendedInfo);
-		var keysBase = Object.keys(this.state.info.info.base);
-		var keysExtended = Object.keys(this.state.info.info.extendedInfo);
-		var jobs = this.state.info.jobs.postedJobs;
-
-		var inputsBase = keysBase.map((element, pos) => {
-			if (element === 'password') {
-				element = (
-					<li>
-						<input
-							type="password"
-							placeholder="new Password"
-							onChange={this.handleChange}
-							name={keysBase[pos]}
-						/>
-					</li>
-				);
-				return element;
-			} else if (element === 'email') {
-				element = (
-					<li>
-						<input type="email" onChange={this.checkUsername} name={keysBase[pos]} placeholder={element} />
-					</li>
-				);
-				return element;
-			} else {
-				element = (
-					<li>
-						<input onChange={this.handleChange} name={keysBase[pos]} placeholder={element} />
-					</li>
-				);
-				return element;
-			}
-		});
-
-		var inputsExtended = keysExtended.map((element, pos) => {
-			if (element === 'description') {
-				element = (
-					<li>
-						<textarea
-							onChange={this.handleChange}
-							placeholder="Tell us something about you!"
-							name={keysBase[pos]}
-						/>
-					</li>
-				);
-				return element;
-			} else if (element === 'birthday') {
-				element = (
-					<li>
-						<input
-							onChange={this.handleChange}
-							name={keysExtended[pos]}
-							placeholder={element}
-							type="date"
-						/>
-					</li>
-				);
-				return element;
-			} else {
-				element = (
-					<li>
-						<input onChange={this.handleChange} name={keysExtended[pos]} placeholder={element} />
-					</li>
-				);
-				return element;
-			}
-		});
-
-		var arrayInfoBaseMap = arrayInfoBase.map((element, pos) => (element = <li name={keysBase[pos]}>{element}</li>));
-		var arrayInfoExtendedMap = arrayInfoExtended.map(
-			(element, pos) => (element = <li name={keysExtended[pos]}>{element}</li>)
-		);
-		var jobsMapped = jobs.map((element) => (element = <li>{element}</li>));
-
-		console.log(this.state);
-		console.log(this.props);
-
-		if (this.state.showMore) {
-			return (
-				<div>
-					<ul>{arrayInfoBaseMap}</ul>
-					<ul name="extendedInfo">{arrayInfoExtendedMap}</ul>
-					<a onClick={this.editProfile}>Edit your profile</a>
-					<a onClick={this.handleShowMore}>Hide</a>
-				</div>
-			);
-		} else if (this.state.edit) {
-			if (this.state.showMoreInputs) {
-				return (
-					<div>
-						<form onSubmit={this.handleSubmit} method="POST">
-							<ul>{inputsBase}</ul>
-							<ul>{inputsExtended}</ul>
-							<input type="submit" name="submit" value="Apply Changes" />
-						</form>
-						<div>
-							<p>{this.state.error}</p>
-							<p>{this.state.success}</p>
-						</div>
-						<a onClick={this.handleShowMoreInputs}>Hide extended Information</a>
-					</div>
-				);
-			} else {
-				return (
-					<div>
-						<form onSubmit={this.handleSubmit} method="POST">
-							<ul>{inputsBase}</ul>
-							<input type="submit" name="submit" value="Apply Changes" />
-						</form>
-						<div>
-							<p>{this.state.error}</p>
-							<p>{this.state.success}</p>
-						</div>
-						<a onClick={this.handleShowMoreInputs}>Show extended Information</a>
-					</div>
-				);
-			}
-		} else {
-			return (
-				<div>
-					<ul name="NormalInfo">{arrayInfoBaseMap}</ul>
-					<div name="jobHistory">{jobsMapped}</div>
-					<a onClick={this.handleShowMore}>Show more</a>
-					<a onClick={this.editProfile}>Edit your profile</a>
-				</div>
-			);
-		}
-	}
-
-	componentDidMount = () => {
+	componentWillMount = () => {
 		console.log(this.state.info);
+		var jobs = this.state.info.jobs.postedJobs;
+		debugger;
+		jobs.forEach((element) => {
+			debugger;
+			axios(`http://10.85.5.220:5000/post-job?id=${element}`)
+				.then((result) => {
+					debugger;
+					if (result.data === '') {
+						var allJobs = [ ...this.state.jobNames ];
+						this.setState({ jobNames: allJobs });
+					} else {
+						var allJobs = [ ...this.state.jobNames ];
+						allJobs.push(result.data.info.title);
+						this.setState({ jobNames: allJobs });
+					}
+				})
+				.catch((err) => console.log(err));
+		});
 	};
 
 	render() {
@@ -217,7 +104,7 @@ class jobOffer extends Component {
 		var arrayInfoExtended = Object.values(this.state.info.info.extendedInfo);
 		var keysBase = Object.keys(this.state.info.info.base);
 		var keysExtended = Object.keys(this.state.info.info.extendedInfo);
-		var jobs = this.state.info.jobs.postedJobs;
+		var jobs = this.state.jobNames;
 
 		var inputsBase = keysBase.map((element, pos) => {
 			if (element === 'password') {
@@ -320,7 +207,17 @@ class jobOffer extends Component {
 
 			return element;
 		});
-		var jobsMapped = jobs.map((element) => (element = <li>{element}</li>));
+
+		var jobsMapped = jobs.map((element) => {
+			if (element === 'Error') {
+				debugger;
+				element = <li>You have not saved any jobs.</li>;
+				return element;
+			} else {
+				element = <li>{element}</li>;
+				return element;
+			}
+		});
 
 		if (this.state.showMore) {
 			return (

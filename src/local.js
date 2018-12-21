@@ -1,8 +1,9 @@
 const local = {
 	ipAddress: 'localhost',
-	// ipAddress: '10.85.4.232',
-	port: 5000,
-	environment: 'production'
+	// ipAddress: '142.93.129.36',
+	port: 5000
+	// port: 80,
+	// environment: 'production'
 };
 
 module.exports = local;

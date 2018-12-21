@@ -9,7 +9,8 @@ class jobSeeker extends Component {
 			edit: false,
 			info: this.props.basicInfo,
 			showMore: false,
-			showMoreInputs: false
+			showMoreInputs: false,
+			jobNames: []
 		};
 	}
 
@@ -75,8 +76,26 @@ class jobSeeker extends Component {
 		this.setState({ showMoreInputs: !this.state.showMoreInputs });
 	};
 
-	componentDidMount = () => {
+	componentWillMount = () => {
 		console.log(this.state.info);
+		var jobs = this.state.info.jobs.saved;
+		debugger;
+		jobs.forEach((element) => {
+			debugger;
+			axios(`http://10.85.5.220:5000/post-job?id=${element}`)
+				.then((result) => {
+					debugger;
+					if (result.data === '') {
+						var allJobs = [ ...this.state.jobNames ];
+						this.setState({ jobNames: allJobs });
+					} else {
+						var allJobs = [ ...this.state.jobNames ];
+						allJobs.push(result.data.info.title);
+						this.setState({ jobNames: allJobs });
+					}
+				})
+				.catch((err) => console.log(err));
+		});
 	};
 
 	render() {
@@ -84,7 +103,7 @@ class jobSeeker extends Component {
 		var arrayInfoExtended = Object.values(this.state.info.info.extendedInfo);
 		var keysBase = Object.keys(this.state.info.info.base);
 		var keysExtended = Object.keys(this.state.info.info.extendedInfo);
-		var jobs = this.state.info.jobs.saved;
+		var jobs = this.state.jobNames;
 
 		var inputsBase = keysBase.map((element, pos) => {
 			if (element === 'password') {
