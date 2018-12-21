@@ -1,7 +1,15 @@
 /* -----Landing Page----- */
 
 body {
-	margin-top: 100px;
+	margin-top: 0;
+}
+
+.alert-success {
+	position: fixed !important;
+	display: block !important;
+	width: 100% !important;
+	margin: 12vh auto !important;
+	text-align: center !important;
 }
 
 .light {

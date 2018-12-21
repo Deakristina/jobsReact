@@ -3,6 +3,7 @@ import Background from './img/shake.jpg';
 import IconQUick from './img/time.png';
 import IconSignal from './img/signal.png';
 import IconCommunity from './img/community.png';
+import ScrollableAnchor from 'react-scrollable-anchor';
 
 let sectionStyle = {
 	width: '100%',
@@ -54,14 +55,14 @@ class LandingPage extends Component {
 						</div>
 					</div>
 				</div>
-
-				<div className="row mb-4 section-why">
-					<div className="section-header text-center col-12">
-						<h2 className="feature-text">Why Find A Job</h2>
-						<p className="lead">Find and work everywhere around you on your preferred moments. </p>
+				<ScrollableAnchor id={'section1'}>
+					<div className="row mb-4 section-why">
+						<div className="section-header text-center col-12">
+							<h2 className="feature-text">Why MicroJobs</h2>
+							<p className="lead">Find and work everywhere around you on your preferred moments. </p>
+						</div>
 					</div>
-				</div>
-
+				</ScrollableAnchor>
 				<div className="container section-icons">
 					<div className="row">
 						<div className="col-md-4">
@@ -103,7 +104,7 @@ class LandingPage extends Component {
 				<div className="row">
 					<div className="col-md-12 footer-box footer-copyright pt-5 pb-5 text-center">
 						<span className="footer-text">
-							| &copy; Copyright 2018. All Rights Reserved by Find Your Job. |
+							| &copy; Copyright 2018. All Rights Reserved by MicroJobs. |
 							<i className="fa fa-heart-o" aria-hidden="true" />
 						</span>
 					</div>

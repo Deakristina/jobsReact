@@ -8,10 +8,11 @@ import SearchJob from './components/SearchJob'; //WORKS
 import Login from './Login'; //WORKS
 import ProfilePage from './ProfilePage'; //Only styling left
 import 'bootstrap/dist/css/bootstrap.css';
-import './App.css';
 import { instanceOf } from 'prop-types';
 import { withCookies, Cookies } from 'react-cookies';
+import { Alert } from 'reactstrap';
 import axios from 'axios';
+import './App.css';
 import local from './local';
 
 class App extends Component {
@@ -25,7 +26,8 @@ class App extends Component {
 		this.state = {
 			currentPage: 'home',
 			loggedIn: false,
-			email: ''
+			email: '',
+			success: false
 		};
 	}
 
@@ -37,6 +39,20 @@ class App extends Component {
 	};
 	loggedIn = (trigger) => {
 		this.setState({ loggedIn: trigger });
+	};
+
+	success = () => {
+		this.setState({ success: true });
+	};
+
+	successTimeOut = () => {
+		setTimeout(() => {
+			this.setState({ success: false });
+		}, 3000);
+	};
+
+	successDismiss = () => {
+		this.setState({ success: false });
 	};
 
 	getEmail = (address) => {
@@ -76,14 +92,39 @@ class App extends Component {
 					email={this.state.email}
 				/>
 			),
+<<<<<<< HEAD
 			postJob: <PostJob loggedIn={this.loggedIn} />,
+=======
+			postJob: <PostJob loggedIn={this.loggedIn} />
+>>>>>>> 516748f1e8565048cf996cdd501b7109fe9aa3fd
 		};
-
+		if (this.state.success) {
+			this.successTimeOut();
+		}
 		return (
 			<div>
+				<Alert
+					className="alert-success alert-logout "
+					color="success"
+					toggle={this.successDismiss}
+					isOpen={this.state.success}
+				>
+					You have successfully logged out!
+				</Alert>
 				{router[this.state.currentPage]}
 
+<<<<<<< HEAD
 				<MainNavBar changePageByEvent={this.changePageByEvent} changePageByName = {this.changePageByName} loggedIn={this.state.loggedIn} setLoggedIn = {this.loggedIn}/>	
+=======
+				<MainNavBar
+					changePageByEvent={this.changePageByEvent}
+					changePageByName={this.changePageByName}
+					loggedIn={this.state.loggedIn}
+					setLoggedIn={this.loggedIn}
+					successAlert={this.success}
+				/>
+
+>>>>>>> 516748f1e8565048cf996cdd501b7109fe9aa3fd
 				{this.state.error}
 			</div>
 		);

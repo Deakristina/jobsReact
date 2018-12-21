@@ -128,7 +128,7 @@ class jobSeeker extends Component {
 						<input
 							className="col-md-12 form-control"
 							type="email"
-							onChange={this.handleChange}
+							onChange={this.checkUsername}
 							name={keysBase[pos]}
 							placeholder={element}
 						/>
